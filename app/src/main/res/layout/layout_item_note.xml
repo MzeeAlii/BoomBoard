@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardNote"
+    android:layout_width="140dp"
+    android:layout_height="164dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="2dp"
+    app:cardBackgroundColor="#FFFF"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@color/color_primary_amber"
+            android:padding="16dp"
+            android:src="@drawable/ic_paper_pin"
+            android:tint="@color/color_primary_light_amber" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="#FFFF"
+            android:padding="6dp">
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginStart="2dp"
+                android:maxLines="2"
+                android:text="Note Subject Will Show Here"
+                android:textColor="@color/color_primary_text"
+                android:textSize="13sp" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="2dp"
+                android:maxLines="1"
+                android:text="Jun 05 - 08:30"
+                android:textColor="@color/color_secondary_text"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/noteCoordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pale_white"
+    tools:context="creationsofali.boomboard.activities.NoteActivity">
+
+    <include layout="@layout/app_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:padding="16dp">
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:maxLines="2"
+                android:text="Note Subject Will Show Here"
+                android:textColor="@color/color_grey_900"
+                android:textSize="18sp" />
+
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textSubject"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+
+                android:text="@string/lorem_ipsum"
+                android:textColor="@color/color_grey_800"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/layoutAttachmentFile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textMessage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="56dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="40dp"
+
+                app:cardBackgroundColor="@color/color_divider"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="2dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="32dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/imagePreview"
+                            android:layout_width="match_parent"
+                            android:layout_height="96dp"
+                            android:background="@android:color/transparent"
+                            android:clickable="true"
+                            android:scaleType="centerCrop" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:alpha="1"
+                            android:background="@android:color/white"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/iconAttachment"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="4dp"
+                                android:layout_marginStart="8dp"
+                                android:alpha="0.8"
+                                android:src="@drawable/ic_file_pdf"
+                                android:tint="@color/color_red" />
+
+                            <creationsofali.boomboard.appfonts.HindTextView
+                                android:id="@+id/textAttachment"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:text="attachment_filename.extension"
+                                android:textColor="@color/color_grey_800"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:id="@+id/iconDownload"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="12dp"
+                                android:padding="1dp"
+                                android:src="@drawable/ic_download"
+                                android:tint="@color/selector_color_blue_white" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

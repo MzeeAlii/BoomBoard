@@ -1,0 +1,107 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentWhatsNew"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:fitsSystemWindows="true"
+    tools:context="creationsofali.boomboard.fragments.WhatsNewFragment">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/appBarLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="256dp">-->
+
+    <!--<android.support.design.widget.CollapsingToolbarLayout-->
+    <!--android:id="@+id/collapsingToolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#FFFF">-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/whatsNewRecycler"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="?attr/actionBarSize"-->
+
+    <!--app:layout_collapseMode="pin" />-->
+    <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/whatsNewRecycler"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="96dp" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/whatsNewRecyclerList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="72dp" />
+
+    <creationsofali.boomboard.appfonts.HindTextView
+        android:id="@+id/textOnBoardThisWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="32dp"
+        android:text="This Week On Board"
+        android:textColor="@color/color_grey_900"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/layoutDeviceOffline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="4dp"
+            android:alpha="0.6"
+            android:src="@drawable/ic_signal_no_internet" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="Device is offline! Please turn on the internet."
+            android:textColor="@color/color_secondary_text"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fabRefresh"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:src="@drawable/ic_refresh"-->
+        <!--android:tint="#FFFF"-->
+
+        <!--app:elevation="6dp"-->
+        <!--app:fabSize="auto"-->
+        <!--app:pressedTranslationZ="14dp"-->
+        <!--app:rippleColor="@android:color/white" />-->
+
+</android.support.design.widget.CoordinatorLayout>

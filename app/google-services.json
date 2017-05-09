@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "787287160683",
+    "firebase_url": "https://boom-board.firebaseio.com",
+    "project_id": "boom-board",
+    "storage_bucket": "boom-board.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787287160683:android:c63f7a02ca0308a3",
+        "android_client_info": {
+          "package_name": "creationsofali.boomboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787287160683-10hkn9aarhg5kem7bnu43n61nu1t9e33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "creationsofali.boomboard",
+            "certificate_hash": "92a61a0e90529d41fbed25f3e20b15d0a6dd3b33"
+          }
+        },
+        {
+          "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjkjjLTf0C_yncCYax0fqdnKQMQsIGMEk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

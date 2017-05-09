@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/navGroupMain"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navWhatsNew"
+            android:checked="true"
+            android:icon="@drawable/ic_whats_hot"
+            android:title="What's New" />
+        <item
+            android:id="@+id/navDummyItem"
+            android:icon="@drawable/ic_book_open_page"
+            android:title="Dummy Item" />
+
+        <item
+            android:id="@+id/navAnotherItem"
+            android:checkable="false"
+            android:icon="@drawable/ic_timetable"
+            android:title="Timetable" />
+    </group>
+
+    <group
+        android:id="@+id/navGroupAbout"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navProfile"
+            android:icon="@drawable/ic_account_box"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/navAbout"
+            android:checkable="false"
+            android:icon="@drawable/ic_info"
+            android:title="About" />
+    </group>
+</menu>

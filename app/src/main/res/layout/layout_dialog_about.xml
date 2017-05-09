@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+
+    <creationsofali.boomboard.appfonts.HindTextView
+        android:id="@+id/textAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/color_primary_amber"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="@string/app_name"
+        android:textColor="#FFFF"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:id="@+id/cardButtonUsingGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:background="@android:color/white"
+        android:clickable="false">
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/labelVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="Version"
+            android:textColor="@color/color_secondary_text"
+            android:textSize="14sp" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/textVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/labelVersion"
+            android:layout_toEndOf="@id/labelVersion"
+            android:text="0.0.0"
+            android:textColor="@color/color_grey_900"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+    <creationsofali.boomboard.appfonts.HindTextView
+        android:id="@+id/textRights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="Copy Right 2017. All Rights Reserved"
+        android:textColor="@color/color_grey_900"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="12dp"
+            android:text="Credits:"
+            android:textColor="@color/color_secondary_text"
+            android:textSize="13sp" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="4dp"
+            android:text="Suleiman, Ali"
+            android:textColor="@color/color_grey_900"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/iconEmail"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ripple_red"
+            android:padding="2dp"
+            android:src="@drawable/ic_email_variant"
+            android:tint="@color/selector_color_red_white" />
+
+        <ImageView
+            android:id="@+id/iconTwitter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ripple_blue"
+            android:padding="2dp"
+            android:src="@drawable/ic_twitter"
+            android:tint="@color/selector_color_blue_white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:visibility="invisible" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/textClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_blue"
+            android:paddingBottom="4dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:text="Close"
+            android:textAllCaps="true"
+            android:textColor="@color/selector_color_blue_white"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>
