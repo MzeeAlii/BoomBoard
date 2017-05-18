@@ -10,7 +10,7 @@
             android:title="@string/what_s_new" />
         <item
             android:id="@+id/navAllOnBoard"
-            android:icon="@drawable/ic_book_open_page"
+            android:icon="@drawable/ic_pin"
             android:title="@string/all_on_board" />
 
         <item

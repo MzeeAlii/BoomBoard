@@ -52,7 +52,9 @@ public class UpdateFacultyFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i >= 0) {
                     // get selected faculty and update student object
-                    updateProfileActivity.setStudentFaculty(adapterView.getSelectedItem().toString());
+                    String faculty = adapterView.getSelectedItem().toString();
+                    updateProfileActivity.setStudentFaculty(faculty);
+                    spinnerFaculty.setFloatingLabelText(CollegeHelper.getFacultyFull(faculty));
                 } else {
                     // null
                     updateProfileActivity.setStudentFaculty(null);

@@ -9,14 +9,14 @@
     </style>
 
 
-    <!-- Base application theme. -->
-    <style name="AppThemeTranslucentStatus" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_primary_amber</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark_amber</item>
-        <item name="colorAccent">@color/color_accent_blue</item>
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
+    <!-- Translucent application theme. -->
+    <!--<style name="AppThemeTranslucentStatus" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/color_primary_amber</item>-->
+    <!--<item name="colorPrimaryDark">@color/color_primary_dark_amber</item>-->
+    <!--<item name="colorAccent">@color/color_accent_blue</item>-->
+    <!--<item name="android:windowTranslucentStatus">true</item>-->
+    <!--</style>-->
 
     <style name="AppThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->

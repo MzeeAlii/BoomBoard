@@ -22,9 +22,7 @@
             </intent-filter>
         </activity>
         <!-- Main -->
-        <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/AppThemeTranslucentStatus" />
+        <activity android:name=".activities.MainActivity" />
         <!-- Timetable -->
         <activity
             android:name=".activities.TimetableActivity"

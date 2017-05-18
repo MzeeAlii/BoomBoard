@@ -10,13 +10,13 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/mainCoordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="264dp"
-            android:stateListAnimator="@animator/anim_appbar_elevation"
+            android:layout_height="256dp"
 
             tools:targetApi="LOLLIPOP">
 
@@ -25,13 +25,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#F5F5F5"
+                android:stateListAnimator="@animator/anim_appbar_elevation"
 
                 app:collapsedTitleTextAppearance="@style/CollapsedTitleTextAppearance"
                 app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/whatsNewRecycler"
+                    android:id="@+id/appBarRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -42,10 +43,9 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/mToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
                     android:elevation="4dp"
-                    android:paddingTop="24dp"
 
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

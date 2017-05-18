@@ -5,22 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <creationsofali.boomboard.appfonts.HindTextView
-        android:id="@+id/textChoose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="128dp"
-        android:text="Please Choose College"
-        android:textColor="@color/color_grey_700"
-        android:textSize="16sp" />
 
     <fr.ganfra.materialspinner.MaterialSpinner
         android:id="@+id/spinnerCollege"
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="80dp"
 
         app:ms_arrowColor="@color/color_accent_blue"
         app:ms_arrowSize="12dp"

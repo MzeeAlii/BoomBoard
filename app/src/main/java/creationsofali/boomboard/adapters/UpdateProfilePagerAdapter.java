@@ -1,9 +1,11 @@
 package creationsofali.boomboard.adapters;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import creationsofali.boomboard.R;
 import creationsofali.boomboard.fragments.UpdateCollegeFragment;
 import creationsofali.boomboard.fragments.UpdateFacultyFragment;
 import creationsofali.boomboard.helpers.CollegeHelper;
@@ -14,8 +16,11 @@ import creationsofali.boomboard.helpers.CollegeHelper;
 
 public class UpdateProfilePagerAdapter extends FragmentPagerAdapter {
 
-    public UpdateProfilePagerAdapter(FragmentManager fragmentManager) {
+    Context context;
+
+    public UpdateProfilePagerAdapter(FragmentManager fragmentManager, Context context) {
         super(fragmentManager);
+        this.context = context;
     }
 
     @Override
@@ -34,5 +39,17 @@ public class UpdateProfilePagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 2;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return context.getString(R.string.college);
+            case 1:
+                return context.getString(R.string.faculty);
+            default:
+                return super.getPageTitle(position);
+        }
     }
 }

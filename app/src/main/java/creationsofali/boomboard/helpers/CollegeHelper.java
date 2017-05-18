@@ -78,4 +78,75 @@ public class CollegeHelper {
 
         return yearList;
     }
+
+    public static String getCollegeFull(String collegeAbbr) {
+        switch (collegeAbbr) {
+            case Constant.COLLEGE_CHSS:
+                return Constant.COLLEGE_CHSS_FULL;
+
+            case Constant.COLLEGE_CIVE:
+                return Constant.COLLEGE_CIVE_FULL;
+
+            case Constant.COLLEGE_CNMS:
+                return Constant.COLLEGE_CNMS_FULL;
+
+            case Constant.COLLEGE_COED:
+                return Constant.COLLEGE_COED_FULL;
+
+            case Constant.COLLEGE_COES:
+                return Constant.COLLEGE_COES_FULL;
+
+            case Constant.COLLEGE_COHAS:
+                return Constant.COLLEGE_COHAS_FULL;
+
+            default:
+                return null;
+        }
+    }
+
+
+    public static String getFacultyFull(String facultyAbbr) {
+
+        switch (facultyAbbr) {
+
+            // cive faculties
+            case Constant.FAC_BIS:
+                return Constant.FAC_BIS_FULL;
+
+            case Constant.FAC_CE:
+                return Constant.FAC_CE_FULL;
+
+            case Constant.FAC_CIS:
+                return Constant.FAC_CIS_FULL;
+
+            case Constant.FAC_CS:
+                return Constant.FAC_CS_FULL;
+
+            case Constant.FAC_HIS:
+                return Constant.FAC_HIS_FULL;
+
+            case Constant.FAC_ICT_MCD:
+                return Constant.FAC_ICT_MCD_FULL;
+
+            case Constant.FAC_IS:
+                return Constant.FAC_IS_FULL;
+
+            case Constant.FAC_MTA:
+                return Constant.FAC_MTA_FULL;
+
+            case Constant.FAC_SE:
+                return Constant.FAC_SE_FULL;
+
+            case Constant.FAC_TE:
+                return Constant.FAC_TE_FULL;
+
+            case Constant.FAC_VE:
+                return Constant.FAC_VE_FULL;
+            // end cive faculties
+
+            default:
+                return null;
+
+        }
+    }
 }

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_primary_amber"
-        android:scaleType="fitXY"
-        android:src="@drawable/image_material_mounts" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_material_circles" />
 
 </RelativeLayout>

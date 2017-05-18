@@ -27,6 +27,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,7 @@ import creationsofali.boomboard.fragments.WhatsNewFragment;
 import creationsofali.boomboard.helpers.DrawerTypefaceSpan;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
+import creationsofali.boomboard.helpers.StartEndSpaceDecoration;
 import creationsofali.boomboard.helpers.TwitterHelper;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
@@ -68,10 +70,9 @@ public class MainActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbar;
     FloatingActionButton fabRefresh;
 
-    RecyclerView whatsNewRecycler;
+    RecyclerView appBarRecycler;
     RecyclerView.LayoutManager layoutManagerHorizontal;
     CollapseNotesAdapter whatsNewAdapter;
-    //FloatingActionButton fabRefresh;
 
     List<Note> appBarNoteList = new ArrayList<>();
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.app_name);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -102,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setExpandedTitleColor(
                 ContextCompat.getColor(MainActivity.this, android.R.color.transparent));
-        // collapsingToolbar.setContentScrimColor(ContextCompat.getColor(MainActivity.this, R.color.color_primary_amber));
 
         fragmentManager = getSupportFragmentManager();
         // by default, set checked item onCreate
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         new DrawerTypefaceSpanTask().execute(navigationDrawer.getMenu());
 
         // recyclerView in  collapsingToolbar
-        onCreateCollapseRecycler();
+        onCreateAppBarRecycler();
 
 
         fabRefresh.setOnClickListener(new View.OnClickListener() {
@@ -206,21 +207,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void onCreateCollapseRecycler() {
+    private void onCreateAppBarRecycler() {
         layoutManagerHorizontal = new LinearLayoutManager(MainActivity.this, RecyclerView.HORIZONTAL, false);
 
-        whatsNewRecycler = (RecyclerView) findViewById(R.id.whatsNewRecycler);
-        whatsNewRecycler.setLayoutManager(layoutManagerHorizontal);
+        appBarRecycler = (RecyclerView) findViewById(R.id.appBarRecycler);
+        appBarRecycler.setLayoutManager(layoutManagerHorizontal);
+
+        // decorations
+        int startEndSpace = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                8,
+                getResources().getDisplayMetrics());
+
+        appBarRecycler.addItemDecoration(new StartEndSpaceDecoration(startEndSpace));
 
         whatsNewAdapter = new CollapseNotesAdapter(appBarNoteList, MainActivity.this);
-        //whatsNewRecycler.setAdapter(whatsNewAdapter);
+        //appBarRecycler.setAdapter(whatsNewAdapter);
 
         scaleInAnimationAdapter = new ScaleInAnimationAdapter(whatsNewAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
         scaleInAnimationAdapter.setInterpolator(new OvershootInterpolator(1f));
         scaleInAnimationAdapter.setDuration(1000);
         // set animationAdapter
-        whatsNewRecycler.setAdapter(scaleInAnimationAdapter);
+        appBarRecycler.setAdapter(scaleInAnimationAdapter);
 
         notesDatabaseReference = FirebaseDatabase.getInstance().getReference().child("posts");
         // listeners
@@ -417,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
         // (c) 2017 Ace Code Labs tm
         //      All Rights Reserved.
         textRights.setText(unicodeCopyRight);
-        textRights.append(" 2017 " + "Ace Code Apps" + unicodeTradeMark);
+        textRights.append(" 2017 " + "Ace Quad Apps" + unicodeTradeMark);
         textRights.append("\n" + "All Rights Reserved.");
 
 
