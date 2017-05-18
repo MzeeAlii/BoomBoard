@@ -11,23 +11,32 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- Main -->
+
         <activity
-            android:name=".activities.MainActivity"
-            android:theme="@style/AppThemeTranslucentStatus">
+            android:name=".activities.SplashScreenActivity"
+            android:theme="@style/AppThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Almanac -->
+        <!-- Main -->
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/AppThemeTranslucentStatus" />
+        <!-- Timetable -->
         <activity
             android:name=".activities.TimetableActivity"
             android:parentActivityName=".activities.MainActivity" />
         <!-- Note -->
         <activity
             android:name=".activities.NoteActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <!-- UpdateProfile -->
+        <activity
+            android:name=".activities.UpdateProfileActivity"
+            android:label="Update Profile"
             android:parentActivityName=".activities.MainActivity" />
     </application>
 

@@ -182,6 +182,7 @@ public class WhatsNewFragment extends Fragment {
             //scaleInAnimationAdapter.notifyDataSetChanged();
             notesAdapter.notifyDataSetChanged();
             textOnBoardThisWeek.setText("Loading...");
+            textOnBoardThisWeek.setVisibility(View.VISIBLE);
 
             if (progressBar.getVisibility() != View.VISIBLE)
                 progressBar.setVisibility(View.VISIBLE);
@@ -220,6 +221,7 @@ public class WhatsNewFragment extends Fragment {
                 // show message, device offline, can't load or something like that
                 layoutDeviceOffline.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
+                textOnBoardThisWeek.setVisibility(View.GONE);
             }
         }
     }
@@ -228,6 +230,7 @@ public class WhatsNewFragment extends Fragment {
     private void onRetrieveComplete() {
         progressBar.setVisibility(View.GONE);
         textOnBoardThisWeek.setText("This Week On Board");
+        textOnBoardThisWeek.setVisibility(View.GONE);
     }
 
     public void startAsyncTask() {

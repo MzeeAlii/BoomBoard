@@ -27,7 +27,7 @@ public class TimetableFragment extends Fragment {
         return timetableFragment;
     }
 
-
+    // get items only once
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

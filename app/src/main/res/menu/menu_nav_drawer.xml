@@ -7,17 +7,17 @@
             android:id="@+id/navWhatsNew"
             android:checked="true"
             android:icon="@drawable/ic_whats_hot"
-            android:title="What's New" />
+            android:title="@string/what_s_new" />
         <item
-            android:id="@+id/navDummyItem"
+            android:id="@+id/navAllOnBoard"
             android:icon="@drawable/ic_book_open_page"
-            android:title="Dummy Item" />
+            android:title="@string/all_on_board" />
 
         <item
-            android:id="@+id/navAnotherItem"
+            android:id="@+id/navTimetable"
             android:checkable="false"
             android:icon="@drawable/ic_timetable"
-            android:title="Timetable" />
+            android:title="@string/timetable" />
     </group>
 
     <group
@@ -27,12 +27,12 @@
         <item
             android:id="@+id/navProfile"
             android:icon="@drawable/ic_account_box"
-            android:title="Profile" />
+            android:title="@string/profile" />
 
         <item
             android:id="@+id/navAbout"
             android:checkable="false"
             android:icon="@drawable/ic_info"
-            android:title="About" />
+            android:title="@string/about" />
     </group>
 </menu>

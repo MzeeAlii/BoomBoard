@@ -18,6 +18,13 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="AppThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary_amber</item>
+        <item name="colorPrimaryDark">@color/color_primary_amber</item>
+        <item name="colorAccent">@color/color_accent_blue</item>
+    </style>
+
 
     <!-- navigationDrawer items -->
     <style name="NavDrawerItemTextAppearance" parent="TextAppearance.AppCompat.Medium">

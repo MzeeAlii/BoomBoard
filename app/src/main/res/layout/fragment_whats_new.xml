@@ -39,7 +39,7 @@
         android:id="@+id/whatsNewRecyclerList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
 
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -91,17 +91,17 @@
     </LinearLayout>
 
     <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fabRefresh"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:src="@drawable/ic_refresh"-->
-        <!--android:tint="#FFFF"-->
+    <!--android:id="@+id/fabRefresh"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|end"-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:src="@drawable/ic_refresh"-->
+    <!--android:tint="#FFFF"-->
 
-        <!--app:elevation="6dp"-->
-        <!--app:fabSize="auto"-->
-        <!--app:pressedTranslationZ="14dp"-->
-        <!--app:rippleColor="@android:color/white" />-->
+    <!--app:elevation="6dp"-->
+    <!--app:fabSize="auto"-->
+    <!--app:pressedTranslationZ="14dp"-->
+    <!--app:rippleColor="@android:color/white" />-->
 
 </android.support.design.widget.CoordinatorLayout>

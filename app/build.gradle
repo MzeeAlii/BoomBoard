@@ -48,6 +48,9 @@ dependencies {
     compile 'me.relex:circleindicator:1.2.2@aar'
     // material viewPager indicator
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.3'
+    // material spinner
+    compile 'com.github.ganfra:material-spinner:1.1.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

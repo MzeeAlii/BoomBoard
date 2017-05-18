@@ -48,8 +48,7 @@ import creationsofali.boomboard.R;
 import creationsofali.boomboard.adapters.CollapseNotesAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Note;
-import creationsofali.boomboard.datamodels.ClassSession;
-import creationsofali.boomboard.fragments.DummyFragment;
+import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
 import creationsofali.boomboard.fragments.WhatsNewFragment;
 import creationsofali.boomboard.helpers.DrawerTypefaceSpan;
@@ -132,24 +131,23 @@ public class MainActivity extends AppCompatActivity {
                                 whatsNewFragment.getTag()).commit();
 
                         appBarLayout.setExpanded(true, true);
-                        toolbar.setTitle(getString(R.string.app_name));
+                        collapsingToolbar.setTitle(getString(R.string.app_name));
                         fabRefresh.setVisibility(View.VISIBLE);
                         break;
 
-                    case R.id.navDummyItem:
-                        DummyFragment dummyFragment = new DummyFragment();
+                    case R.id.navAllOnBoard:
+                        AllOnBoardFragment allOnBoardFragment = new AllOnBoardFragment();
                         fragmentManager.beginTransaction().replace(
                                 R.id.mainContentView,
-                                dummyFragment,
-                                dummyFragment.getTag()).commit();
+                                allOnBoardFragment,
+                                allOnBoardFragment.getTag()).commit();
 
                         appBarLayout.setExpanded(false, true);
-                        //toolbar.setTitle("Dummy Fragment");
-                        collapsingToolbar.setTitle("Dummy Fragment");
+                        collapsingToolbar.setTitle(item.getTitle());
                         fabRefresh.setVisibility(View.GONE);
                         break;
 
-                    case R.id.navAnotherItem:
+                    case R.id.navTimetable:
                         startActivity(new Intent(MainActivity.this, TimetableActivity.class));
                         break;
 
@@ -160,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
                                 profileFragment).commit();
 
                         appBarLayout.setExpanded(false, true);
-                        //toolbar.setTitle("Dummy Fragment");
                         collapsingToolbar.setTitle("Student's Profile");
+//                        collapsingToolbar.setElevation();
                         fabRefresh.setVisibility(View.GONE);
                         break;
 
@@ -472,24 +470,4 @@ public class MainActivity extends AppCompatActivity {
 
         item.setTitle(newItemTitle);
     }
-
-
-//    private void launchTwitter(String username) {
-//        Intent twitterIntent = null;
-//        try {
-//            // launch app if available
-//            getContext().getPackageManager().getPackageInfo("com.twitter.android", 0);
-//            twitterIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + username));
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//            // no app, open in browser
-//            twitterIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + username));
-//        } finally {
-//            // go to twitter account page
-//            if (twitterIntent != null) {
-//                twitterIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(twitterIntent);
-//            }
-//        }
-//    }
 }

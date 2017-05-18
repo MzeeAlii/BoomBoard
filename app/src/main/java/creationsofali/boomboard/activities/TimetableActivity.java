@@ -24,6 +24,7 @@ import java.util.Locale;
 
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.adapters.TimetableAdapter;
+import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.ClassSession;
 
 public class TimetableActivity extends AppCompatActivity {
@@ -125,6 +126,9 @@ public class TimetableActivity extends AppCompatActivity {
             }
         });
 
+        // set my custom app font
+        View rootView = findViewById(android.R.id.content);
+        new MyCustomAppFont(getApplicationContext(), rootView);
     }
 
 
@@ -169,7 +173,10 @@ public class TimetableActivity extends AppCompatActivity {
         protected void onPostExecute(String weekDay) {
             super.onPostExecute(weekDay);
 
-            toolbar.setTitle(weekDay);
+            if (weekDay.equals("Saturday") || weekDay.equals("Sunday"))
+                toolbar.setTitle("Monday");
+            else
+                toolbar.setTitle(weekDay);
 
             // 1 = mon, 7 = sun
             SimpleDateFormat dayNumbOfWeekFormat = new SimpleDateFormat("u", Locale.ENGLISH);

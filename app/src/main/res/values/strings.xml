@@ -8,4 +8,24 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="what_s_new">What\'s New</string>
+    <string name="all_on_board">All On Board</string>
+    <string name="timetable">Timetable</string>
+    <string name="profile">Profile</string>
+    <string name="about">About</string>
+    <string name="choose_faculty">Choose Faculty</string>
+    <string name="faculty">Faculty</string>
+    <string name="choose_year">Choose Year</string>
+    <string name="year_of_study">Year Of Study</string>
+    <string name="update_faculty_details">Update Faculty Details</string>
+    <string name="choose_college">Choose College</string>
+    <string name="cive_ful"><![CDATA[College of Informatics & Virtual Education]]></string>
+    <string name="refresh">Refresh</string>
+    <string name="first_year">First Year</string>
+    <string name="second_year">Second Year</string>
+    <string name="third_year">Third Year</string>
+    <string name="fourth_year">Fourth Year</string>
+    <string name="fifth_year">Fifth Year</string>
+    <string name="college">College</string>
+    <string name="unspecified">Unspecified</string>
 </resources>
