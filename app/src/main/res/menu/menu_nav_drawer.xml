@@ -12,22 +12,34 @@
             android:id="@+id/navAllOnBoard"
             android:icon="@drawable/ic_pin"
             android:title="@string/all_on_board" />
+    </group>
+
+    <group
+        android:id="@+id/navGroupProfile"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navProfile"
+            android:icon="@drawable/ic_account_circle"
+            android:title="@string/profile" />
 
         <item
             android:id="@+id/navTimetable"
             android:checkable="false"
             android:icon="@drawable/ic_timetable"
             android:title="@string/timetable" />
+
+        <item
+            android:id="@+id/navBookmarks"
+            android:checkable="false"
+            android:icon="@drawable/ic_bookmark_check"
+            android:title="@string/bookmarked" />
+
     </group>
 
     <group
         android:id="@+id/navGroupAbout"
         android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/navProfile"
-            android:icon="@drawable/ic_account_box"
-            android:title="@string/profile" />
 
         <item
             android:id="@+id/navAbout"

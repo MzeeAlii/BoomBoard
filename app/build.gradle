@@ -25,6 +25,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
@@ -32,23 +33,18 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
 
-    // firebase
     compile 'com.google.firebase:firebase-core:10.2.4'
     compile 'com.google.firebase:firebase-database:10.2.4'
     compile 'com.google.firebase:firebase-auth:10.2.4'
     compile 'com.google.firebase:firebase-storage:10.2.4'
 
-    // gson lib
     compile 'com.google.code.gson:gson:2.8.0'
-    // glide lib
+
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    // recyclerView animations
+
     compile 'jp.wasabeef:recyclerview-animators:2.2.6'
-    // viewPager indicator
     compile 'me.relex:circleindicator:1.2.2@aar'
-    // material viewPager indicator
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.3'
-    // material spinner
     compile 'com.github.ganfra:material-spinner:1.1.1'
 
 }

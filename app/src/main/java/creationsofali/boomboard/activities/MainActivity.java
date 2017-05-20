@@ -161,8 +161,12 @@ public class MainActivity extends AppCompatActivity {
 
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle("Student's Profile");
-//                        collapsingToolbar.setElevation();
                         fabRefresh.setVisibility(View.GONE);
+                        break;
+
+                    case R.id.navBookmarks:
+                        // go to bookmark activity, pass user object
+                        startActivity(new Intent(MainActivity.this, BookmarksActivity.class));
                         break;
 
                     case R.id.navAbout:

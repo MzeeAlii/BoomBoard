@@ -45,7 +45,7 @@
                 android:layout_alignStart="@id/textCollegeAbr"
                 android:layout_below="@id/textCollegeAbr"
                 android:text="@string/cive_ful"
-                android:textColor="@color/color_grey_900"
+                android:textColor="@color/color_primary_text"
                 android:textSize="13sp" />
         </RelativeLayout>
 
@@ -80,7 +80,7 @@
                 android:layout_alignStart="@id/textFacultyAbr"
                 android:layout_below="@id/textFacultyAbr"
                 android:text="Bachelor of Science in Software Engineering"
-                android:textColor="@color/color_grey_900"
+                android:textColor="@color/color_primary_text"
                 android:textSize="13sp" />
         </RelativeLayout>
 
@@ -96,7 +96,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:alpha="0.8"
-                android:src="@drawable/ic_event"
+                android:src="@drawable/ic_calendar_text"
                 android:tint="@color/color_accent_blue" />
 
             <creationsofali.boomboard.appfonts.HindTextView
@@ -115,7 +115,7 @@
                 android:layout_alignStart="@id/textYearAbr"
                 android:layout_below="@id/textYearAbr"
                 android:text="Second Year"
-                android:textColor="@color/color_grey_900"
+                android:textColor="@color/color_primary_text"
                 android:textSize="13sp" />
         </RelativeLayout>
 

@@ -30,4 +30,6 @@
     <string name="unspecified">Unspecified</string>
     <string name="year">Year</string>
     <string name="welcome_note">Boom Board would like you to set up your profile.\n\nThis will help improving your experience while using the app.</string>
+    <string name="bookmarked">Bookmarked</string>
+    <string name="update_profile">Update Profile</string>
 </resources>
