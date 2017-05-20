@@ -61,14 +61,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        fragmentView.findViewById(R.id.textRefresh).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // do magic
-                new SharedPreferenceReader(getContext()).execute();
-            }
-        });
-
         return fragmentView;
     }
 

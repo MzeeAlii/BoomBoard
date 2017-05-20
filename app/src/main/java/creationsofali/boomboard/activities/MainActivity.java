@@ -55,6 +55,7 @@ import creationsofali.boomboard.fragments.WhatsNewFragment;
 import creationsofali.boomboard.helpers.DrawerTypefaceSpan;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
+import creationsofali.boomboard.helpers.PackageInfoHelper;
 import creationsofali.boomboard.helpers.StartEndSpaceDecoration;
 import creationsofali.boomboard.helpers.TwitterHelper;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
@@ -407,18 +408,8 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
         TextView textVersion = (TextView) dialogView.findViewById(R.id.textVersion);
-        if (packageInfo != null) {
-            // get and set version
-            textVersion.setText(packageInfo.versionName);
-        }
+        textVersion.setText(PackageInfoHelper.getVersionName(MainActivity.this));
 
         TextView textRights = (TextView) dialogView.findViewById(R.id.textRights);
         String unicodeCopyRight = "\u00A9"; // or (char) 169 = 10101001 = 0x00A9

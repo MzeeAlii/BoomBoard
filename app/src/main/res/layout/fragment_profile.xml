@@ -142,7 +142,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@id/layoutProfile"
         android:layout_margin="24dp"
-        android:src="@drawable/ic_pencil"
+        android:src="@drawable/ic_account_edit"
         android:tint="@color/selector_color_red_white"
 
         app:backgroundTint="#FFFF"

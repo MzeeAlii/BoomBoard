@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,7 +24,6 @@ import com.google.gson.Gson;
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.adapters.UpdateProfilePagerAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
-import creationsofali.boomboard.datamodels.Constant;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceEditor;
@@ -164,10 +164,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         new MyCustomAppFont(getApplicationContext(), rootView);
     }
 
-    private void showWelcomeDialog() {
-
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -188,6 +184,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
         } else
             return false;
 
+    }
+
+
+    private void showWelcomeDialog() {
+        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_welcome, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(UpdateProfileActivity.this);
+        dialogBuilder
+                .setView(dialogView)
+                .setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // close dialog
+                dialog.dismiss();
+            }
+        });
     }
 
     private void showSnackbar(String message) {
@@ -218,11 +234,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         student.setFacultyAbr(facultyAbr);
 
         if (facultyAbr != null)
-            student.setFacultyFull(facultyAbr);
+            student.setFacultyFull(CollegeHelper.getFacultyFull(facultyAbr));
         else
             student.setFacultyFull(null);
 
         Log.d(TAG, "setStudentFaculty: facultyAbbr = " + student.getFacultyAbr()
                 + ", facultyFull = " + student.getFacultyFull());
     }
+
 }
