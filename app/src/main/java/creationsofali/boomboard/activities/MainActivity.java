@@ -2,8 +2,6 @@ package creationsofali.boomboard.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -31,6 +29,8 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     AppBarLayout appBarLayout;
     CollapsingToolbarLayout collapsingToolbar;
     FloatingActionButton fabRefresh;
+    Animation animationFabShow, animationFabHide;
 
     RecyclerView appBarRecycler;
     RecyclerView.LayoutManager layoutManagerHorizontal;
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
         collapsingToolbar.setExpandedTitleColor(
                 ContextCompat.getColor(MainActivity.this, android.R.color.transparent));
 
+        animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show);
+        animationFabHide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_hide);
+
         fragmentManager = getSupportFragmentManager();
         // by default, set checked item onCreate
         final WhatsNewFragment whatsNewFragment = new WhatsNewFragment();
@@ -117,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         appBarLayout.setExpanded(true, true);
 
         fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+        fabRefresh.startAnimation(animationFabShow);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationDrawer = (NavigationView) findViewById(R.id.navigationDrawer);
@@ -134,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
 
                         appBarLayout.setExpanded(true, true);
                         collapsingToolbar.setTitle(getString(R.string.app_name));
-                        fabRefresh.setVisibility(View.VISIBLE);
+                        fabRefresh.show();
+                        fabRefresh.startAnimation(animationFabShow);
                         break;
 
                     case R.id.navAllOnBoard:
@@ -146,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle(item.getTitle());
-                        fabRefresh.setVisibility(View.GONE);
+                        fabRefresh.startAnimation(animationFabHide);
+                        // fabRefresh.hide();
                         break;
 
                     case R.id.navTimetable:
@@ -161,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
 
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle("Student's Profile");
-                        fabRefresh.setVisibility(View.GONE);
+                        fabRefresh.startAnimation(animationFabHide);
+                        // fabRefresh.hide();
                         break;
 
                     case R.id.navBookmarks:
