@@ -19,7 +19,7 @@ import creationsofali.boomboard.R;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Note;
 
-public class NoteActivity extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
@@ -62,7 +62,7 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // download attachment
-                Toast.makeText(NoteActivity.this, "Downloading file...", Toast.LENGTH_LONG).show();
+                Toast.makeText(NoticeActivity.this, "Downloading file...", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -87,7 +87,7 @@ public class NoteActivity extends AppCompatActivity {
             textMessage.setText(note.getMessage());
         else {
             textMessage.setText("Download the attachment file below.");
-            textMessage.setTextColor(ContextCompat.getColor(NoteActivity.this, R.color.color_secondary_text));
+            textMessage.setTextColor(ContextCompat.getColor(NoticeActivity.this, R.color.color_secondary_text));
         }
 
 
@@ -100,7 +100,7 @@ public class NoteActivity extends AppCompatActivity {
             // doc attached
             iconAttachment.setImageResource(R.drawable.ic_file_pdf);
             iconAttachment.setColorFilter(ContextCompat.getColor(
-                    NoteActivity.this, R.color.color_red));
+                    NoticeActivity.this, R.color.color_red));
             imageAttachmentPreview.setImageResource(R.drawable.image_docs);
 
             textAttachmentName.setText(label[0]);
@@ -120,7 +120,7 @@ public class NoteActivity extends AppCompatActivity {
             // image attached
             iconAttachment.setImageResource(R.drawable.ic_file_image);
             iconAttachment.setColorFilter(ContextCompat.getColor(
-                    NoteActivity.this, R.color.color_green));
+                    NoticeActivity.this, R.color.color_green));
 
             textAttachmentName.setText(label[0]);
             if (label.length > 1)
@@ -135,7 +135,7 @@ public class NoteActivity extends AppCompatActivity {
             // add extension at the end of file name
             textAttachmentName.append(".png");
 
-            Glide.with(NoteActivity.this).load(note.getImageUrl()).into(imageAttachmentPreview);
+            Glide.with(NoticeActivity.this).load(note.getImageUrl()).into(imageAttachmentPreview);
         }
     }
 

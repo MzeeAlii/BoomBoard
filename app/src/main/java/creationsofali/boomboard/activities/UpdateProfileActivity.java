@@ -15,8 +15,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -38,10 +41,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
     FloatingActionButton fab;
     ViewPager viewPager;
     TabLayout tabs;
+    Animation animationFabShow, animationFabHide;
 
     Student student = new Student();
     private static final String TAG = "UpdateProfileActivity";
-    private boolean isFromSplash;
+    private boolean isFromMain;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -51,9 +55,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
 
-        isFromSplash = getIntent().getBooleanExtra("isFromSplash", false);
+        isFromMain = getIntent().getBooleanExtra("isFromMain", false);
 
-        if (!isFromSplash) {
+        if (isFromMain) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
@@ -61,13 +65,17 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
             }
         } else {
-            // isFromSplash:true | user runs the app for the very 1st time
+            // isFromMain:true | user runs the app for the very 1st time
             // show welcome dialog
             showWelcomeDialog();
         }
 
+        animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show_fast);
+        animationFabHide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_hide_fast);
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
+        fab.startAnimation(animationFabHide);
+        fab.setEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new UpdateProfilePagerAdapter(getSupportFragmentManager(), UpdateProfileActivity.this));
@@ -84,17 +92,18 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 Log.d(TAG, "onPageSelected = " + position);
                 switch (position) {
                     case 0:
-                        fab.setVisibility(View.GONE);
+                        fab.startAnimation(animationFabHide);
+                        fab.setEnabled(false);
                         break;
                     case 1:
-                        fab.setVisibility(View.VISIBLE);
+                        fab.startAnimation(animationFabShow);
+                        fab.setEnabled(true);
                         break;
                 }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -136,8 +145,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     // update profile
                     new SharedPreferenceEditor(UpdateProfileActivity.this).execute(student);
 
-                    if (isFromSplash) {
-                        Toast.makeText(UpdateProfileActivity.this, "Successful! Profile set up complete.", Toast.LENGTH_SHORT).show();
+                    if (!isFromMain) {
+                        Toast.makeText(UpdateProfileActivity.this,
+                                "Profile set up complete.",
+                                Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -151,7 +162,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         }, 1000);
                     } else
                         // update successful!
-                        Toast.makeText(UpdateProfileActivity.this, "Successful! Profile updated.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateProfileActivity.this,
+                                "Successful! Profile updated.",
+                                Toast.LENGTH_SHORT).show();
                 } else
                     // show snackbar
                     showSnackbar("Please provide all required information.");
@@ -241,5 +254,38 @@ public class UpdateProfileActivity extends AppCompatActivity {
         Log.d(TAG, "setStudentFaculty: facultyAbbr = " + student.getFacultyAbr()
                 + ", facultyFull = " + student.getFacultyFull());
     }
+
+    public void showSignInDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.layout_dialog_sign_in, null);
+
+        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(true);
+//                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        // isOkClicked = false;
+//                        dialogInterface.dismiss();
+//                       // showMessageSnackbar("Sign in cancelled!");
+//                    }
+//                });
+
+        final android.app.AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        dialogView.findViewById(R.id.cardButtonUsingGoogle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // isOkClicked = true;
+                dialog.dismiss();
+                //Intent authUiIntent = getAuthUiIntent();
+                // Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent();
+
+                // startActivityForResult(getGoogleAuthIntent(), RC_SIGN_IN);
+            }
+        });
+    }
+
 
 }

@@ -139,8 +139,11 @@ public class MainActivity extends AppCompatActivity {
 
                         appBarLayout.setExpanded(true, true);
                         collapsingToolbar.setTitle(getString(R.string.app_name));
-                        fabRefresh.show();
-                        fabRefresh.startAnimation(animationFabShow);
+                        if (!fabRefresh.isShown()) {
+                            fabRefresh.show();
+                            fabRefresh.startAnimation(animationFabShow);
+                            fabRefresh.setEnabled(true);
+                        }
                         break;
 
                     case R.id.navAllOnBoard:
@@ -153,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle(item.getTitle());
                         fabRefresh.startAnimation(animationFabHide);
-                        // fabRefresh.hide();
+                        fabRefresh.hide();
+                        fabRefresh.setEnabled(false);
                         break;
 
                     case R.id.navTimetable:
@@ -169,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle("Student's Profile");
                         fabRefresh.startAnimation(animationFabHide);
-                        // fabRefresh.hide();
+                        fabRefresh.hide();
+                        fabRefresh.setEnabled(false);
                         break;
 
                     case R.id.navBookmarks:
@@ -337,6 +342,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        fabRefresh.startAnimation(animationFabShow);
+    }
 
     private void detachDatabaseListeners() {
         if (notesValueEventListener != null)

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <creationsofali.boomboard.appfonts.HindTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:text="@string/sign_in"
+        android:textColor="#FFFF"
+        android:textSize="13sp" />
+
+    <creationsofali.boomboard.appfonts.HindTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/choose_sign_in_method"
+        android:textColor="#FFFF"
+        android:textSize="14sp" />
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="32dp"
+
+        app:cardBackgroundColor="#FFFF"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:id="@+id/cardButtonUsingGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_blue"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/imageGoogleLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_google_icon_small" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@id/imageGoogleLogo"
+                android:gravity="center_vertical"
+                android:text="@string/using_google_account"
+                android:textColor="@color/color_primary_text"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:visibility="invisible" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/textCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ripple_blue"
+            android:paddingBottom="4dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:text="Cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/selector_color_blue_white"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

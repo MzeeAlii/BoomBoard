@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorSignIn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="creationsofali.boomboard.activities.SignInActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_mobile_app_coffee" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#40263238" />
+
+    <!--<include-->
+    <!--layout="@layout/app_bar"-->
+    <!--android:background="@android:color/transparent" />-->
+
+
+    <!--<creationsofali.boomboard.appfonts.HindTextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:layout_marginTop="128dp"-->
+    <!--android:text="@string/app_name"-->
+    <!--android:textColor="@color/color_white"-->
+    <!--android:textSize="16sp" />-->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical">
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/app_name"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
+            android:textSize="28sp" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="With Technology On Our"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
+            android:textSize="14sp" />
+
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Fingertips"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
+            android:textSize="28sp" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="It's A Shame To"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
+            android:textSize="14sp" />
+
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Miss A Notice"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
+            android:textSize="28sp" />
+
+        <Button
+            android:id="@+id/buttonSignIn"
+            android:layout_width="184dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="128dp"
+            android:background="@drawable/shape_button_stroke"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textColor="@color/color_white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

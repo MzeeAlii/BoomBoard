@@ -4,8 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_primary_dark_amber"
-    android:orientation="vertical"
+    android:fitsSystemWindows="false"
     tools:context="creationsofali.boomboard.activities.SplashScreenActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_mobile_app_coffee" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aa263238" />
 
     <LinearLayout
         android:layout_width="wrap_content"

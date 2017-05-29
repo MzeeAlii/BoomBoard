@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import creationsofali.boomboard.R;
-import creationsofali.boomboard.activities.NoteActivity;
+import creationsofali.boomboard.activities.NoticeActivity;
 import creationsofali.boomboard.datamodels.Note;
 
 /**
@@ -50,7 +50,7 @@ public class CollapseNotesAdapter extends RecyclerView.Adapter<CollapseNotesAdap
                     // open note
                     Note note = noteList.get(getAdapterPosition());
                     String gsonNote = new Gson().toJson(note);
-                    context.startActivity(new Intent(context, NoteActivity.class)
+                    context.startActivity(new Intent(context, NoticeActivity.class)
                             .putExtra("note", gsonNote)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }

@@ -33,7 +33,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             .putExtra("student", studentProfile));
                 } else {
                     // set up profile
-                    startActivity(new Intent(SplashScreenActivity.this, UpdateProfileActivity.class)
+                    startActivity(new Intent(SplashScreenActivity.this, SignInActivity.class)
                             .putExtra("isFromSplash", true));
                 }
                 // finish activity

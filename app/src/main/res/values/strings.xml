@@ -30,6 +30,15 @@
     <string name="unspecified">Unspecified</string>
     <string name="year">Year</string>
     <string name="welcome_note">Boom Board would like you to set up your profile.\n\nThis will help improving your experience while using the app.</string>
+    <string name="web_client_id">787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com</string>
     <string name="bookmarked">Bookmarked</string>
     <string name="update_profile">Update Profile</string>
+    <string name="using_google_account">Using Google Account</string>
+    <string name="choose_sign_in_method">Choose a sign in method</string>
+    <string name="sign_in">Sign In</string>
+    <string name="signing_in">Signing In</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="sorry_error_try_again">Sorry, an error has occurred. Please try again</string>
+    <string name="welcome_to_boom_board">Welcome To Boom Board</string>
+
 </resources>
