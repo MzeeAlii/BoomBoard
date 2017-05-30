@@ -111,7 +111,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // go to edit profile activity
-                startActivity(new Intent(getContext(), ProfileSetupActivity.class));
+                startActivity(new Intent(getContext(), ProfileSetupActivity.class)
+                        .putExtra("isFromMain", true));
                 dialog.dismiss();
             }
         });

@@ -44,6 +44,7 @@
         <!-- SignIn -->
         <activity
             android:name=".activities.SignInActivity"
+            android:label=""
             android:theme="@style/AppThemeTranslucentStatus" />
     </application>
 
