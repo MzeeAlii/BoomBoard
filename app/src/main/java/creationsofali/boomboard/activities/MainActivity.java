@@ -32,9 +32,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     AppBarLayout appBarLayout;
     CollapsingToolbarLayout collapsingToolbar;
     FloatingActionButton fabRefresh;
+    TextView textNavName, textNavEmail;
+    ImageView imageNavDp;
     Animation animationFabShow, animationFabHide;
 
     RecyclerView appBarRecycler;
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference notesDatabaseReference;
     ChildEventListener notesChildEventListener;
     ValueEventListener notesValueEventListener;
+    FirebaseAuth firebaseAuth;
 
     ScaleInAnimationAdapter scaleInAnimationAdapter;
 
@@ -102,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
         }
 
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
         appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setExpandedTitleColor(
@@ -122,9 +132,22 @@ public class MainActivity extends AppCompatActivity {
 
         fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
         fabRefresh.startAnimation(animationFabShow);
+        fabRefresh.setEnabled(true);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationDrawer = (NavigationView) findViewById(R.id.navigationDrawer);
+        View headerView = navigationDrawer.getHeaderView(0);
+        textNavName = (TextView) headerView.findViewById(R.id.textNavName);
+        textNavEmail = (TextView) headerView.findViewById(R.id.textNavEmail);
+        imageNavDp = (ImageView) headerView.findViewById(R.id.imageNavDp);
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            textNavEmail.setText(user.getEmail());
+            textNavName.setText(user.getDisplayName());
+            Glide.with(MainActivity.this).load(user.getPhotoUrl()).into(imageNavDp);
+        }
+
         navigationDrawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -139,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
                         appBarLayout.setExpanded(true, true);
                         collapsingToolbar.setTitle(getString(R.string.app_name));
-                        if (!fabRefresh.isShown()) {
-                            fabRefresh.show();
+                        if (!fabRefresh.isEnabled()) {
+                            // fabRefresh.show();
                             fabRefresh.startAnimation(animationFabShow);
                             fabRefresh.setEnabled(true);
                         }
@@ -156,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle(item.getTitle());
                         fabRefresh.startAnimation(animationFabHide);
-                        fabRefresh.hide();
+                        // fabRefresh.hide();
                         fabRefresh.setEnabled(false);
                         break;
 
@@ -173,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                         appBarLayout.setExpanded(false, true);
                         collapsingToolbar.setTitle("Student's Profile");
                         fabRefresh.startAnimation(animationFabHide);
-                        fabRefresh.hide();
+                        //fabRefresh.hide();
                         fabRefresh.setEnabled(false);
                         break;
 
@@ -206,7 +229,6 @@ public class MainActivity extends AppCompatActivity {
 
         // recyclerView in  collapsingToolbar
         onCreateAppBarRecycler();
-
 
         fabRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -347,7 +369,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        fabRefresh.startAnimation(animationFabShow);
+        if (fabRefresh.isEnabled())
+            fabRefresh.startAnimation(animationFabShow);
     }
 
     private void detachDatabaseListeners() {
@@ -493,5 +516,13 @@ public class MainActivity extends AppCompatActivity {
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
         item.setTitle(newItemTitle);
+    }
+
+    public void signOut() {
+
+        firebaseAuth.signOut();
+        // go signInActivity
+        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        finish();
     }
 }

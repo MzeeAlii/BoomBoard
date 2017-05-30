@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 import creationsofali.boomboard.R;
-import creationsofali.boomboard.activities.UpdateProfileActivity;
+import creationsofali.boomboard.activities.ProfileSetupActivity;
 import creationsofali.boomboard.datamodels.Constant;
 import creationsofali.boomboard.helpers.CollegeHelper;
 import fr.ganfra.materialspinner.MaterialSpinner;
@@ -94,7 +94,7 @@ public class UpdateCollegeFragment extends Fragment {
                     Log.d(TAG, "onCreateView: adapter = facultyAdapter#dataSetChanged:items = " + facultyAdapter.getCount());
 
                     // update profile object
-                    ((UpdateProfileActivity) getActivity())
+                    ((ProfileSetupActivity) getActivity())
                             .setStudentCollege(college);
 
                     // change floating label
@@ -132,7 +132,7 @@ public class UpdateCollegeFragment extends Fragment {
                             + ", index = " + i);
 
                     // update profile object
-                    ((UpdateProfileActivity) getActivity())
+                    ((ProfileSetupActivity) getActivity())
                             .setStudentCollege(null);
                 }
             }

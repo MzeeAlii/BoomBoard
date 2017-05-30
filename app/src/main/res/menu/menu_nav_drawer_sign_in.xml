@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/navGroupAbout"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navAbout"
+            android:checkable="false"
+            android:icon="@drawable/ic_info"
+            android:title="@string/about" />
+    </group>
+
+    <!--<group-->
+    <!--android:id="@+id/navGroupMain"-->
+    <!--android:checkableBehavior="single">-->
+    <!--<item-->
+    <!--android:id="@+id/navWhatsNew"-->
+    <!--android:checked="true"-->
+    <!--android:icon="@drawable/ic_whats_hot"-->
+    <!--android:title="@string/what_s_new" />-->
+    <!--<item-->
+    <!--android:id="@+id/navAllOnBoard"-->
+    <!--android:icon="@drawable/ic_pin"-->
+    <!--android:title="@string/all_on_board" />-->
+    <!--</group>-->
+
+    <!--<group-->
+    <!--android:id="@+id/navGroupProfile"-->
+    <!--android:checkableBehavior="single">-->
+
+    <!--<item-->
+    <!--android:id="@+id/navProfile"-->
+    <!--android:icon="@drawable/ic_account_circle"-->
+    <!--android:title="@string/profile" />-->
+
+    <!--<item-->
+    <!--android:id="@+id/navTimetable"-->
+    <!--android:checkable="false"-->
+    <!--android:icon="@drawable/ic_timetable"-->
+    <!--android:title="@string/timetable" />-->
+
+    <!--<item-->
+    <!--android:id="@+id/navBookmarks"-->
+    <!--android:checkable="false"-->
+    <!--android:icon="@drawable/ic_bookmark_check"-->
+    <!--android:title="@string/bookmarked" />-->
+
+    <!--</group>-->
+</menu>

@@ -33,7 +33,7 @@
             android:parentActivityName=".activities.MainActivity" />
         <!-- UpdateProfile -->
         <activity
-            android:name=".activities.UpdateProfileActivity"
+            android:name=".activities.ProfileSetupActivity"
             android:label="@string/update_profile"
             android:parentActivityName=".activities.MainActivity" />
         <!-- Bookmarks -->

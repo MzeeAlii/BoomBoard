@@ -135,6 +135,23 @@
             android:visibility="gone" />
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/buttonSignOut"
+        android:layout_width="128dp"
+        android:layout_height="32dp"
+        android:layout_alignTop="@+id/fabEditProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_button_stroke"
+        android:backgroundTint="@color/color_red"
+        android:text="Sign Out"
+        android:textAllCaps="false"
+        android:textColor="@color/color_red"
+        android:textSize="13sp" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabEditProfile"
         android:layout_width="wrap_content"

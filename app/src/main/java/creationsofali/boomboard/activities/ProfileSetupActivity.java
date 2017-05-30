@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import creationsofali.boomboard.R;
-import creationsofali.boomboard.adapters.UpdateProfilePagerAdapter;
+import creationsofali.boomboard.adapters.ProfileSetupPagerAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
@@ -35,7 +35,7 @@ import creationsofali.boomboard.helpers.SharedPreferenceEditor;
  * Created by ali on 5/13/17.
  */
 
-public class UpdateProfileActivity extends AppCompatActivity {
+public class ProfileSetupActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     FloatingActionButton fab;
@@ -44,7 +44,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     Animation animationFabShow, animationFabHide;
 
     Student student = new Student();
-    private static final String TAG = "UpdateProfileActivity";
+    private static final String TAG = "ProfileSetupActivity";
     private boolean isFromMain;
 
     @SuppressWarnings("ConstantConditions")
@@ -78,7 +78,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         fab.setEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setAdapter(new UpdateProfilePagerAdapter(getSupportFragmentManager(), UpdateProfileActivity.this));
+        viewPager.setAdapter(new ProfileSetupPagerAdapter(getSupportFragmentManager(), ProfileSetupActivity.this));
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -143,10 +143,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (isProfileComplete()) {
                     // update profile
-                    new SharedPreferenceEditor(UpdateProfileActivity.this).execute(student);
+                    new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
 
                     if (!isFromMain) {
-                        Toast.makeText(UpdateProfileActivity.this,
+                        Toast.makeText(ProfileSetupActivity.this,
                                 "Profile set up complete.",
                                 Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
@@ -154,7 +154,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             public void run() {
                                 // go to main activity
                                 String gsonStudentProfile = new Gson().toJson(student);
-                                startActivity(new Intent(UpdateProfileActivity.this, MainActivity.class)
+                                startActivity(new Intent(ProfileSetupActivity.this, MainActivity.class)
                                         .putExtra("student", gsonStudentProfile));
                                 // kill activity
                                 finish();
@@ -162,7 +162,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         }, 1000);
                     } else
                         // update successful!
-                        Toast.makeText(UpdateProfileActivity.this,
+                        Toast.makeText(ProfileSetupActivity.this,
                                 "Successful! Profile updated.",
                                 Toast.LENGTH_SHORT).show();
                 } else
@@ -202,7 +202,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     private void showWelcomeDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_welcome, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(UpdateProfileActivity.this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ProfileSetupActivity.this);
         dialogBuilder
                 .setView(dialogView)
                 .setCancelable(false);
@@ -259,7 +259,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.layout_dialog_sign_in, null);
 
-        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
+        final android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(ProfileSetupActivity.this);
         dialogBuilder.setView(dialogView)
                 .setCancelable(true);
 //                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {

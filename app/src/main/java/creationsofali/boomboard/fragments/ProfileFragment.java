@@ -4,20 +4,25 @@ package creationsofali.boomboard.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import creationsofali.boomboard.R;
-import creationsofali.boomboard.activities.UpdateProfileActivity;
+import creationsofali.boomboard.activities.MainActivity;
+import creationsofali.boomboard.activities.ProfileSetupActivity;
 import creationsofali.boomboard.datamodels.Constant;
 import creationsofali.boomboard.datamodels.Student;
 
@@ -29,11 +34,22 @@ public class ProfileFragment extends Fragment {
     boolean isProfileAvailable = false;
 
     TextView textCollegeAbr, textCollegeFull, textFacultyAbr, textFacultyFull, textYearFull;
+    Button buttonSignOut;
+
+    FirebaseAuth firebaseAuth;
+
+    MainActivity mainActivity;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mainActivity = (MainActivity) getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +63,6 @@ public class ProfileFragment extends Fragment {
         textFacultyFull = (TextView) fragmentView.findViewById(R.id.textFacultyFull);
         textYearFull = (TextView) fragmentView.findViewById(R.id.textYearFull);
 
-
         fragmentView.findViewById(R.id.fabEditProfile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +70,21 @@ public class ProfileFragment extends Fragment {
                 if (isProfileAvailable)
                     showEditProfileDialog();
                 else
-                    // start UpdateProfileActivity
-                    startActivity(new Intent(getContext(), UpdateProfileActivity.class));
+                    // start ProfileSetupActivity
+                    startActivity(new Intent(getContext(), ProfileSetupActivity.class)
+                            .putExtra("isFromMain", true));
 
+            }
+        });
+
+        buttonSignOut = (Button) fragmentView.findViewById(R.id.buttonSignOut);
+        buttonSignOut.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/hind-regular.ttf"));
+
+        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // logout
+                mainActivity.signOut();
             }
         });
 
@@ -84,7 +111,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // go to edit profile activity
-                startActivity(new Intent(getContext(), UpdateProfileActivity.class));
+                startActivity(new Intent(getContext(), ProfileSetupActivity.class));
                 dialog.dismiss();
             }
         });

@@ -152,7 +152,7 @@ public class SignInActivity extends AppCompatActivity {
                     signInWaitDialog.dismiss();
 
                 // go to main activity
-                startActivity(new Intent(SignInActivity.this, UpdateProfileActivity.class));
+                startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
                 // kill activity to clear top
                 finish();
 

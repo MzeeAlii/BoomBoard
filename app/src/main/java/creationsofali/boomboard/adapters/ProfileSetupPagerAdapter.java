@@ -14,11 +14,11 @@ import creationsofali.boomboard.helpers.CollegeHelper;
  * Created by ali on 5/14/17.
  */
 
-public class UpdateProfilePagerAdapter extends FragmentPagerAdapter {
+public class ProfileSetupPagerAdapter extends FragmentPagerAdapter {
 
     Context context;
 
-    public UpdateProfilePagerAdapter(FragmentManager fragmentManager, Context context) {
+    public ProfileSetupPagerAdapter(FragmentManager fragmentManager, Context context) {
         super(fragmentManager);
         this.context = context;
     }

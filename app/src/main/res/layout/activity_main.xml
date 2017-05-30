@@ -70,7 +70,7 @@
             android:tint="#FFFF"
 
             app:elevation="6dp"
-            app:fabSize="mini"
+            app:fabSize="normal"
             app:pressedTranslationZ="14dp"
             app:rippleColor="@android:color/white" />
 
