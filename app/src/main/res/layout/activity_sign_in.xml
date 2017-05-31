@@ -94,7 +94,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="128dp"
-                android:background="@drawable/shape_button_stroke"
+                android:background="@drawable/shape_button_stroke_blue"
                 android:clickable="true"
                 android:gravity="center">
 
@@ -125,7 +125,7 @@
             <!--android:layout_marginEnd="8dp"-->
             <!--android:layout_marginStart="8dp"-->
             <!--android:layout_marginTop="128dp"-->
-            <!--android:background="@drawable/shape_button_stroke"-->
+            <!--android:background="@drawable/shape_button_stroke_blue"-->
             <!--android:text="@string/sign_in"-->
             <!--android:textAllCaps="false"-->
             <!--android:textColor="@color/color_white"-->

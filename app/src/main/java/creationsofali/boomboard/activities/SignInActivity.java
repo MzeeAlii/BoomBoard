@@ -62,6 +62,8 @@ public class SignInActivity extends AppCompatActivity {
     GoogleApiClient googleApiClient;
     FirebaseAuth firebaseAuth;
 
+    boolean isFirstTime;
+
     private static final String TAG = "SignInActivity";
 
     @SuppressWarnings("deprecation")
@@ -79,6 +81,8 @@ public class SignInActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
+
+        isFirstTime = getIntent().getBooleanExtra("isFirstTime", false);
 
         firebaseAuth = FirebaseAuth.getInstance();
         // buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
@@ -282,8 +286,13 @@ public class SignInActivity extends AppCompatActivity {
                 if (signInWaitDialog.isShowing())
                     signInWaitDialog.dismiss();
 
-                // go to main activity
-                startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
+                if (isFirstTime)
+                    // go to profile setup
+                    startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
+                else
+                    // go to main activity
+                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+
                 // kill activity to clear top
                 finish();
 

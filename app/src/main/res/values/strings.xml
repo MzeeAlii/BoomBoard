@@ -40,5 +40,6 @@
     <string name="please_wait">Please Wait</string>
     <string name="sorry_error_try_again">Sorry, an error has occurred. Please try again</string>
     <string name="welcome_to_boom_board">Welcome To Boom Board</string>
+    <string name="sign_out_qn">Sign out of Boom Board?</string>
 
 </resources>

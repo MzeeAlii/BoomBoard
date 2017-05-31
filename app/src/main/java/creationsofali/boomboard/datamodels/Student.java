@@ -5,7 +5,7 @@ package creationsofali.boomboard.datamodels;
  */
 
 public class Student {
-    private String collegeFull, collegeAbr, facultyFull, facultyAbr;
+    private String collegeFull, collegeAbr, facultyFull, facultyAbr, email;
     private int yearOfStudy;
 
     public Student() {
@@ -51,5 +51,13 @@ public class Student {
 
     public void setYearOfStudy(int yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

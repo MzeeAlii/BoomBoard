@@ -1,9 +1,11 @@
 package creationsofali.boomboard.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +24,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import creationsofali.boomboard.R;
@@ -29,6 +36,7 @@ import creationsofali.boomboard.adapters.ProfileSetupPagerAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
+import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceEditor;
 
 /**
@@ -38,10 +46,13 @@ import creationsofali.boomboard.helpers.SharedPreferenceEditor;
 public class ProfileSetupActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    FloatingActionButton fab;
+    FloatingActionButton fabDone;
     ViewPager viewPager;
     TabLayout tabs;
     Animation animationFabShow, animationFabHide;
+
+    DatabaseReference studentProfileReference;
+    FirebaseAuth firebaseAuth;
 
     Student student = new Student();
     private static final String TAG = "ProfileSetupActivity";
@@ -70,12 +81,22 @@ public class ProfileSetupActivity extends AppCompatActivity {
             showWelcomeDialog();
         }
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            // initialize database ref for student profile
+            studentProfileReference = FirebaseDatabase.getInstance().getReference()
+                    .child("students")
+                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child("profile");
+        }
+
         animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show_fast);
         animationFabHide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_hide_fast);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.startAnimation(animationFabHide);
-        fab.setEnabled(false);
+        fabDone = (FloatingActionButton) findViewById(R.id.fab);
+        fabDone.startAnimation(animationFabHide);
+        fabDone.setEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new ProfileSetupPagerAdapter(getSupportFragmentManager(), ProfileSetupActivity.this));
@@ -92,12 +113,12 @@ public class ProfileSetupActivity extends AppCompatActivity {
                 Log.d(TAG, "onPageSelected = " + position);
                 switch (position) {
                     case 0:
-                        fab.startAnimation(animationFabHide);
-                        fab.setEnabled(false);
+                        fabDone.startAnimation(animationFabHide);
+                        fabDone.setEnabled(false);
                         break;
                     case 1:
-                        fab.startAnimation(animationFabShow);
-                        fab.setEnabled(true);
+                        fabDone.startAnimation(animationFabShow);
+                        fabDone.setEnabled(true);
                         break;
                 }
             }
@@ -138,33 +159,59 @@ public class ProfileSetupActivity extends AppCompatActivity {
         });
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isProfileComplete()) {
-                    // update profile
-                    new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
+                    // update profile in firebase database
+                    if (NetworkHelper.isOnline(ProfileSetupActivity.this)) {
+                        // online
+                        final ProgressDialog progressDialog = new ProgressDialog(ProfileSetupActivity.this);
+                        progressDialog.setCancelable(false);
+                        progressDialog.setMessage("Updating profile...");
+                        progressDialog.show();
 
-                    if (!isFromMain) {
-                        Toast.makeText(ProfileSetupActivity.this,
-                                "Profile set up complete.",
-                                Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
+                        if (firebaseAuth.getCurrentUser() != null)
+                            student.setEmail(firebaseAuth.getCurrentUser().getEmail());
+
+                        studentProfileReference.setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void run() {
-                                // go to main activity
-                                String gsonStudentProfile = new Gson().toJson(student);
-                                startActivity(new Intent(ProfileSetupActivity.this, MainActivity.class)
-                                        .putExtra("student", gsonStudentProfile));
-                                // kill activity
-                                finish();
+                            public void onSuccess(Void aVoid) {
+                                progressDialog.dismiss();
+
+                                if (!isFromMain) {
+                                    Toast.makeText(ProfileSetupActivity.this,
+                                            "Profile set up complete.",
+                                            Toast.LENGTH_LONG).show();
+
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            // go to main activity
+                                            String gsonStudentProfile = new Gson().toJson(student);
+                                            startActivity(new Intent(ProfileSetupActivity.this, MainActivity.class)
+                                                    .putExtra("student", gsonStudentProfile));
+                                            // kill activity
+                                            finish();
+                                        }
+                                    }, 1000);
+                                } else
+                                    // update successful
+                                    showSnackbar("Successful! Profile updated.");
                             }
-                        }, 1000);
-                    } else
-                        // update successful!
-                        Toast.makeText(ProfileSetupActivity.this,
-                                "Successful! Profile updated.",
-                                Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                // update failed
+                                showSnackbar("Failed!" + e.getMessage());
+                            }
+                        });
+                        // update profile in shared preference
+                        new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
+                    } else  // offline
+                        showSnackbar("Device is offline.");
+
                 } else
                     // show snackbar
                     showSnackbar("Please provide all required information.");
@@ -222,7 +269,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
     private void showSnackbar(String message) {
         Snackbar.make(findViewById(R.id.coordinatorLayoutProfile),
                 message,
-                Snackbar.LENGTH_LONG).show();
+                Snackbar.LENGTH_INDEFINITE)
+                .setDuration(8000)
+                .show();
     }
 
     public void setStudentCollege(String college) {

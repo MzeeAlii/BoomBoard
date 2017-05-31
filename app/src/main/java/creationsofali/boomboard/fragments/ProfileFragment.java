@@ -15,9 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import creationsofali.boomboard.R;
@@ -33,10 +33,10 @@ public class ProfileFragment extends Fragment {
 
     boolean isProfileAvailable = false;
 
-    TextView textCollegeAbr, textCollegeFull, textFacultyAbr, textFacultyFull, textYearFull;
+    TextView textProfileName, textProfileEmail, textCollegeAbr,
+            textCollegeFull, textFacultyAbr, textFacultyFull, textYearFull;
     Button buttonSignOut;
-
-    FirebaseAuth firebaseAuth;
+    ImageView imageProfileDp;
 
     MainActivity mainActivity;
 
@@ -57,22 +57,27 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        textProfileEmail = (TextView) fragmentView.findViewById(R.id.textProfileEmail);
+        textProfileName = (TextView) fragmentView.findViewById(R.id.textProfileName);
         textCollegeAbr = (TextView) fragmentView.findViewById(R.id.textCollegeAbr);
         textCollegeFull = (TextView) fragmentView.findViewById(R.id.textCollegeFull);
         textFacultyAbr = (TextView) fragmentView.findViewById(R.id.textFacultyAbr);
         textFacultyFull = (TextView) fragmentView.findViewById(R.id.textFacultyFull);
         textYearFull = (TextView) fragmentView.findViewById(R.id.textYearFull);
+        imageProfileDp = (ImageView) fragmentView.findViewById(R.id.imageProfileDp);
+
+        mainActivity.setProfileFragment(textProfileName, textProfileEmail, imageProfileDp);
 
         fragmentView.findViewById(R.id.fabEditProfile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // show dialog
-                if (isProfileAvailable)
-                    showEditProfileDialog();
-                else
-                    // start ProfileSetupActivity
-                    startActivity(new Intent(getContext(), ProfileSetupActivity.class)
-                            .putExtra("isFromMain", true));
+                // if (isProfileAvailable)
+                //     showEditProfileDialog();
+                //  else
+                // start ProfileSetupActivity
+                startActivity(new Intent(getContext(), ProfileSetupActivity.class)
+                        .putExtra("isFromMain", true));
 
             }
         });
@@ -83,8 +88,8 @@ public class ProfileFragment extends Fragment {
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // logout
-                mainActivity.signOut();
+                // ask for confirmation and sign out
+                mainActivity.showSignOutDialog();
             }
         });
 
@@ -126,6 +131,7 @@ public class ProfileFragment extends Fragment {
         });
 
     }
+
 
     private class SharedPreferenceReader extends AsyncTask<Void, Void, String> {
         private Context context;
@@ -193,6 +199,4 @@ public class ProfileFragment extends Fragment {
                 textYearFull.setText(R.string.fifth_year);
         }
     }
-
-
 }

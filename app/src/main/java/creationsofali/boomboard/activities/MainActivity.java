@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         textNavName = (TextView) headerView.findViewById(R.id.textNavName);
         textNavEmail = (TextView) headerView.findViewById(R.id.textNavEmail);
         imageNavDp = (ImageView) headerView.findViewById(R.id.imageNavDp);
+        textNavEmail.setText("");
+        textNavName.setText("");
 
         if (firebaseAuth.getCurrentUser() != null) {
             FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -518,8 +520,54 @@ public class MainActivity extends AppCompatActivity {
         item.setTitle(newItemTitle);
     }
 
-    public void signOut() {
+    public void setProfileFragment(TextView textProfileName, TextView textProfileEmail,
+                                   ImageView imageProfileDp) {
 
+        if (firebaseAuth.getCurrentUser() != null) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            textProfileName.setText(user.getDisplayName());
+            textProfileEmail.setText(user.getEmail());
+            Glide.with(MainActivity.this).load(user.getPhotoUrl()).into(imageProfileDp);
+        }
+    }
+
+    public void showSignOutDialog() {
+        View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_sign_out, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setCancelable(true);
+
+        TextView textHeaderName = (TextView) dialogView.findViewById(R.id.textHeaderName);
+        ImageView imageDialogDp = (ImageView) dialogView.findViewById(R.id.imageDialogDp);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            textHeaderName.setText(user.getDisplayName());
+            Glide.with(MainActivity.this).load(user.getPhotoUrl()).into(imageDialogDp);
+        }
+        // positive button
+        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // sign out the user
+                signOut();
+            }
+        });
+        // negative button
+        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // dismiss dialog
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    private void signOut() {
         firebaseAuth.signOut();
         // go signInActivity
         startActivity(new Intent(MainActivity.this, SignInActivity.class));

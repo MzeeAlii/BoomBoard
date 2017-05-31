@@ -5,11 +5,59 @@
     android:layout_height="match_parent"
     android:background="@color/color_pale_white">
 
+    <RelativeLayout
+        android:id="@+id/layoutNameEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardDp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+
+            app:cardBackgroundColor="@color/color_accent_blue"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/imageProfileDp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:tint="@color/color_white" />
+        </android.support.v7.widget.CardView>
+
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/textProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@id/cardDp"
+            android:text="Student Name"
+            android:textColor="@color/color_secondary_text"
+            android:textSize="20sp" />
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/textProfileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/textProfileName"
+            android:layout_below="@id/textProfileName"
+            android:text="studentname@gmail.com"
+            android:textColor="@color/color_primary_text"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/layoutProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_below="@+id/layoutNameEmail"
+        android:layout_marginTop="24dp"
         android:orientation="vertical"
         android:paddingEnd="24dp"
         android:paddingStart="24dp">
@@ -135,7 +183,6 @@
             android:visibility="gone" />
     </LinearLayout>
 
-
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="128dp"
@@ -145,11 +192,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/shape_button_stroke"
-        android:backgroundTint="@color/color_red"
+        android:background="@drawable/shape_button_stroke_red"
         android:text="Sign Out"
         android:textAllCaps="false"
-        android:textColor="@color/color_red"
+        android:textColor="@color/selector_color_red_white"
         android:textSize="13sp" />
 
     <android.support.design.widget.FloatingActionButton
