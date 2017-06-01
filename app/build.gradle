@@ -1,11 +1,16 @@
 apply plugin: 'com.android.application'
 
+// allow to set minSdk at build to take advantage
+// of faster build times leveraging ART in API 21+
+// with loosing much lint checks
+def minSdk =  hasProperty('minSdk') ? minSdk : 19
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "creationsofali.boomboard"
-        minSdkVersion 19
+        minSdkVersion minSdk
         targetSdkVersion 25
         versionCode 1
         versionName "0.17.0502"
