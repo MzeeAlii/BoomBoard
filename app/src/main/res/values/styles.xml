@@ -52,7 +52,7 @@
     <style name="SignInDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="DialogTitleAppearance">@style/DialogTextAppearance</item>
         <item name="DialogTitleText">@string/signing_in</item>
-        <item name="DialogSpotColor">@color/color_primary_dark_amber</item>
+        <item name="DialogSpotColor">@color/color_primary_amber</item>
         <item name="DialogSpotCount">4</item>
     </style>
 

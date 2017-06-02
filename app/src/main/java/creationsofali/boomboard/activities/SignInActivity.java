@@ -115,9 +115,6 @@ public class SignInActivity extends AppCompatActivity {
                 R.string.drawer_closed);
         drawerLayout.setDrawerListener(drawerToggle);
 
-        // drawer items typeface
-        new DrawerTypefaceHelper(SignInActivity.this).executeTask(navigationDrawer.getMenu());
-
         navigationDrawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -135,6 +132,10 @@ public class SignInActivity extends AppCompatActivity {
                 showSignInDialog();
             }
         });
+
+
+        // drawer items typeface
+        new DrawerTypefaceHelper(SignInActivity.this).executeTask(navigationDrawer.getMenu());
 
         // set my custom app font
         View rootView = findViewById(android.R.id.content);

@@ -58,6 +58,7 @@ import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
 import creationsofali.boomboard.fragments.WhatsNewFragment;
+import creationsofali.boomboard.helpers.DrawerTypefaceHelper;
 import creationsofali.boomboard.helpers.DrawerTypefaceSpan;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
@@ -231,7 +232,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(drawerToggle);
 
         // drawer items typeface
-        new DrawerTypefaceSpanTask().execute(navigationDrawer.getMenu());
+        new DrawerTypefaceHelper(MainActivity.this).executeTask(navigationDrawer.getMenu());
+        // new DrawerTypefaceSpanTask().execute(navigationDrawer.getMenu());
 
         // recyclerView in  collapsingToolbar
         onCreateAppBarRecycler();
