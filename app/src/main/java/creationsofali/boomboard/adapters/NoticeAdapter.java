@@ -18,7 +18,7 @@ import java.util.Locale;
 
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.activities.NoticeActivity;
-import creationsofali.boomboard.datamodels.Note;
+import creationsofali.boomboard.datamodels.Notice;
 
 /**
  * Created by ali on 5/1/17.
@@ -26,11 +26,11 @@ import creationsofali.boomboard.datamodels.Note;
 
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
 
-    List<Note> noteList;
+    List<Notice> noticeList;
     Context context;
 
-    public NoticeAdapter(List<Note> noteList, Context context) {
-        this.noteList = noteList;
+    public NoticeAdapter(List<Notice> noticeList, Context context) {
+        this.noticeList = noticeList;
         this.context = context;
     }
 
@@ -52,11 +52,11 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             cardNote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // open note
-                    Note note = noteList.get(getAdapterPosition());
-                    String gsonNote = new Gson().toJson(note);
+                    // open notice
+                    Notice notice = noticeList.get(getAdapterPosition());
+                    String gsonNote = new Gson().toJson(notice);
                     context.startActivity(new Intent(context, NoticeActivity.class)
-                            .putExtra("note", gsonNote)
+                            .putExtra("notice", gsonNote)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
@@ -73,11 +73,11 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textSubject.setText(noteList.get(position).getSubject());
+        holder.textSubject.setText(noticeList.get(position).getSubject());
 
-        if (noteList.get(position).getMessage() != null) {
+        if (noticeList.get(position).getMessage() != null) {
             // for notes with message
-            String noteMessage = noteList.get(position).getMessage();
+            String noteMessage = noticeList.get(position).getMessage();
 
             if (noteMessage.length() > 64) {
                 // trim message
@@ -92,14 +92,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             holder.textMessage.setText("This note has only attachment file.");
         }
 
-        long dateTime = noteList.get(position).getDate();
+        long dateTime = noticeList.get(position).getDate();
         // Jun 05 - 15:47
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd - kk:mm", Locale.ENGLISH);
         holder.textDateTime.setText(dateFormat.format(dateTime));
 
         // attachments
-        if (noteList.get(position).getDocUrl() != null ||
-                noteList.get(position).getImageUrl() != null) {
+        if (noticeList.get(position).getDocUrl() != null ||
+                noticeList.get(position).getImageUrl() != null) {
             // note contains attachment
             holder.iconClip.setVisibility(View.VISIBLE);
         } else {
@@ -110,6 +110,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return noteList.size();
+        return noticeList.size();
     }
 }

@@ -38,6 +38,7 @@ import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceEditor;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by ali on 5/13/17.
@@ -166,10 +167,13 @@ public class ProfileSetupActivity extends AppCompatActivity {
                     // update profile in firebase database
                     if (NetworkHelper.isOnline(ProfileSetupActivity.this)) {
                         // online
-                        final ProgressDialog progressDialog = new ProgressDialog(ProfileSetupActivity.this);
-                        progressDialog.setCancelable(false);
-                        progressDialog.setMessage("Updating profile...");
-                        progressDialog.show();
+                        // show progress
+                        final SpotsDialog spotsDialog = new SpotsDialog(
+                                ProfileSetupActivity.this,
+                                getString(R.string.updating_profile),
+                                R.style.SignInDialogStyle);
+                        spotsDialog.setCancelable(false);
+                        spotsDialog.show();
 
                         if (firebaseAuth.getCurrentUser() != null)
                             student.setEmail(firebaseAuth.getCurrentUser().getEmail());
@@ -177,7 +181,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         studentProfileReference.setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                progressDialog.dismiss();
+                                // update profile in shared preference
+                                new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
+                                spotsDialog.dismiss();
 
                                 if (!isFromMain) {
                                     Toast.makeText(ProfileSetupActivity.this,
@@ -202,13 +208,11 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
+                                spotsDialog.dismiss();
                                 // update failed
                                 showSnackbar("Failed!" + e.getMessage());
                             }
                         });
-                        // update profile in shared preference
-                        new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
                     } else  // offline
                         showSnackbar("Device is offline.");
 

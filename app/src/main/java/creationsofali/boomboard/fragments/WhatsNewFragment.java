@@ -28,7 +28,7 @@ import java.util.List;
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.activities.MainActivity;
 import creationsofali.boomboard.adapters.NoticeAdapter;
-import creationsofali.boomboard.datamodels.Note;
+import creationsofali.boomboard.datamodels.Notice;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceHelper;
@@ -48,7 +48,7 @@ public class WhatsNewFragment extends Fragment {
     LinearLayout layoutDeviceOffline;
     TextView textOnBoardThisWeek;
 
-    List<Note> noticeList = new ArrayList<>();
+    List<Notice> noticeList = new ArrayList<>();
 
     DatabaseReference noticesReference;
     ChildEventListener notesChildEventListener;
@@ -114,8 +114,8 @@ public class WhatsNewFragment extends Fragment {
         notesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Note note = dataSnapshot.getValue(Note.class);
-                noticeList.add(note);
+                Notice notice = dataSnapshot.getValue(Notice.class);
+                noticeList.add(notice);
                 //scaleInAnimationAdapter.notifyItemInserted(noticeList.size());
                 noticeAdapter.notifyItemInserted(noticeList.size());
             }

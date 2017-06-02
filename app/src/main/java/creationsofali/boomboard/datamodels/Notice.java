@@ -4,12 +4,12 @@ package creationsofali.boomboard.datamodels;
  * Created by ali on 5/1/17.
  */
 
-public class Note {
+public class Notice {
 
     private String subject, message, imageUrl, docUrl, author;
     private long date;
 
-    public Note() {
+    public Notice() {
     }
 
     public String getSubject() {

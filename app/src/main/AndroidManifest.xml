@@ -27,7 +27,7 @@
         <activity
             android:name=".activities.TimetableActivity"
             android:parentActivityName=".activities.MainActivity" />
-        <!-- Note -->
+        <!-- Notice -->
         <activity
             android:name=".activities.NoticeActivity"
             android:parentActivityName=".activities.MainActivity" />

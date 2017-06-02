@@ -3,8 +3,6 @@ package creationsofali.boomboard.activities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Typeface;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -21,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 

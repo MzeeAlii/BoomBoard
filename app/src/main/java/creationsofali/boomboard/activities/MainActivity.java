@@ -53,7 +53,7 @@ import java.util.List;
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.adapters.CollapsingToolbarAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
-import creationsofali.boomboard.datamodels.Note;
+import creationsofali.boomboard.datamodels.Notice;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     CollapsingToolbarAdapter whatsNewAdapter;
     WhatsNewFragment whatsNewFragment;
 
-    List<Note> appBarNoticeList = new ArrayList<>();
+    List<Notice> appBarNoticeList = new ArrayList<>();
 
     DatabaseReference noticesReference;
     ChildEventListener noticesChildEventListener;
@@ -290,8 +290,8 @@ public class MainActivity extends AppCompatActivity {
         noticesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Note note = dataSnapshot.getValue(Note.class);
-                appBarNoticeList.add(note);
+                Notice notice = dataSnapshot.getValue(Notice.class);
+                appBarNoticeList.add(notice);
                 scaleInAnimationAdapter.notifyItemInserted(appBarNoticeList.size());
             }
 
