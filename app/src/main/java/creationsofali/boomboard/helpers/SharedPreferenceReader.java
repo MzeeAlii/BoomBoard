@@ -25,7 +25,7 @@ public class SharedPreferenceReader extends AsyncTask<Void, Void, String> {
         SharedPreferences sharedPreferences = context.getSharedPreferences(
                 context.getString(R.string.app_name),
                 Context.MODE_PRIVATE);
-        String student = sharedPreferences.getString("student", Constant.NO_PROFILE_FOUND);
+        String student = sharedPreferences.getString("student", null);
 
         Log.d(TAG, "doInBackground:studentProfile: " + student);
 

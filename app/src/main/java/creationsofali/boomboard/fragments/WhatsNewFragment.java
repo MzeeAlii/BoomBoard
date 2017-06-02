@@ -14,7 +14,6 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,10 +27,11 @@ import java.util.List;
 
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.activities.MainActivity;
-import creationsofali.boomboard.adapters.CollapseNotesAdapter;
-import creationsofali.boomboard.adapters.NotesAdapter;
+import creationsofali.boomboard.adapters.NoticeAdapter;
 import creationsofali.boomboard.datamodels.Note;
+import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.NetworkHelper;
+import creationsofali.boomboard.helpers.SharedPreferenceHelper;
 import creationsofali.boomboard.helpers.TopBottomSpaceDecoration;
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
 
@@ -43,14 +43,14 @@ public class WhatsNewFragment extends Fragment {
 
     RecyclerView whatsNewRecycler;
     RecyclerView.LayoutManager layoutManager;
-    NotesAdapter notesAdapter;
+    NoticeAdapter noticeAdapter;
     ProgressBar progressBar;
     LinearLayout layoutDeviceOffline;
     TextView textOnBoardThisWeek;
 
-    List<Note> noteList = new ArrayList<>();
+    List<Note> noticeList = new ArrayList<>();
 
-    DatabaseReference notesDatabaseReference;
+    DatabaseReference noticesReference;
     ChildEventListener notesChildEventListener;
     ValueEventListener notesValueEventListener;
 
@@ -86,8 +86,8 @@ public class WhatsNewFragment extends Fragment {
         scaleInTopAnimator.setChangeDuration(1000);
         whatsNewRecycler.setItemAnimator(scaleInTopAnimator);
 
-        notesAdapter = new NotesAdapter(noteList, getContext());
-        whatsNewRecycler.setAdapter(notesAdapter);
+        noticeAdapter = new NoticeAdapter(noticeList, getContext());
+        whatsNewRecycler.setAdapter(noticeAdapter);
 
         // decorations
         int topSpace = (int) TypedValue.applyDimension(
@@ -96,20 +96,28 @@ public class WhatsNewFragment extends Fragment {
                 getResources().getDisplayMetrics());
         int bottomSpace = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                72,
+                80,
                 getResources().getDisplayMetrics());
 
         whatsNewRecycler.addItemDecoration(new TopBottomSpaceDecoration(bottomSpace, topSpace));
 
-        notesDatabaseReference = FirebaseDatabase.getInstance().getReference().child("posts");
+        // get student profile from shared preferences
+        Student student = SharedPreferenceHelper.getStudentProfile(getContext());
+
+        if (student != null)
+            noticesReference = FirebaseDatabase.getInstance().getReference()
+                    .child("notices")
+                    .child(student.getCollegeAbr())
+                    .child("global");
+
         // listeners
         notesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Note note = dataSnapshot.getValue(Note.class);
-                noteList.add(note);
-                //scaleInAnimationAdapter.notifyItemInserted(noteList.size());
-                notesAdapter.notifyItemInserted(noteList.size());
+                noticeList.add(note);
+                //scaleInAnimationAdapter.notifyItemInserted(noticeList.size());
+                noticeAdapter.notifyItemInserted(noticeList.size());
             }
 
             @Override
@@ -167,10 +175,10 @@ public class WhatsNewFragment extends Fragment {
 
     private void detachDatabaseListeners() {
         if (notesValueEventListener != null)
-            notesDatabaseReference.removeEventListener(notesValueEventListener);
+            noticesReference.removeEventListener(notesValueEventListener);
 
         if (notesChildEventListener != null)
-            notesDatabaseReference.removeEventListener(notesChildEventListener);
+            noticesReference.removeEventListener(notesChildEventListener);
     }
 
     private class NotesRetrieveTask extends AsyncTask<Void, Void, Boolean> {
@@ -178,9 +186,9 @@ public class WhatsNewFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            noteList.clear();
+            noticeList.clear();
             //scaleInAnimationAdapter.notifyDataSetChanged();
-            notesAdapter.notifyDataSetChanged();
+            noticeAdapter.notifyDataSetChanged();
             textOnBoardThisWeek.setText("Loading...");
             textOnBoardThisWeek.setVisibility(View.VISIBLE);
 
@@ -205,8 +213,8 @@ public class WhatsNewFragment extends Fragment {
             if (NetworkHelper.isOnline(getContext().getApplicationContext())) {
                 // device online
                 // attach listeners to database ref
-                notesDatabaseReference.addChildEventListener(notesChildEventListener);
-                notesDatabaseReference.addValueEventListener(notesValueEventListener);
+                noticesReference.addChildEventListener(notesChildEventListener);
+                noticesReference.addValueEventListener(notesValueEventListener);
                 return true;
             } else {
                 // device offline
@@ -222,6 +230,7 @@ public class WhatsNewFragment extends Fragment {
                 layoutDeviceOffline.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
                 textOnBoardThisWeek.setVisibility(View.GONE);
+                ((MainActivity) getActivity()).showSnackbarAction("Failed!");
             }
         }
     }

@@ -24,12 +24,12 @@ import creationsofali.boomboard.datamodels.Note;
  * Created by ali on 5/1/17.
  */
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
+public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
 
     List<Note> noteList;
     Context context;
 
-    public NotesAdapter(List<Note> noteList, Context context) {
+    public NoticeAdapter(List<Note> noteList, Context context) {
         this.noteList = noteList;
         this.context = context;
     }

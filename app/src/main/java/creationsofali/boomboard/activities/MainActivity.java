@@ -12,6 +12,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -50,9 +51,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import creationsofali.boomboard.R;
-import creationsofali.boomboard.adapters.CollapseNotesAdapter;
+import creationsofali.boomboard.adapters.CollapsingToolbarAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Note;
+import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
 import creationsofali.boomboard.fragments.WhatsNewFragment;
@@ -60,6 +62,7 @@ import creationsofali.boomboard.helpers.DrawerTypefaceSpan;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.PackageInfoHelper;
+import creationsofali.boomboard.helpers.SharedPreferenceHelper;
 import creationsofali.boomboard.helpers.StartEndSpaceDecoration;
 import creationsofali.boomboard.helpers.TwitterHelper;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
@@ -80,12 +83,13 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView appBarRecycler;
     RecyclerView.LayoutManager layoutManagerHorizontal;
-    CollapseNotesAdapter whatsNewAdapter;
+    CollapsingToolbarAdapter whatsNewAdapter;
+    WhatsNewFragment whatsNewFragment;
 
-    List<Note> appBarNoteList = new ArrayList<>();
+    List<Note> appBarNoticeList = new ArrayList<>();
 
-    DatabaseReference notesDatabaseReference;
-    ChildEventListener notesChildEventListener;
+    DatabaseReference noticesReference;
+    ChildEventListener noticesChildEventListener;
     ValueEventListener notesValueEventListener;
     FirebaseAuth firebaseAuth;
 
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         // by default, set checked item onCreate
-        final WhatsNewFragment whatsNewFragment = new WhatsNewFragment();
+        whatsNewFragment = new WhatsNewFragment();
         fragmentManager.beginTransaction().replace(
                 R.id.mainContentView,
                 whatsNewFragment,
@@ -263,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
 
         appBarRecycler.addItemDecoration(new StartEndSpaceDecoration(startEndSpace));
 
-        whatsNewAdapter = new CollapseNotesAdapter(appBarNoteList, MainActivity.this);
+        whatsNewAdapter = new CollapsingToolbarAdapter(appBarNoticeList, MainActivity.this);
         //appBarRecycler.setAdapter(whatsNewAdapter);
 
         scaleInAnimationAdapter = new ScaleInAnimationAdapter(whatsNewAdapter);
@@ -273,14 +277,22 @@ public class MainActivity extends AppCompatActivity {
         // set animationAdapter
         appBarRecycler.setAdapter(scaleInAnimationAdapter);
 
-        notesDatabaseReference = FirebaseDatabase.getInstance().getReference().child("posts");
+        // get student profile from shared preferences
+        Student student = SharedPreferenceHelper.getStudentProfile(MainActivity.this);
+
+        if (student != null)
+            noticesReference = FirebaseDatabase.getInstance().getReference()
+                    .child("notices")
+                    .child(student.getCollegeAbr())
+                    .child("global");
+
         // listeners
-        notesChildEventListener = new ChildEventListener() {
+        noticesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Note note = dataSnapshot.getValue(Note.class);
-                appBarNoteList.add(note);
-                scaleInAnimationAdapter.notifyItemInserted(appBarNoteList.size());
+                appBarNoticeList.add(note);
+                scaleInAnimationAdapter.notifyItemInserted(appBarNoticeList.size());
             }
 
             @Override
@@ -306,6 +318,10 @@ public class MainActivity extends AppCompatActivity {
                 // onRetrieveComplete
                 // hide progressBar and shit
                 //onRetrieveComplete();
+                if (!fabRefresh.isEnabled()) {
+                    fabRefresh.setEnabled(true);
+                    fabRefresh.startAnimation(animationFabShow);
+                }
             }
 
             @Override
@@ -319,16 +335,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startAsyncTaskForAppBarRecycler() {
-        new NotesRetrieveTask().execute();
+        new NoticesRetrieveTask().execute();
     }
 
 
-    private class NotesRetrieveTask extends AsyncTask<Void, Void, Boolean> {
+    private class NoticesRetrieveTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            appBarNoteList.clear();
+            appBarNoticeList.clear();
             scaleInAnimationAdapter.notifyDataSetChanged();
 
 //            if (progressBar.getVisibility() != View.VISIBLE)
@@ -347,8 +363,8 @@ public class MainActivity extends AppCompatActivity {
             if (NetworkHelper.isOnline(MainActivity.this)) {
                 // device online
                 // attach listeners to database ref
-                notesDatabaseReference.addChildEventListener(notesChildEventListener);
-                notesDatabaseReference.addValueEventListener(notesValueEventListener);
+                noticesReference.addChildEventListener(noticesChildEventListener);
+                noticesReference.addValueEventListener(notesValueEventListener);
                 return true;
 
             } else {
@@ -362,6 +378,11 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(isOnline);
             if (!isOnline) {
                 // show message, device offline, can't load or something like that
+                //showSnackbarAction("Failed!");
+                if (fabRefresh.isEnabled()) {
+                    fabRefresh.setEnabled(false);
+                    fabRefresh.startAnimation(animationFabHide);
+                }
             }
         }
     }
@@ -377,10 +398,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void detachDatabaseListeners() {
         if (notesValueEventListener != null)
-            notesDatabaseReference.removeEventListener(notesValueEventListener);
+            noticesReference.removeEventListener(notesValueEventListener);
 
-        if (notesChildEventListener != null)
-            notesDatabaseReference.removeEventListener(notesChildEventListener);
+        if (noticesChildEventListener != null)
+            noticesReference.removeEventListener(noticesChildEventListener);
     }
 
 
@@ -529,6 +550,32 @@ public class MainActivity extends AppCompatActivity {
             textProfileEmail.setText(user.getEmail());
             Glide.with(MainActivity.this).load(user.getPhotoUrl()).into(imageProfileDp);
         }
+    }
+
+
+    public void showSnackbarAction(String message) {
+        Snackbar.make(findViewById(R.id.mainCoordinatorLayout),
+                message,
+                Snackbar.LENGTH_INDEFINITE)
+                // .setDuration(20000)
+                .setAction("Retry", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // start new retrieve task
+                        // for app bar layout
+                        new NoticesRetrieveTask().execute();
+                        // for fragment
+                        whatsNewFragment.startAsyncTask();
+                    }
+                }).show();
+    }
+
+    private void showSnackbar(String message) {
+        Snackbar.make(findViewById(R.id.mainCoordinatorLayout),
+                message,
+                Snackbar.LENGTH_INDEFINITE)
+                .setDuration(10000)
+                .show();
     }
 
     public void showSignOutDialog() {

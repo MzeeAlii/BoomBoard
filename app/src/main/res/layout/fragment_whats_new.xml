@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:orientation="vertical">
 
         <ImageView
@@ -83,7 +83,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="Device is offline! Please turn on the internet."
+            android:text="@string/device_offline_turn_on_internet"
             android:textColor="@color/color_secondary_text"
             android:textSize="15sp" />
 

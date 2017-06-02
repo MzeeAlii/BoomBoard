@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/image_mobile_app_coffee" />
+            android:src="@drawable/image_xperia_xz_1" />
 
         <TextView
             android:layout_width="match_parent"

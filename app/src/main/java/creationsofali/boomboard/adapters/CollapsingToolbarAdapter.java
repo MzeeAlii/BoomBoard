@@ -23,12 +23,12 @@ import creationsofali.boomboard.datamodels.Note;
  * Created by ali on 5/1/17.
  */
 
-public class CollapseNotesAdapter extends RecyclerView.Adapter<CollapseNotesAdapter.ViewHolder> {
+public class CollapsingToolbarAdapter extends RecyclerView.Adapter<CollapsingToolbarAdapter.ViewHolder> {
 
     List<Note> noteList;
     Context context;
 
-    public CollapseNotesAdapter(List<Note> noteList, Context context) {
+    public CollapsingToolbarAdapter(List<Note> noteList, Context context) {
         this.noteList = noteList;
         this.context = context;
     }
@@ -59,7 +59,7 @@ public class CollapseNotesAdapter extends RecyclerView.Adapter<CollapseNotesAdap
 
     }
 
-    public CollapseNotesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CollapsingToolbarAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_item_note, parent, false);
@@ -67,7 +67,7 @@ public class CollapseNotesAdapter extends RecyclerView.Adapter<CollapseNotesAdap
     }
 
     @Override
-    public void onBindViewHolder(CollapseNotesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CollapsingToolbarAdapter.ViewHolder holder, int position) {
         holder.textSubject.setText(noteList.get(position).getSubject());
         long dateTime = noteList.get(position).getDate();
         // Jun 05 - 15:47
