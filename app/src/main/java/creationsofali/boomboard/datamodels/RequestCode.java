@@ -11,5 +11,6 @@ public class RequestCode {
             RC_READ_STORAGE = 1113,
             RC_WRITE_STORAGE = 1114,
             RC_READ_WRITE_STORAGE = 1115,
-            RC_SIGN_IN = 1116;
+            RC_SIGN_IN = 1116,
+            RC_FCM_NOTIFICATION = 1117;
 }

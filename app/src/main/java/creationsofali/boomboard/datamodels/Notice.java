@@ -6,10 +6,11 @@ package creationsofali.boomboard.datamodels;
 
 public class Notice {
 
-    private String subject, message, imageUrl, docUrl, author;
+    private String subject, message, imageUrl, docUrl, author, authorDpUrl, authorEmail;
     private long date;
 
     public Notice() {
+        this.date = 0;
     }
 
     public String getSubject() {
@@ -58,5 +59,21 @@ public class Notice {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getAuthorDpUrl() {
+        return authorDpUrl;
+    }
+
+    public void setAuthorDpUrl(String authorDpUrl) {
+        this.authorDpUrl = authorDpUrl;
+    }
+
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+
+    public void setAuthorEmail(String authorEmail) {
+        this.authorEmail = authorEmail;
     }
 }
