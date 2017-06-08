@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/noteCoordinator"
+    android:id="@+id/noticeCoordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_pale_white"
@@ -14,35 +14,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <creationsofali.boomboard.appfonts.HindTextView
                 android:id="@+id/textSubject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
                 android:maxLines="2"
-                android:text="Note Subject Will Show Here"
+                android:text="Notice Subject Will Show Here"
                 android:textColor="@color/color_grey_900"
                 android:textSize="18sp" />
-
 
             <creationsofali.boomboard.appfonts.HindTextView
                 android:id="@+id/textMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textSubject"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:padding="20dp"
 
                 android:text="@string/lorem_ipsum"
                 android:textColor="@color/color_grey_800"
@@ -52,16 +50,15 @@
                 android:id="@+id/layoutAttachmentFile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textMessage"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="56dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
 
                 app:cardBackgroundColor="@color/color_divider"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="2dp">
+                app:cardCornerRadius="2dp"
+                app:cardElevation="1.5dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -127,6 +124,66 @@
                     </LinearLayout>
                 </FrameLayout>
             </android.support.v7.widget.CardView>
-        </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardDp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+
+                    app:cardBackgroundColor="@color/color_accent_blue"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/imageStaffDp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+                </android.support.v7.widget.CardView>
+
+                <creationsofali.boomboard.appfonts.HindTextView
+                    android:id="@+id/textStaffName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/cardDp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@id/cardDp"
+                    android:text="Staff Name"
+                    android:textColor="@color/color_grey_900"
+                    android:textSize="14sp" />
+
+                <creationsofali.boomboard.appfonts.HindTextView
+                    android:id="@+id/textStaffTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textStaffName"
+                    android:layout_toEndOf="@id/cardDp"
+                    android:maxWidth="144dp"
+                    android:text="Staff Title Staff Title"
+                    android:textColor="@color/color_secondary_text"
+                    android:textSize="14sp" />
+
+                <creationsofali.boomboard.appfonts.HindTextView
+                    android:id="@+id/textWhen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/textStaffName"
+                    android:layout_marginEnd="24dp"
+                    android:text="05 June '17 - 21:47"
+                    android:textColor="@color/color_secondary_text"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>
