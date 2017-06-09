@@ -44,5 +44,6 @@
     <string name="sign_out_qn">Sign out of Boom Board?</string>
     <string name="device_offline_turn_on_internet">Device is offline! Please turn on the internet.</string>
     <string name="sign_out">Sign Out</string>
+    <string name="hint">Hint</string>
 
 </resources>

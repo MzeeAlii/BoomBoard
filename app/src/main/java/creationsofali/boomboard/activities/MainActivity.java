@@ -215,6 +215,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navAbout:
                         showAboutDialog();
                         break;
+
+                    case R.id.navHint:
+                        showHintDialog();
+                        break;
                 }
 
                 if (drawerLayout.isDrawerOpen(GravityCompat.START))
@@ -515,6 +519,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void showHintDialog() {
+        final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_downloads_hint, null);
+
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setView(dialogView)
+                .setCancelable(true);
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        dialogView.findViewById(R.id.textOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialogView.findViewById(R.id.textDirectory).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // do magic
+                // TODO: 6/9/17 go to open folder if there's any downloaded file
+            }
+        });
+    }
+
 
     private class DrawerTypefaceSpanTask extends AsyncTask<Menu, Void, Void> {
         @Override

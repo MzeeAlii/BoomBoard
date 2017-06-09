@@ -42,6 +42,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/navHint"
+            android:checkable="false"
+            android:icon="@drawable/ic_lightbulb_on_outline"
+            android:title="@string/hint" />
+
+        <item
             android:id="@+id/navAbout"
             android:checkable="false"
             android:icon="@drawable/ic_info"
