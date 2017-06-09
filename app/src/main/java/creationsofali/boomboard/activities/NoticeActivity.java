@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -126,11 +128,25 @@ public class NoticeActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_options_notice, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case android.R.id.home:
                 onBackPressed();
+                return true;
+
+            case R.id.optionBookmark:
+                // save a notice as a bookmark
+                Toast.makeText(NoticeActivity.this,
+                        "Notice saved in your bookmarks.",
+                        Toast.LENGTH_SHORT).show();
+                item.setIcon(R.drawable.ic_bookmark_check);
                 return true;
 
             default:

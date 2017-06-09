@@ -2,9 +2,12 @@ package creationsofali.boomboard.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -47,6 +50,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +59,7 @@ import creationsofali.boomboard.R;
 import creationsofali.boomboard.adapters.CollapsingToolbarAdapter;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Notice;
+import creationsofali.boomboard.datamodels.RequestCode;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
@@ -63,6 +69,7 @@ import creationsofali.boomboard.helpers.DrawerTypefaceSpan;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.PackageInfoHelper;
+import creationsofali.boomboard.helpers.PermissionsHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceHelper;
 import creationsofali.boomboard.helpers.StartEndSpaceDecoration;
 import creationsofali.boomboard.helpers.TwitterHelper;
@@ -474,6 +481,21 @@ public class MainActivity extends AppCompatActivity {
         detachDatabaseListeners();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length > 0) {
+            switch (requestCode) {
+                case RequestCode.RC_READ_STORAGE:
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        openBoomBoardFolder();
+                    }
+                    break;
+            }
+        }
+    }
+
     public void showAboutDialog() {
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_dialog_about, null);
 
@@ -490,10 +512,10 @@ public class MainActivity extends AppCompatActivity {
         TextView textRights = (TextView) dialogView.findViewById(R.id.textRights);
         String unicodeCopyRight = "\u00A9"; // or (char) 169 = 10101001 = 0x00A9
         String unicodeTradeMark = "\u2122"; // or (char) 8482 = 0x2122
-        // (c) 2017 Ace Code Labs tm
+        // (c) 2017 TINTech Apps tm
         //      All Rights Reserved.
         textRights.setText(unicodeCopyRight);
-        textRights.append(" 2017 " + "Ace Quad Apps" + unicodeTradeMark);
+        textRights.append(" 2017 " + "TINTech Apps" + unicodeTradeMark);
         textRights.append("\n" + "All Rights Reserved.");
 
 
@@ -543,37 +565,46 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // do magic
                 // TODO: 6/9/17 go to open folder if there's any downloaded file
+                if (PermissionsHelper.hasReadStoragePermission(MainActivity.this)) {
+                    // open folder
+                    openBoomBoardFolder();
+
+                } else
+                    PermissionsHelper.requestReadStoragePermission(MainActivity.this);
+
+                // close dialog
+                dialog.dismiss();
             }
         });
     }
 
 
-    private class DrawerTypefaceSpanTask extends AsyncTask<Menu, Void, Void> {
-        @Override
-        protected Void doInBackground(Menu... menus) {
-            Menu drawerMenu = menus[0];
-            for (int i = 0; i < drawerMenu.size(); i++) {
-                // for each item in the drawer
-                setCustomDrawerFonts(drawerMenu.getItem(i));
-            }
-            return null;
-        }
-    }
+//    private class DrawerTypefaceSpanTask extends AsyncTask<Menu, Void, Void> {
+//        @Override
+//        protected Void doInBackground(Menu... menus) {
+//            Menu drawerMenu = menus[0];
+//            for (int i = 0; i < drawerMenu.size(); i++) {
+//                // for each item in the drawer
+//                setCustomDrawerFonts(drawerMenu.getItem(i));
+//            }
+//            return null;
+//        }
+//    }
 
     // custom drawer items fonts
-    private void setCustomDrawerFonts(MenuItem item) {
-        String fontFamily = "";
-        Typeface customTypeface = Typeface.createFromAsset(getAssets(), "fonts/hind-regular.ttf");
-
-        SpannableString newItemTitle = new SpannableString(item.getTitle());
-        newItemTitle.setSpan(
-                new DrawerTypefaceSpan(fontFamily, customTypeface),
-                0,
-                newItemTitle.length(),
-                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-
-        item.setTitle(newItemTitle);
-    }
+//    private void setCustomDrawerFonts(MenuItem item) {
+//        String fontFamily = "";
+//        Typeface customTypeface = Typeface.createFromAsset(getAssets(), "fonts/hind-regular.ttf");
+//
+//        SpannableString newItemTitle = new SpannableString(item.getTitle());
+//        newItemTitle.setSpan(
+//                new DrawerTypefaceSpan(fontFamily, customTypeface),
+//                0,
+//                newItemTitle.length(),
+//                Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+//
+//        item.setTitle(newItemTitle);
+//    }
 
     public void setProfileFragment(TextView textProfileName, TextView textProfileEmail,
                                    ImageView imageProfileDp) {
@@ -653,5 +684,21 @@ public class MainActivity extends AppCompatActivity {
         // go signInActivity
         startActivity(new Intent(MainActivity.this, SignInActivity.class));
         finish();
+    }
+
+    private void openBoomBoardFolder() {
+        // open folder
+        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BoomBoard");
+        if (folder.exists()) {
+            Uri folderUri = Uri.parse(folder.getAbsolutePath());
+            Intent openFolderIntent = new Intent(Intent.ACTION_VIEW);
+            openFolderIntent.setDataAndType(folderUri, "resource/folder");
+
+            if (openFolderIntent.resolveActivityInfo(getPackageManager(), 0) != null)
+                startActivity(openFolderIntent);
+
+        } else
+            showSnackbar("You haven't downloaded any file yet.");
+
     }
 }

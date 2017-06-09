@@ -30,6 +30,7 @@ public class BoomBoardMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         Log.d(TAG, "onMessageReceived:message = " + remoteMessage.getNotification().getBody());
+
         // show notification
         createNotification(remoteMessage);
     }

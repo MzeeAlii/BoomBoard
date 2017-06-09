@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/imageDialogDp"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_folder_download"
             android:tint="@color/color_primary_light_amber" />
@@ -58,14 +58,14 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_file_check"
+            android:src="@drawable/ic_lightbulb_on"
             android:tint="@color/color_light_blue" />
 
         <creationsofali.boomboard.appfonts.HindTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
             android:maxLines="1"
             android:text="Downloaded files are saved in the folder"
             android:textSize="14sp" />

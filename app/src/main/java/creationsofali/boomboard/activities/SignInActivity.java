@@ -338,10 +338,10 @@ public class SignInActivity extends AppCompatActivity {
         TextView textRights = (TextView) dialogView.findViewById(R.id.textRights);
         String unicodeCopyRight = "\u00A9"; // or (char) 169 = 10101001 = 0x00A9
         String unicodeTradeMark = "\u2122"; // or (char) 8482 = 0x2122
-        // (c) 2017 Ace Code Labs tm
+        // (c) 2017 TINTech tm
         //      All Rights Reserved.
         textRights.setText(unicodeCopyRight);
-        textRights.append(" 2017 " + "Ace Quad Apps" + unicodeTradeMark);
+        textRights.append(" 2017 " + "TINTech Apps" + unicodeTradeMark);
         textRights.append("\n" + "All Rights Reserved.");
 
 

@@ -22,6 +22,7 @@ public class SharedPreferenceHelper {
                 Context.MODE_PRIVATE);
         String gsonStudent = sharedPreferences.getString("student", null);
 
+
         if (gsonStudent != null)
             return gson.fromJson(gsonStudent, Student.class);
         else
