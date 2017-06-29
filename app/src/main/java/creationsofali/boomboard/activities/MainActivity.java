@@ -564,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // do magic
-                // TODO: 6/9/17 go to open folder if there's any downloaded file
+                // TODO: 6/10/17 show waiting dialog while checking folder
                 if (PermissionsHelper.hasReadStoragePermission(MainActivity.this)) {
                     // open folder
                     openBoomBoardFolder();
@@ -688,6 +688,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openBoomBoardFolder() {
         // open folder
+        // TODO: 6/10/17 close dialog before starting intent
         File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BoomBoard");
         if (folder.exists()) {
             Uri folderUri = Uri.parse(folder.getAbsolutePath());
