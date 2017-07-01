@@ -55,7 +55,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="6dp"
                     android:src="@drawable/ic_google"
-                    android:tint="@color/selector_color_white_blue" />
+                    android:tint="@color/selector_color_white_amber" />
 
                 <creationsofali.boomboard.appfonts.HindTextView
                     android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="24dp"
                     android:text="@string/sign_in"
-                    android:textColor="@color/selector_color_white_blue"
+                    android:textColor="@color/selector_color_white_amber"
                     android:textSize="15sp" />
             </LinearLayout>
 

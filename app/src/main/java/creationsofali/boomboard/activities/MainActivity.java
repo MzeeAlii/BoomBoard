@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        dialogView.findViewById(R.id.textDirectory).setOnClickListener(new View.OnClickListener() {
+        dialogView.findViewById(R.id.layoutDirectory).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // do magic

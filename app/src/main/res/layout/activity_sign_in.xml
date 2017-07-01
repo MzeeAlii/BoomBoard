@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/image_mobile_app_coffee" />
+            android:src="@drawable/image_xperia_xz_1" />
 
         <TextView
             android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="6dp"
                     android:src="@drawable/ic_google"
-                    android:tint="@color/selector_color_white_blue" />
+                    android:tint="@color/selector_color_white_amber" />
 
                 <creationsofali.boomboard.appfonts.HindTextView
                     android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="32dp"
                     android:text="@string/sign_in"
-                    android:textColor="@color/selector_color_white_blue"
+                    android:textColor="@color/selector_color_white_amber"
                     android:textSize="15sp" />
             </LinearLayout>
 

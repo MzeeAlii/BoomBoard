@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/color_primary_dark_amber"
-    tools:targetApi="21">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@android:color/white" />
+    <item android:drawable="@color/color_primary_amber" android:state_pressed="true" />
 
-</ripple>
+    <item android:drawable="@color/color_white" />
+
+</selector>
