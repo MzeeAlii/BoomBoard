@@ -104,7 +104,9 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 drawerLayout.closeDrawer(GravityCompat.START);
-                showSignInDialog();
+                //showSignInDialog();
+                // initiate sign in
+                initiateSignInIntent();
             }
         });
 
@@ -129,7 +131,9 @@ public class SignInActivity extends AppCompatActivity {
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSignInDialog();
+                // showSignInDialog();
+                // initiate sign in
+                initiateSignInIntent();
             }
         });
 
@@ -366,6 +370,13 @@ public class SignInActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    private void initiateSignInIntent() {
+        // show progress
+        buildSignInDialog.show();
+        startActivityForResult(getGoogleAuthIntent(), RequestCode.RC_SIGN_IN);
+
     }
 
 

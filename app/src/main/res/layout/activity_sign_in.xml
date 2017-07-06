@@ -116,7 +116,6 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-
             <!--<Button-->
             <!--android:id="@+id/buttonSignIn"-->
             <!--android:layout_width="184dp"-->
