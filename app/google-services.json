@@ -15,10 +15,150 @@
       },
       "oauth_client": [
         {
+          "client_id": "787287160683-02724jc4hk9clnpqitlc4tjaktkkdv02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "creationsofali.boomboard",
+            "certificate_hash": "4fdd726c3c06995198a8ef9c87109dd7bd8b00c7"
+          }
+        },
+        {
           "client_id": "787287160683-10hkn9aarhg5kem7bnu43n61nu1t9e33.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "creationsofali.boomboard",
+            "certificate_hash": "92a61a0e90529d41fbed25f3e20b15d0a6dd3b33"
+          }
+        },
+        {
+          "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjkjjLTf0C_yncCYax0fqdnKQMQsIGMEk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787287160683:android:cfe688c7602129e0",
+        "android_client_info": {
+          "package_name": "creationsofali.boomboardplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787287160683-gb7hq1t20llsl1k6akud1qh7rdhsorpp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "creationsofali.boomboardplus",
+            "certificate_hash": "92a61a0e90529d41fbed25f3e20b15d0a6dd3b33"
+          }
+        },
+        {
+          "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjkjjLTf0C_yncCYax0fqdnKQMQsIGMEk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787287160683:android:f70d52daa60c5e30",
+        "android_client_info": {
+          "package_name": "creationsofali.boardtimetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787287160683-qbt10besadik6490otvvf10jqpsca4p4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "creationsofali.boardtimetable",
+            "certificate_hash": "92a61a0e90529d41fbed25f3e20b15d0a6dd3b33"
+          }
+        },
+        {
+          "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjkjjLTf0C_yncCYax0fqdnKQMQsIGMEk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787287160683-ermsok5jgs59qkb188rns4rbcac3hkpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787287160683:android:268836b5f122eb59",
+        "android_client_info": {
+          "package_name": "creationsofali.boomboardregister"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787287160683-rsa2ijsqt8lt7om08lqhc3os49t4hbjf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "creationsofali.boomboardregister",
             "certificate_hash": "92a61a0e90529d41fbed25f3e20b15d0a6dd3b33"
           }
         },

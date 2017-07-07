@@ -219,6 +219,7 @@ public class SignInActivity extends AppCompatActivity {
             } else {
                 // sign in failed
                 showSnackbar(getString(R.string.sorry_error_try_again));
+                Log.d(TAG, "fail status: " + signInResult.getStatus().toString());
             }
         }
     }
@@ -241,7 +242,9 @@ public class SignInActivity extends AppCompatActivity {
                 dialog.dismiss();
                 // sign in with google
                 buildSignInDialog.show();
-                startActivityForResult(getGoogleAuthIntent(), RequestCode.RC_SIGN_IN);
+                startActivityForResult(
+                        Auth.GoogleSignInApi.getSignInIntent(getGoogleApiClientInstance()),
+                        RequestCode.RC_SIGN_IN);
             }
         });
 
@@ -253,10 +256,10 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private Intent getGoogleAuthIntent() {
-        // signInIntent
-        return Auth.GoogleSignInApi.getSignInIntent(getGoogleApiClientInstance());
-    }
+//    private Intent getGoogleAuthIntent() {
+//        // signInIntent
+//        return Auth.GoogleSignInApi.getSignInIntent(getGoogleApiClientInstance());
+//    }
 
     private GoogleApiClient getGoogleApiClientInstance() {
         if (googleApiClient == null) {
@@ -375,7 +378,9 @@ public class SignInActivity extends AppCompatActivity {
     private void initiateSignInIntent() {
         // show progress
         buildSignInDialog.show();
-        startActivityForResult(getGoogleAuthIntent(), RequestCode.RC_SIGN_IN);
+        startActivityForResult(
+                Auth.GoogleSignInApi.getSignInIntent(getGoogleApiClientInstance()),
+                RequestCode.RC_SIGN_IN);
 
     }
 
