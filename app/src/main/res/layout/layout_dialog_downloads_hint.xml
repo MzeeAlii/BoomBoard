@@ -77,28 +77,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="24dp"
-        android:orientation="vertical"
-        android:paddingBottom="2dp">
+        android:orientation="vertical">
 
         <creationsofali.boomboard.appfonts.HindTextView
             android:id="@+id/textDirectory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
-            android:paddingBottom="0dp"
+            android:background="@drawable/ripple_grey"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
             android:paddingTop="4dp"
             android:text="/sdcard/BoomBoard/"
             android:textColor="@color/selector_color_blue_amber"
             android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="128dp"
-            android:layout_height="0.8dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/selector_color_blue_amber" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -112,32 +104,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <!--<TextView-->
-        <!--android:id="@+id/textCancel"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="4dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:background="@drawable/ripple_red"-->
-        <!--android:paddingBottom="4dp"-->
-        <!--android:paddingEnd="10dp"-->
-        <!--android:paddingStart="10dp"-->
-        <!--android:paddingTop="4dp"-->
-        <!--android:text="Cancel"-->
-        <!--android:textAllCaps="true"-->
-        <!--android:textColor="@color/selector_color_red_white"-->
-        <!--android:textSize="13sp" />-->
-
         <creationsofali.boomboard.appfonts.HindTextView
             android:id="@+id/textOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginEnd="8dp"
-            android:paddingBottom="2dp"
-            android:paddingEnd="20dp"
-            android:paddingStart="20dp"
-            android:paddingTop="2dp"
+            android:background="@drawable/ripple_grey"
+            android:paddingBottom="4dp"
+            android:paddingEnd="24dp"
+            android:paddingStart="24dp"
+            android:paddingTop="4dp"
             android:text="Got It"
             android:textAllCaps="true"
             android:textColor="@color/selector_color_blue_amber"
