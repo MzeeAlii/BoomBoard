@@ -80,13 +80,13 @@
             android:layout_weight="1" />
 
 
-        <TextView
+        <creationsofali.boomboard.appfonts.HindTextView
             android:id="@+id/textCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ripple_red"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ripple_grey"
             android:paddingBottom="4dp"
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
@@ -96,13 +96,13 @@
             android:textColor="@color/selector_color_red_white"
             android:textSize="13sp" />
 
-        <TextView
+        <creationsofali.boomboard.appfonts.HindTextView
             android:id="@+id/textOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/ripple_blue"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/ripple_grey"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"

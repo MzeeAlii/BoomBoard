@@ -93,7 +93,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/ripple_red"
+            android:background="@drawable/ripple_grey"
             android:padding="2dp"
             android:src="@drawable/ic_email_variant"
             android:tint="@color/selector_color_red_white" />
@@ -102,7 +102,7 @@
             android:id="@+id/iconTwitter"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ripple_blue"
+            android:background="@drawable/ripple_grey"
             android:padding="2dp"
             android:src="@drawable/ic_twitter"
             android:tint="@color/selector_color_blue_white" />
@@ -129,7 +129,7 @@
             android:id="@+id/textClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_blue"
+            android:background="@drawable/ripple_grey"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
