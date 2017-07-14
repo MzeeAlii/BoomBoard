@@ -1,6 +1,5 @@
 package creationsofali.boomboard.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -86,10 +86,14 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
         if (firebaseAuth.getCurrentUser() != null) {
             // initialize database ref for student profile
+            FirebaseUser user = firebaseAuth.getCurrentUser();
             studentProfileReference = FirebaseDatabase.getInstance().getReference()
                     .child("students")
-                    .child(firebaseAuth.getCurrentUser().getUid())
+                    .child(user.getUid())
                     .child("profile");
+
+            student.setEmail(user.getEmail());
+            student.setUid(user.getUid());
         }
 
         animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show_fast);
@@ -175,9 +179,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         spotsDialog.setCancelable(false);
                         spotsDialog.show();
 
-                        if (firebaseAuth.getCurrentUser() != null)
-                            student.setEmail(firebaseAuth.getCurrentUser().getEmail());
-
+                        // saving profile to database
                         studentProfileReference.setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
@@ -243,7 +245,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
     public boolean isProfileComplete() {
 
-        if (student.getCollegeAbr() != null && student.getFacultyAbr() != null && student.getYearOfStudy() != 0) {
+        if (student.getCollegeAbr() != null
+                && student.getFacultyAbr() != null
+                && student.getYearOfStudy() != 0) {
             return true;
         } else
             return false;

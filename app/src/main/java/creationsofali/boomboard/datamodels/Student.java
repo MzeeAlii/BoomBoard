@@ -5,7 +5,7 @@ package creationsofali.boomboard.datamodels;
  */
 
 public class Student {
-    private String collegeFull, collegeAbr, facultyFull, facultyAbr, email;
+    private String collegeFull, collegeAbr, facultyFull, facultyAbr, email, uid;
     private int yearOfStudy;
 
     public Student() {
@@ -59,5 +59,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }
