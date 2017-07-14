@@ -2,6 +2,7 @@ package creationsofali.boomboard.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,11 +33,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.gson.Gson;
 
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.RequestCode;
+import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.DrawerTypefaceHelper;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
@@ -287,16 +291,33 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
 
-                // dismiss progress dialog
-                if (signInWaitDialog.isShowing())
-                    signInWaitDialog.dismiss();
-
                 if (isFirstTime)
                     // go to profile setup
                     startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
-                else
-                    // go to main activity
-                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                else {
+                    // there're some profile info in SharedPreferences
+                    String signedUid = authResult.getUser().getUid();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(
+                            getString(R.string.app_name), MODE_PRIVATE);
+
+                    String gsonStudent = sharedPreferences.getString("student", null);
+                    Student student = new Gson().fromJson(gsonStudent, Student.class);
+
+                    if (student.getUid().equals(signedUid)) {
+                        // same same account
+                        // go to main activity
+                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                    } else {
+                        // different account
+                        // go to profile setup
+                        startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
+                    }
+                }
+
+                // dismiss progress dialog
+                if (signInWaitDialog.isShowing())
+                    signInWaitDialog.dismiss();
 
                 // kill activity to clear top
                 finish();
