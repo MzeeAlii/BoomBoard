@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -16,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,8 +33,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import creationsofali.boomboard.R;
@@ -45,6 +49,7 @@ import creationsofali.boomboard.helpers.DrawerTypefaceHelper;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.PackageInfoHelper;
+import creationsofali.boomboard.helpers.SharedPreferenceEditor;
 import creationsofali.boomboard.helpers.TwitterHelper;
 import dmax.dialog.SpotsDialog;
 
@@ -220,44 +225,13 @@ public class SignInActivity extends AppCompatActivity {
                 signInWaitDialog.show();
                 firebaseAuthWithGoogleSignInApi(account);
                 Log.d(TAG, "onActivityResult:signInResult::isSuccess");
+
             } else {
                 // sign in failed
                 showSnackbar(getString(R.string.sorry_error_try_again));
                 Log.d(TAG, "fail status: " + signInResult.getStatus().toString());
             }
         }
-    }
-
-    public void showSignInDialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.layout_dialog_sign_in, null);
-
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SignInActivity.this);
-        dialogBuilder.setView(dialogView)
-                .setCancelable(true);
-
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-        dialogView.findViewById(R.id.cardButtonUsingGoogle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dialog.dismiss();
-                // sign in with google
-                buildSignInDialog.show();
-                startActivityForResult(
-                        Auth.GoogleSignInApi.getSignInIntent(getGoogleApiClientInstance()),
-                        RequestCode.RC_SIGN_IN);
-            }
-        });
-
-        dialogView.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
     }
 
 //    private Intent getGoogleAuthIntent() {
@@ -291,10 +265,13 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
 
-                if (isFirstTime)
-                    // go to profile setup
-                    startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
-                else {
+                Log.d(TAG, "firebaseAuthWithGoogleSignInApi:onSuccess");
+
+                if (isFirstTime) {
+                    // check if user profile exists in database
+                    checkUserProfileInDatabase(authResult.getUser().getUid());
+
+                } else {
                     // there're some profile info in SharedPreferences
                     String signedUid = authResult.getUser().getUid();
 
@@ -304,40 +281,30 @@ public class SignInActivity extends AppCompatActivity {
                     String gsonStudent = sharedPreferences.getString("student", null);
                     Student student = new Gson().fromJson(gsonStudent, Student.class);
 
-                    if (student.getUid().equals(signedUid)) {
+                    if (student.getUid().equals(signedUid))
                         // same same account
                         // go to main activity
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                    } else {
+                        gotoMain();
+                    else
                         // different account
-                        // go to profile setup
-                        startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
-                    }
+                        // check user profile in database
+                        checkUserProfileInDatabase(authResult.getUser().getUid());
+
                 }
 
-                // dismiss progress dialog
-                if (signInWaitDialog.isShowing())
-                    signInWaitDialog.dismiss();
-
-                // kill activity to clear top
-                finish();
-
-                Log.d(TAG, "firebaseAuthWithGoogleSignInApi:onSuccess");
-                // onChangeAuthSharedPreference(true);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d(TAG, "firebaseAuthWithGoogleSignInApi:onFailure::" + e.getMessage());
                 // dismiss progress dialog
-                if (signInWaitDialog.isShowing())
-                    signInWaitDialog.dismiss();
+                hideSignInDialog();
 
                 // check if the error is caused by network problems
                 if (!NetworkHelper.isOnline(SignInActivity.this)) {
                     showSnackbar("Device is offline, check internet settings and try again.");
                 } else
-                    showSnackbar("Failed! " + e.getMessage());
+                    showSnackbar(getString(R.string.sorry_error_try_again));
             }
         });
     }
@@ -369,7 +336,7 @@ public class SignInActivity extends AppCompatActivity {
         // (c) 2017 TINTech tm
         //      All Rights Reserved.
         textRights.setText(unicodeCopyRight);
-        textRights.append(" 2017 " + "TINTech Apps" + unicodeTradeMark);
+        textRights.append(" 2017 " + "TINTech" + unicodeTradeMark);
         textRights.append("\n" + "All Rights Reserved.");
 
 
@@ -405,5 +372,84 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+    private void checkUserProfileInDatabase(String uid) {
+        showSignInDialog("Checking Profile");
+        // database reference
+        DatabaseReference studentsReference = FirebaseDatabase.getInstance()
+                .getReference().child("students");
+
+        // profile reference
+        studentsReference.child(uid).child("profile").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "checkUserProfileInDatabase#onDataChange: " + dataSnapshot.toString());
+
+                if (dataSnapshot.getValue() != null) {
+                    // student's profile exists in the database ref
+                    Log.d(TAG, "checkUserProfileInDatabase#onDataChange: profile found");
+
+                    Student student = dataSnapshot.getValue(Student.class);
+                    // update sharedPrefs
+                    new SharedPreferenceEditor(SignInActivity.this).execute(student);
+                    // go to main
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // goto main
+                            gotoMain();
+                        }
+                    }, 100);
+
+                } else {
+                    // snapshotValue = null
+                    // no profile reference
+                    gotoProfileSetup();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "checkUserProfileInDatabase#onCancelled: err " + databaseError.getCode() +
+                        " " + databaseError.getMessage());
+
+                hideSignInDialog();
+
+                if (databaseError.getCode() == DatabaseError.UNAVAILABLE)
+                    // profile doesn't exist in the ref
+                    // goto profile set up
+                    gotoProfileSetup();
+                else
+                    showSnackbar(getString(R.string.sorry_error_try_again));
+
+            }
+        });
+
+    }
+
+    private void gotoMain() {
+        startActivity(new Intent(SignInActivity.this, MainActivity.class));
+        hideSignInDialog();
+        // kill to clear top
+        finish();
+    }
+
+    private void gotoProfileSetup() {
+        startActivity(new Intent(SignInActivity.this, ProfileSetupActivity.class));
+        hideSignInDialog();
+        // kill to clear top
+        finish();
+    }
+
+    private void showSignInDialog(String message) {
+        signInWaitDialog.setMessage(message);
+
+        if (!signInWaitDialog.isShowing())
+            signInWaitDialog.show();
+    }
+
+    private void hideSignInDialog() {
+        if (signInWaitDialog.isShowing())
+            signInWaitDialog.dismiss();
+    }
 
 }
