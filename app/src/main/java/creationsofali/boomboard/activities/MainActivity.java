@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
@@ -26,6 +25,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +60,7 @@ import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
 import creationsofali.boomboard.fragments.WhatsNewFragment;
+import creationsofali.boomboard.helpers.DirectoriesHelper;
 import creationsofali.boomboard.helpers.DrawerTypefaceHelper;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false, isTimeTableReady = false;
     int DELAY_TIME = 2000;
+    final String TAG = this.getClass().getSimpleName();
 
     @SuppressWarnings("deprecation")
     @Override
@@ -484,8 +486,10 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode) {
                 case RequestCode.RC_READ_STORAGE:
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Log.d(TAG, "onRequestPermissionsResult: read permission granted.");
                         openBoomBoardFolder();
-                    }
+                    } else
+                        Log.d(TAG, "onRequestPermissionsResult: read permission denied.");
                     break;
             }
         }
@@ -683,15 +687,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void openBoomBoardFolder() {
         // open folder
-        // TODO: 6/10/17 close dialog before starting intent
+        // TODO: 7/19/17 show loading dialog while opening the folder
         File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BoomBoard");
         if (folder.exists()) {
-            Uri folderUri = Uri.parse(folder.getAbsolutePath());
-            Intent openFolderIntent = new Intent(Intent.ACTION_VIEW);
-            openFolderIntent.setDataAndType(folderUri, "resource/folder");
-
-            if (openFolderIntent.resolveActivityInfo(getPackageManager(), 0) != null)
-                startActivity(openFolderIntent);
+            // open folder
+            Log.d(TAG, "folder exists: " + folder.getAbsolutePath());
+            DirectoriesHelper.openDirectory(MainActivity.this, folder.getAbsolutePath());
 
         } else
             showSnackbar("You haven't downloaded any file yet.");
