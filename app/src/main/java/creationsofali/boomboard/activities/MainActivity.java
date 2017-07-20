@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     AppBarLayout appBarLayout;
     CollapsingToolbarLayout collapsingToolbar;
     FloatingActionButton fabRefresh;
-    TextView textNavName, textNavEmail;
+    TextView textNavName, textNavEmail, textToolbarTitle;
     ImageView imageNavDp;
     Animation animationFabShow, animationFabHide;
 
@@ -110,14 +110,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.app_name);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("");
         }
 
+        textToolbarTitle = (TextView) findViewById(R.id.textToolbarTitle);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -159,6 +160,9 @@ public class MainActivity extends AppCompatActivity {
             Glide.with(MainActivity.this).load(user.getPhotoUrl()).into(imageNavDp);
         }
 
+
+        collapsingToolbar.setTitle("");
+
         navigationDrawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -172,7 +176,8 @@ public class MainActivity extends AppCompatActivity {
                                 whatsNewFragment.getTag()).commit();
 
                         appBarLayout.setExpanded(true, true);
-                        collapsingToolbar.setTitle(getString(R.string.app_name));
+                        // collapsingToolbar.setTitle(getString(R.string.app_name));
+                        textToolbarTitle.setText(getString(R.string.app_name));
                         if (!fabRefresh.isEnabled()) {
                             // fabRefresh.show();
                             fabRefresh.startAnimation(animationFabShow);
@@ -188,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
                                 allOnBoardFragment.getTag()).commit();
 
                         appBarLayout.setExpanded(false, true);
-                        collapsingToolbar.setTitle(item.getTitle());
+                        // collapsingToolbar.setTitle(item.getTitle());
+                        textToolbarTitle.setText(item.getTitle());
+
                         fabRefresh.startAnimation(animationFabHide);
                         // fabRefresh.hide();
                         fabRefresh.setEnabled(false);
@@ -205,7 +212,9 @@ public class MainActivity extends AppCompatActivity {
                                 profileFragment).commit();
 
                         appBarLayout.setExpanded(false, true);
-                        collapsingToolbar.setTitle("Student's Profile");
+                        // collapsingToolbar.setTitle("Student's Profile");
+                        textToolbarTitle.setText(item.getTitle());
+
                         fabRefresh.startAnimation(animationFabHide);
                         //fabRefresh.hide();
                         fabRefresh.setEnabled(false);

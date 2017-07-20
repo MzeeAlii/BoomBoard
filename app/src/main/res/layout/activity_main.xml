@@ -49,7 +49,18 @@
 
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                    <creationsofali.boomboard.appfonts.HindTextView
+                        android:id="@+id/textToolbarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/app_name"
+                        android:textColor="@color/color_white"
+                        android:textSize="20sp" />
+
+                </android.support.v7.widget.Toolbar>
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
