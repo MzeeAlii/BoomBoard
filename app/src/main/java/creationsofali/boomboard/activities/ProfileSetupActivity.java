@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +30,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.adapters.ProfileSetupPagerAdapter;
@@ -59,6 +61,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
     Student student = new Student();
     private static final String TAG = "ProfileSetupActivity";
     private boolean isFromMain;
+    private Map<String, String> facultyMap = new HashMap<>();
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -381,5 +384,15 @@ public class ProfileSetupActivity extends AppCompatActivity {
         return true;
     }
 
+
+    public void updateFacultyMap(String college) {
+        facultyMap.clear();
+        facultyMap = CollegeHelper.getCollegeFacultiesMap(college);
+    }
+
+    public String getFullFacultyFromMap(String faculty) {
+        // return full faculty from abbreviation
+        return facultyMap.get(faculty);
+    }
 
 }

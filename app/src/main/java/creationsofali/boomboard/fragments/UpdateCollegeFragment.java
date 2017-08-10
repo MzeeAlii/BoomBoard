@@ -33,6 +33,7 @@ public class UpdateCollegeFragment extends Fragment {
     ArrayAdapter<String> collegeAdapter;
     public static ArrayAdapter<String> facultyAdapter;
     private static Gson gson = new Gson();
+    private ProfileSetupActivity profileSetupActivity;
 
     List<String> collegeList;
     int position;
@@ -66,6 +67,8 @@ public class UpdateCollegeFragment extends Fragment {
 
         facultyAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item);
         facultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        profileSetupActivity = (ProfileSetupActivity) getActivity();
     }
 
     @Nullable
@@ -94,8 +97,8 @@ public class UpdateCollegeFragment extends Fragment {
                     Log.d(TAG, "onCreateView: adapter = facultyAdapter#dataSetChanged:items = " + facultyAdapter.getCount());
 
                     // update profile object
-                    ((ProfileSetupActivity) getActivity())
-                            .setStudentCollege(college);
+                    profileSetupActivity.setStudentCollege(college);
+                    profileSetupActivity.updateFacultyMap(college);
 
                     // change floating label
                     switch (college) {

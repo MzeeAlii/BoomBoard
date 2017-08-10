@@ -53,7 +53,10 @@ public class UpdateFacultyFragment extends Fragment {
                     // get selected faculty and update student object
                     String faculty = adapterView.getSelectedItem().toString();
                     profileSetupActivity.setStudentFaculty(faculty);
-                    spinnerFaculty.setFloatingLabelText(CollegeHelper.getFacultyFull(faculty));
+                    // get full faculty from hashMap
+                    String fullFaculty = profileSetupActivity.getFullFacultyFromMap(faculty);
+                    spinnerFaculty.setFloatingLabelText(fullFaculty);
+
                 } else {
                     // null
                     profileSetupActivity.setStudentFaculty(null);
