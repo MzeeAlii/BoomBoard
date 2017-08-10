@@ -55,6 +55,17 @@ public class CollegeHelper {
 
             case Constant.COLLEGE_COED:
                 // add coed faculties
+                facultyList.add(Constant.FAC_ADEC);
+                facultyList.add(Constant.FAC_ADMAN);
+                facultyList.add(Constant.FAC_ARTS);
+                facultyList.add(Constant.FAC_BEDCOM);
+                facultyList.add(Constant.FAC_BEDSC);
+                facultyList.add(Constant.FAC_BEDSCICT);
+                facultyList.add(Constant.FAC_ECE);
+                facultyList.add(Constant.FAC_GUCO);
+                facultyList.add(Constant.FAC_PPM);
+                facultyList.add(Constant.FAC_PSY);
+                facultyList.add(Constant.FAC_SPED);
                 break;
 
             case Constant.COLLEGE_COES:
@@ -143,6 +154,7 @@ public class CollegeHelper {
             case Constant.FAC_VE:
                 return Constant.FAC_VE_FULL;
             // end cive faculties
+
 
             default:
                 return null;
