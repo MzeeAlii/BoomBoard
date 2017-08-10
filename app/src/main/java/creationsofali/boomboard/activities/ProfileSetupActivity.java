@@ -1,6 +1,7 @@
 package creationsofali.boomboard.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -183,26 +184,19 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         studentProfileReference.setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                // check if college has changed before updating
+                                boolean isCollegeChanged = isCollegeChanged();
+
                                 // update profile in shared preference
-                                new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
+                                updateProfileSharedPreferences();
                                 spotsDialog.dismiss();
 
-                                if (!isFromMain) {
-                                    Toast.makeText(ProfileSetupActivity.this,
-                                            "Profile set up complete.",
-                                            Toast.LENGTH_LONG).show();
 
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            // go to main activity
-                                            String gsonStudentProfile = new Gson().toJson(student);
-                                            startActivity(new Intent(ProfileSetupActivity.this, MainActivity.class)
-                                                    .putExtra("student", gsonStudentProfile));
-                                            // kill activity
-                                            finish();
-                                        }
-                                    }, 1000);
+                                if (!isFromMain) {
+                                    showSnackbar("Profile set up complete.");
+                                    // go to main
+                                    gotoMain();
+
                                 } else
                                     // update successful
                                     showSnackbar("Successful! Profile updated.");
@@ -237,6 +231,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -245,13 +240,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
     public boolean isProfileComplete() {
 
-        if (student.getCollegeAbr() != null
+        return (student.getCollegeAbr() != null
                 && student.getFacultyAbr() != null
-                && student.getYearOfStudy() != 0) {
-            return true;
-        } else
-            return false;
-
+                && student.getYearOfStudy() != 0);
     }
 
 
@@ -278,7 +269,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
         Snackbar.make(findViewById(R.id.coordinatorLayoutProfile),
                 message,
                 Snackbar.LENGTH_INDEFINITE)
-                .setDuration(8000)
+                .setDuration(4000)
                 .show();
     }
 
@@ -342,6 +333,52 @@ public class ProfileSetupActivity extends AppCompatActivity {
                 // startActivityForResult(getGoogleAuthIntent(), RC_SIGN_IN);
             }
         });
+    }
+
+
+    private void gotoMain() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // go to main activity
+                String gsonStudentProfile = new Gson().toJson(student);
+                startActivity(new Intent(ProfileSetupActivity.this, MainActivity.class)
+                        .putExtra("student", gsonStudentProfile));
+
+                // kill activity
+                finish();
+            }
+        }, 1000);
+    }
+
+
+    // start task to update profile in shared preferences
+    private void updateProfileSharedPreferences() {
+        new SharedPreferenceEditor(ProfileSetupActivity.this).execute(student);
+    }
+
+
+    // check if college has changed
+    private boolean isCollegeChanged() {
+        SharedPreferences sharedPreferences =
+                getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        String gsonStudent = sharedPreferences.getString("student", null);
+
+        if (gsonStudent != null) {
+            Student oldProfile = new Gson().fromJson(gsonStudent, Student.class);
+
+            if (oldProfile.getCollegeAbr().equals(student.getCollegeAbr())) {
+                Log.d(TAG, "same college " + student.getCollegeAbr());
+                return false;
+
+            } else {
+                Log.d(TAG, "different college " + oldProfile.getCollegeAbr() + " -> " + student.getCollegeAbr());
+                return true;
+            }
+        }
+
+        return true;
     }
 
 
