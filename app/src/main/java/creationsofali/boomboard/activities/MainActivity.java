@@ -57,7 +57,6 @@ import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Notice;
 import creationsofali.boomboard.datamodels.RequestCode;
 import creationsofali.boomboard.datamodels.Student;
-import creationsofali.boomboard.fragments.AllOnBoardFragment;
 import creationsofali.boomboard.fragments.ProfileFragment;
 import creationsofali.boomboard.fragments.WhatsNewFragment;
 import creationsofali.boomboard.helpers.DirectoriesHelper;
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false, isTimeTableReady = false;
     int DELAY_TIME = 2000;
-    final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @SuppressWarnings("deprecation")
     @Override
@@ -186,19 +185,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navAllOnBoard:
-                        AllOnBoardFragment allOnBoardFragment = new AllOnBoardFragment();
-                        fragmentManager.beginTransaction().replace(
-                                R.id.mainContentView,
-                                allOnBoardFragment,
-                                allOnBoardFragment.getTag()).commit();
-
-                        appBarLayout.setExpanded(false, true);
-                        // collapsingToolbar.setTitle(item.getTitle());
-                        textToolbarTitle.setText(item.getTitle());
-
-                        fabRefresh.startAnimation(animationFabHide);
-                        // fabRefresh.hide();
-                        fabRefresh.setEnabled(false);
+                        startActivity(new Intent(MainActivity.this, AllOnBoardActivity.class));
                         break;
 
                     case R.id.navTimetable:

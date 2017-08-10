@@ -70,7 +70,7 @@ public class SignInActivity extends AppCompatActivity {
 
     boolean isFirstTime;
 
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = SignInActivity.class.getSimpleName();
 
     @SuppressWarnings("deprecation")
     @Override
