@@ -94,7 +94,7 @@ public class SignInActivity extends AppCompatActivity {
         // buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonSignIn = (LinearLayout) findViewById(R.id.buttonSignIn);
         // buttonSignIn.setTypeface(Typeface.createFromAsset(
-        //       getResources().getAssets(), "fonts/hind-regular.ttf"));
+        //       getResources().getAssets(), "fonts/Hind-Regular.ttf"));
 
         // show progress dialog while signing in
         signInWaitDialog = new SpotsDialog(SignInActivity.this, R.style.SignInDialogStyle);

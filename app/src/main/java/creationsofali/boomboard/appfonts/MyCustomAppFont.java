@@ -40,7 +40,7 @@ public class MyCustomAppFont {
                     return; // don't override
                 else
                     ((TextView) view).setTypeface(Typeface.createFromAsset(context.getAssets(),
-                            "fonts/hind-regular.ttf"));
+                            "fonts/Hind-Regular.ttf"));
             }
 
         } catch (Exception e) {

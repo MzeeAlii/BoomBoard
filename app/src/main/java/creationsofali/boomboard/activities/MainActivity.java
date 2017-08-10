@@ -601,7 +601,7 @@ public class MainActivity extends AppCompatActivity {
     // custom drawer items fonts
 //    private void setCustomDrawerFonts(MenuItem item) {
 //        String fontFamily = "";
-//        Typeface customTypeface = Typeface.createFromAsset(getAssets(), "fonts/hind-regular.ttf");
+//        Typeface customTypeface = Typeface.createFromAsset(getAssets(), "fonts/Hind-Regular.ttf");
 //
 //        SpannableString newItemTitle = new SpannableString(item.getTitle());
 //        newItemTitle.setSpan(

@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
         });
 
         buttonSignOut = (Button) fragmentView.findViewById(R.id.buttonSignOut);
-        buttonSignOut.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/hind-regular.ttf"));
+        buttonSignOut.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/Hind-Regular.ttf"));
 
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
