@@ -80,10 +80,10 @@ public class WhatsNewFragment extends Fragment {
         whatsNewRecycler.setLayoutManager(layoutManager);
 
         scaleInTopAnimator = new ScaleInTopAnimator(new OvershootInterpolator(1f));
-        scaleInTopAnimator.setAddDuration(1000);
-        scaleInTopAnimator.setRemoveDuration(1000);
-        scaleInTopAnimator.setMoveDuration(1000);
-        scaleInTopAnimator.setChangeDuration(1000);
+        scaleInTopAnimator.setAddDuration(800);
+        scaleInTopAnimator.setRemoveDuration(800);
+        scaleInTopAnimator.setMoveDuration(800);
+        scaleInTopAnimator.setChangeDuration(800);
         whatsNewRecycler.setItemAnimator(scaleInTopAnimator);
 
         noticeAdapter = new NoticeAdapter(noticeList, getContext());
@@ -92,7 +92,7 @@ public class WhatsNewFragment extends Fragment {
         // decorations
         int topSpace = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                24,
+                16,
                 getResources().getDisplayMetrics());
         int bottomSpace = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,

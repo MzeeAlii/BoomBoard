@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManagerHorizontal;
     CollapsingToolbarAdapter whatsNewAdapter;
     WhatsNewFragment whatsNewFragment;
+    ProfileFragment profileFragment;
 
     List<Notice> appBarNoticeList = new ArrayList<>();
 
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     ScaleInAnimationAdapter scaleInAnimationAdapter;
 
-    boolean doubleBackToExitPressedOnce = false, isTimeTableReady = false;
+    boolean doubleBackToExitPressedOnce = false, isTimeTableReady = false, isProfileFragmentAdded = false;
     int DELAY_TIME = 2000;
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         // by default, set checked item onCreate
+        profileFragment = new ProfileFragment();
         whatsNewFragment = new WhatsNewFragment();
         fragmentManager.beginTransaction().replace(
                 R.id.mainContentView,
@@ -168,15 +170,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
 
                     case R.id.navWhatsNew:
-                        // whatsNewFragment = new WhatsNewFragment();
-                        fragmentManager.beginTransaction().replace(
-                                R.id.mainContentView,
-                                whatsNewFragment,
-                                whatsNewFragment.getTag()).commit();
+                        fragmentManager.beginTransaction()
+                                .detach(profileFragment)
+                                .attach(whatsNewFragment)
+                                .commit();
 
                         appBarLayout.setExpanded(true, true);
                         // collapsingToolbar.setTitle(getString(R.string.app_name));
                         textToolbarTitle.setText(getString(R.string.app_name));
+                        // fab anim
                         if (!fabRefresh.isEnabled()) {
                             // fabRefresh.show();
                             fabRefresh.startAnimation(animationFabShow);
@@ -193,18 +195,28 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navProfile:
-                        ProfileFragment profileFragment = new ProfileFragment();
-                        fragmentManager.beginTransaction().replace(
-                                R.id.mainContentView,
-                                profileFragment).commit();
+                        if (isProfileFragmentAdded) {
+                            fragmentManager.beginTransaction()
+                                    .attach(profileFragment)
+                                    .commit();
+
+                        } else {
+                            fragmentManager.beginTransaction()
+                                    .add(R.id.mainContentView, profileFragment)
+                                    .commit();
+                            // update check
+                            isProfileFragmentAdded = true;
+                        }
 
                         appBarLayout.setExpanded(false, true);
                         // collapsingToolbar.setTitle("Student's Profile");
                         textToolbarTitle.setText(item.getTitle());
-
-                        fabRefresh.startAnimation(animationFabHide);
-                        //fabRefresh.hide();
-                        fabRefresh.setEnabled(false);
+                        // fab anim
+                        if (fabRefresh.isEnabled()) {
+                            fabRefresh.startAnimation(animationFabHide);
+                            //fabRefresh.hide();
+                            fabRefresh.setEnabled(false);
+                        }
                         break;
 
                     case R.id.navBookmarks:
