@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -36,9 +37,9 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textDateTime, textSubject, textMessage;
+        TextView textDateTime, textSubject, textMessage, textAuthorName;
         CardView cardNote;
-        ImageView iconClip;
+        ImageView iconClip, imageAuthorDp;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -48,8 +49,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             iconClip = (ImageView) itemView.findViewById(R.id.iconClip);
             iconClip.setVisibility(View.GONE);
             cardNote = (CardView) itemView.findViewById(R.id.cardNote);
+            textAuthorName = (TextView) itemView.findViewById(R.id.textAuthorName);
+            imageAuthorDp = (ImageView) itemView.findViewById(R.id.imageAuthorDp);
 
-            cardNote.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // open notice
@@ -67,13 +70,15 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_item_note_list, parent, false);
+                .inflate(R.layout.layout_notice_list, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textSubject.setText(noticeList.get(position).getSubject());
+
+        holder.textAuthorName.setText(noticeList.get(position).getAuthor());
 
         if (noticeList.get(position).getMessage() != null) {
             // for notes with message
@@ -106,6 +111,9 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             // no attachment
             holder.iconClip.setVisibility(View.GONE);
         }
+
+        // author dp
+        Glide.with(context).load(noticeList.get(position).getAuthorDpUrl()).into(holder.imageAuthorDp);
     }
 
     @Override

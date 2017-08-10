@@ -92,11 +92,11 @@ public class WhatsNewFragment extends Fragment {
         // decorations
         int topSpace = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                32,
+                24,
                 getResources().getDisplayMetrics());
         int bottomSpace = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
-                80,
+                64,
                 getResources().getDisplayMetrics());
 
         whatsNewRecycler.addItemDecoration(new TopBottomSpaceDecoration(bottomSpace, topSpace));
