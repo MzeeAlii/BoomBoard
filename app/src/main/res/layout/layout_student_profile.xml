@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:id="@+id/layoutProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutNameEmail"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iconCollege"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:alpha="0.8"
+                android:src="@drawable/ic_temple"
+                android:tint="@color/color_accent_blue" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textCollegeAbr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iconCollege"
+                android:text="CIVE"
+                android:textColor="@color/color_secondary_text"
+                android:textSize="20sp" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textCollegeFull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/textCollegeAbr"
+                android:layout_below="@id/textCollegeAbr"
+                android:text="@string/cive_ful"
+                android:textColor="@color/color_primary_text"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/iconFaculty"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:alpha="0.8"
+                android:src="@drawable/ic_graduation_hat"
+                android:tint="@color/color_accent_blue" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textFacultyAbr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iconFaculty"
+                android:text="BScSE"
+                android:textColor="@color/color_secondary_text"
+                android:textSize="20sp" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textFacultyFull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/textFacultyAbr"
+                android:layout_below="@id/textFacultyAbr"
+                android:text="Bachelor of Science in Software Engineering"
+                android:textColor="@color/color_primary_text"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/iconYear"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:alpha="0.8"
+                android:src="@drawable/ic_calendar_text"
+                android:tint="@color/color_accent_blue" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textYearAbr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iconYear"
+                android:text="@string/year_of_study"
+                android:textColor="@color/color_secondary_text"
+                android:textSize="20sp" />
+
+            <creationsofali.boomboard.appfonts.HindTextView
+                android:id="@+id/textYearFull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/textYearAbr"
+                android:layout_below="@id/textYearAbr"
+                android:text="Second Year"
+                android:textColor="@color/color_primary_text"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <creationsofali.boomboard.appfonts.HindTextView
+            android:id="@+id/textRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:text="@string/refresh"
+            android:textColor="@color/selector_color_blue_white"
+            android:textSize="13sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

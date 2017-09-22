@@ -188,23 +188,9 @@ public class SignInActivity extends AppCompatActivity {
             // double back to exit
             getSupportFragmentManager().popBackStack();
 
-//        } else if (!doubleBackToExitPressedOnce) {
-//
-//            this.doubleBackToExitPressedOnce = true;
-//            // now ask for the second backPress to exit
-//            Toast.makeText(
-//                    getApplicationContext(),
-//                    R.string.press_again_exit,
-//                    Toast.LENGTH_SHORT).show();
-//
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    // reset values after time delay
-//                    doubleBackToExitPressedOnce = false;
-//                }
-//            }, DELAY_TIME);
-
+        } else if (getIntent().getBooleanExtra("isToForceClose", false)) {
+            // force close the app
+            finishAffinity();
         } else {
             // default
             super.onBackPressed();

@@ -40,8 +40,8 @@
         <activity
             android:name=".activities.ProfileSetupActivity"
             android:label="@string/update_profile"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme" />
         <!-- Bookmarks -->
         <activity
             android:name=".activities.BookmarksActivity"
@@ -51,6 +51,12 @@
         <activity
             android:name=".activities.SignInActivity"
             android:label=""
+            android:theme="@style/AppTheme.Light.TranslucentStatus" />
+        <!-- All Notices -->
+        <activity android:name=".activities.AllOnBoardActivity" />
+        <!-- ProfileDetail -->
+        <activity
+            android:name=".activities.ProfileDetailActivity"
             android:theme="@style/AppTheme.Light.TranslucentStatus" />
         <!-- MessagingService -->
         <service android:name=".services.BoomBoardMessagingService">
@@ -72,8 +78,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/color_primary_amber" />
-
-        <activity android:name=".activities.AllOnBoardActivity" />
     </application>
 
 </manifest>

@@ -60,7 +60,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
     Student student = new Student();
     private static final String TAG = "ProfileSetupActivity";
-    private boolean isFromMain;
+    private boolean hasParentActivity;
     private Map<String, String> facultyMap = new HashMap<>();
 
     @SuppressWarnings("ConstantConditions")
@@ -71,9 +71,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
 
-        isFromMain = getIntent().getBooleanExtra("isFromMain", false);
+        hasParentActivity = getIntent().getBooleanExtra("hasParentActivity", false);
 
-        if (isFromMain) {
+        if (hasParentActivity) {
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
@@ -81,7 +81,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
 //                actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
             }
         } else {
-            // isFromMain:true | user runs the app for the very 1st time
+            // hasParentActivity:true | user runs the app for the very 1st time
             // show welcome dialog
             showWelcomeDialog();
         }
@@ -195,7 +195,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
                                 spotsDialog.dismiss();
 
 
-                                if (!isFromMain) {
+                                if (!hasParentActivity) {
                                     showSnackbar("Profile set up complete.");
                                     // go to main
                                     gotoMain();

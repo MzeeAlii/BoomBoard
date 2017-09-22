@@ -77,7 +77,7 @@ public class ProfileFragment extends Fragment {
                 //  else
                 // start ProfileSetupActivity
                 startActivity(new Intent(getContext(), ProfileSetupActivity.class)
-                        .putExtra("isFromMain", true));
+                        .putExtra("hasParentActivity", true));
 
             }
         });
@@ -117,7 +117,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 // go to edit profile activity
                 startActivity(new Intent(getContext(), ProfileSetupActivity.class)
-                        .putExtra("isFromMain", true));
+                        .putExtra("hasParentActivity", true));
                 dialog.dismiss();
             }
         });

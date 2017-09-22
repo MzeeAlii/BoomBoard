@@ -195,28 +195,30 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navProfile:
-                        if (isProfileFragmentAdded) {
-                            fragmentManager.beginTransaction()
-                                    .attach(profileFragment)
-                                    .commit();
+//                        if (isProfileFragmentAdded) {
+//                            fragmentManager.beginTransaction()
+//                                    .attach(profileFragment)
+//                                    .commit();
+//
+//                        } else {
+//                            fragmentManager.beginTransaction()
+//                                    .add(R.id.mainContentView, profileFragment)
+//                                    .commit();
+//                            // update check
+//                            isProfileFragmentAdded = true;
+//                        }
+//
+//                        appBarLayout.setExpanded(false, true);
+//                        // collapsingToolbar.setTitle("Student's Profile");
+//                        textToolbarTitle.setText(item.getTitle());
+//                        // fab anim
+//                        if (fabRefresh.isEnabled()) {
+//                            fabRefresh.startAnimation(animationFabHide);
+//                            //fabRefresh.hide();
+//                            fabRefresh.setEnabled(false);
+//                        }
 
-                        } else {
-                            fragmentManager.beginTransaction()
-                                    .add(R.id.mainContentView, profileFragment)
-                                    .commit();
-                            // update check
-                            isProfileFragmentAdded = true;
-                        }
-
-                        appBarLayout.setExpanded(false, true);
-                        // collapsingToolbar.setTitle("Student's Profile");
-                        textToolbarTitle.setText(item.getTitle());
-                        // fab anim
-                        if (fabRefresh.isEnabled()) {
-                            fabRefresh.startAnimation(animationFabHide);
-                            //fabRefresh.hide();
-                            fabRefresh.setEnabled(false);
-                        }
+                        startActivity(new Intent(MainActivity.this, ProfileDetailActivity.class));
                         break;
 
                     case R.id.navBookmarks:
