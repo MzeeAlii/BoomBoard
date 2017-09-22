@@ -42,6 +42,7 @@ import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceEditor;
+import creationsofali.boomboard.helpers.SharedPreferenceHelper;
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -59,9 +60,9 @@ public class ProfileSetupActivity extends AppCompatActivity {
     DatabaseReference studentProfileReference;
     FirebaseAuth firebaseAuth;
 
-    Student student = new Student();
+    Student student = new Student(), oldStudentProfile;
     private static final String TAG = "ProfileSetupActivity";
-    private boolean hasParentActivity;
+    private boolean hasParentActivity, isCollegeChanged;
     private Map<String, String> facultyMap = new HashMap<>();
 
     @SuppressWarnings("ConstantConditions")
@@ -100,6 +101,8 @@ public class ProfileSetupActivity extends AppCompatActivity {
             student.setEmail(user.getEmail());
             student.setUid(user.getUid());
         }
+
+        oldStudentProfile = SharedPreferenceHelper.getStudentProfile(ProfileSetupActivity.this);
 
         animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show_fast);
         animationFabHide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_hide_fast);
@@ -189,7 +192,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 // check if college has changed before updating
-                                boolean isCollegeChanged = isCollegeChanged();
+                                isCollegeChanged = isCollegeChanged();
 
                                 // update profile in shared preference
                                 updateProfileSharedPreferences();
@@ -228,6 +231,16 @@ public class ProfileSetupActivity extends AppCompatActivity {
         new MyCustomAppFont(getApplicationContext(), rootView);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!isProfileComplete())
+            setResult(RESULT_CANCELED);
+        
+        else if (isCollegeChanged())
+            setResult(RESULT_OK);
+
+        super.onBackPressed();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -366,19 +379,32 @@ public class ProfileSetupActivity extends AppCompatActivity {
 
     // check if college has changed
     private boolean isCollegeChanged() {
-        SharedPreferences sharedPreferences =
-                getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
-        String gsonStudent = sharedPreferences.getString("student", null);
+//        SharedPreferences sharedPreferences =
+//                getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+//        String gsonStudent = sharedPreferences.getString("student", null);
 
-        if (gsonStudent != null) {
-            Student oldProfile = new Gson().fromJson(gsonStudent, Student.class);
+//        if (gsonStudent != null) {
+//            Student oldProfile = new Gson().fromJson(gsonStudent, Student.class);
+//
+//            if (oldProfile.getCollegeAbr().equals(student.getCollegeAbr())) {
+//                Log.d(TAG, "same college " + student.getCollegeAbr());
+//                return false;
+//
+//            } else {
+//                Log.d(TAG, "different college " + oldProfile.getCollegeAbr() + " -> " + student.getCollegeAbr());
+//                return true;
+//            }
+//        }
 
-            if (oldProfile.getCollegeAbr().equals(student.getCollegeAbr())) {
+        if (oldStudentProfile != null) {
+
+            if (oldStudentProfile.getCollegeAbr().equals(student.getCollegeAbr())) {
                 Log.d(TAG, "same college " + student.getCollegeAbr());
                 return false;
 
             } else {
-                Log.d(TAG, "different college " + oldProfile.getCollegeAbr() + " -> " + student.getCollegeAbr());
+                Log.d(TAG, "different college " +
+                        oldStudentProfile.getCollegeAbr() + " -> " + student.getCollegeAbr());
                 return true;
             }
         }

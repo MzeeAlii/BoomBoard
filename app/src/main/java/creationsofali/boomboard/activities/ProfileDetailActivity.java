@@ -30,6 +30,7 @@ import java.util.Map;
 
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.datamodels.Constant;
+import creationsofali.boomboard.datamodels.RequestCode;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
 import creationsofali.boomboard.helpers.MyMenuBuilderHelper;
@@ -48,7 +49,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
-    private boolean isToolbarTitleShown;
+    private boolean isToolbarTitleShown, isCollegeChanged;
     private static final String TAG = ProfileDetailActivity.class.getSimpleName();
 
 
@@ -137,6 +138,26 @@ public class ProfileDetailActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         new SharedPreferenceReader().execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isCollegeChanged)
+            setResult(RESULT_OK);
+
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RequestCode.RC_PROFILE_SETUP
+                && resultCode == RESULT_OK) {
+            // serious profile change
+            Log.d(TAG, "Serious profile change. Different college!");
+            isCollegeChanged = true;
+
+        } else
+            super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -292,8 +313,8 @@ public class ProfileDetailActivity extends AppCompatActivity {
     }
 
     private void gotoProfileSetup() {
-        startActivity(new Intent(ProfileDetailActivity.this, ProfileSetupActivity.class)
-                .putExtra("hasParentActivity", true));
+        startActivityForResult(new Intent(ProfileDetailActivity.this, ProfileSetupActivity.class)
+                .putExtra("hasParentActivity", true), RequestCode.RC_PROFILE_SETUP);
 
     }
 

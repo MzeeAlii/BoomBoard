@@ -218,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
 //                            fabRefresh.setEnabled(false);
 //                        }
 
-                        startActivity(new Intent(MainActivity.this, ProfileDetailActivity.class));
+                        startActivityForResult(new Intent(MainActivity.this, ProfileDetailActivity.class),
+                                RequestCode.RC_PROFILE_SETUP);
                         break;
 
                     case R.id.navBookmarks:
@@ -270,6 +271,19 @@ public class MainActivity extends AppCompatActivity {
         // set my custom app font
         View rootView = findViewById(android.R.id.content);
         new MyCustomAppFont(getApplicationContext(), rootView);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RequestCode.RC_PROFILE_SETUP
+                && resultCode == RESULT_OK) {
+            // serious profile change
+            Log.d(TAG, "Serious profile change. Different college!");
+            // TODO: 9/22/17 handle a lotta shit here to deal with college change
+
+        } else
+            super.onActivityResult(requestCode, resultCode, data);
     }
 
 
