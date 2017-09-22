@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import creationsofali.boomboard.R;
@@ -294,12 +295,13 @@ public class ProfileSetupActivity extends AppCompatActivity {
         Log.d(TAG, "setStudentYear: yearOfStudy = " + student.getYearOfStudy());
     }
 
-    public void setStudentFaculty(String facultyAbr) {
+    public void setStudentFaculty(String facultyAbr, String college) {
         student.setFacultyAbr(facultyAbr);
 
-        if (facultyAbr != null)
-            student.setFacultyFull(CollegeHelper.getFacultyFull(facultyAbr));
-        else
+        if (facultyAbr != null) {
+            Map<String, String> facultyMap = CollegeHelper.getCollegeFacultiesMap(college);
+            student.setFacultyFull(facultyMap.get(facultyAbr));
+        } else
             student.setFacultyFull(null);
 
         Log.d(TAG, "setStudentFaculty: facultyAbbr = " + student.getFacultyAbr()

@@ -208,6 +208,31 @@ public class CollegeHelper {
 
             case Constant.COLLEGE_COHAS:
                 break;
+
+            default:
+                facultyMap.put(Constant.FAC_BIS, Constant.FAC_BIS);
+                facultyMap.put(Constant.FAC_CE, Constant.FAC_CE_FULL);
+                facultyMap.put(Constant.FAC_CIS, Constant.FAC_CIS_FULL);
+                facultyMap.put(Constant.FAC_CS, Constant.FAC_CS_FULL);
+                facultyMap.put(Constant.FAC_HIS, Constant.FAC_HIS_FULL);
+                facultyMap.put(Constant.FAC_ICT_MCD, Constant.FAC_ICT_MCD_FULL);
+                facultyMap.put(Constant.FAC_IS, Constant.FAC_IS_FULL);
+                facultyMap.put(Constant.FAC_MTA, Constant.FAC_MTA_FULL);
+                facultyMap.put(Constant.FAC_SE, Constant.FAC_SE_FULL);
+                facultyMap.put(Constant.FAC_TE, Constant.FAC_TE_FULL);
+                facultyMap.put(Constant.FAC_VE, Constant.FAC_VE_FULL);
+
+                facultyMap.put(Constant.FAC_ADEC, Constant.FAC_ADEC_FULL);
+                facultyMap.put(Constant.FAC_ADMAN, Constant.FAC_ADMAN_FULL);
+                facultyMap.put(Constant.FAC_ARTS, Constant.FAC_ARTS_FULL);
+                facultyMap.put(Constant.FAC_BEDCOM, Constant.FAC_BEDCOM_FULL);
+                facultyMap.put(Constant.FAC_BEDSC, Constant.FAC_BEDSC_FULL);
+                facultyMap.put(Constant.FAC_BEDSCICT, Constant.FAC_BEDSCICT_FULL);
+                facultyMap.put(Constant.FAC_ECE, Constant.FAC_ECE_FULL);
+                facultyMap.put(Constant.FAC_GUCO, Constant.FAC_GUCO_FULL);
+                facultyMap.put(Constant.FAC_PPM, Constant.FAC_PPM_FULL);
+                facultyMap.put(Constant.FAC_PSY, Constant.FAC_PSY_FULL);
+                facultyMap.put(Constant.FAC_SPED, Constant.FAC_SPED_FULL);
         }
 
         return facultyMap;

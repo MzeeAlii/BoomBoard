@@ -52,14 +52,16 @@ public class UpdateFacultyFragment extends Fragment {
                 if (i >= 0) {
                     // get selected faculty and update student object
                     String faculty = adapterView.getSelectedItem().toString();
-                    profileSetupActivity.setStudentFaculty(faculty);
+                    // todo pass college to get faculty hash map
+                    profileSetupActivity.setStudentFaculty(faculty, "");
                     // get full faculty from hashMap
                     String fullFaculty = profileSetupActivity.getFullFacultyFromMap(faculty);
                     spinnerFaculty.setFloatingLabelText(fullFaculty);
 
                 } else {
                     // null
-                    profileSetupActivity.setStudentFaculty(null);
+                    // todo pass college to get faculty hash map
+                    profileSetupActivity.setStudentFaculty(null, "");
                 }
             }
 

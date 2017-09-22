@@ -21,9 +21,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
+import java.util.Map;
+
 import creationsofali.boomboard.R;
 import creationsofali.boomboard.datamodels.Constant;
 import creationsofali.boomboard.datamodels.Student;
+import creationsofali.boomboard.helpers.CollegeHelper;
 
 public class ProfileDetailActivity extends AppCompatActivity {
 
@@ -156,7 +159,10 @@ public class ProfileDetailActivity extends AppCompatActivity {
             textCollegeAbr.setText(student.getCollegeAbr());
             textCollegeFull.setText(student.getCollegeFull());
             textFacultyAbr.setText(student.getFacultyAbr());
-            textFacultyFull.setText(student.getFacultyFull());
+            Map<String, String> facultyMap =
+                    CollegeHelper.getCollegeFacultiesMap(student.getCollegeAbr());
+            textFacultyFull.setText(facultyMap.get(student.getFacultyAbr()));
+
             int year = student.getYearOfStudy();
             if (year == 1)
                 textYearFull.setText(R.string.first_year);
