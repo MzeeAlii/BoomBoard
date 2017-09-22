@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -71,6 +71,37 @@
         <!--<item name="android:typeface">@assets/fonts/ubuntu-regular.ttf</item>-->
         <item name="android:textColor">@color/color_primary_text</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Light application theme. -->
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary_white</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark_white</item>
+        <item name="colorAccent">@color/color_primary_amber</item>
+        <item name="android:colorBackground">@color/color_background_white</item>
+        <item name="android:windowBackground">@color/color_background_white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="M">true</item>
+    </style>
+
+    <style name="AppTheme.Light.TranslucentStatus.Main" parent="AppTheme.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="M">true</item>
+    </style>
+
+    <style name="AppTheme.Light.TranslucentStatus" parent="AppTheme.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="M">false</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/color_primary_dark_amber</item>
+        <item name="android:colorControlHighlight" tools:targetApi="LOLLIPOP">
+            @color/color_primary_amber
+        </item>
     </style>
 
 </resources>

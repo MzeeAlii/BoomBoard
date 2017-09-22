@@ -57,7 +57,7 @@ public class NoticeActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+//            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
         }
 
 

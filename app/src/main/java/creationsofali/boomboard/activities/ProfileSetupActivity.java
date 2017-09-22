@@ -78,7 +78,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 actionBar.setHomeButtonEnabled(true);
-                actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+//                actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
             }
         } else {
             // isFromMain:true | user runs the app for the very 1st time

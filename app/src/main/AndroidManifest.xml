@@ -12,12 +12,12 @@
         android:icon="@mipmap/ic_boom_board"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Light">
 
         <!-- Splash -->
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:theme="@style/AppThemeTranslucentStatus">
+            android:theme="@style/AppTheme.Light.TranslucentStatus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <!-- Main -->
-        <activity android:name=".activities.MainActivity" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/AppTheme.Light.TranslucentStatus.Main" />
         <!-- Timetable -->
         <activity
             android:name=".activities.TimetableActivity"
@@ -48,7 +50,7 @@
         <activity
             android:name=".activities.SignInActivity"
             android:label=""
-            android:theme="@style/AppThemeTranslucentStatus" />
+            android:theme="@style/AppTheme.Light.TranslucentStatus" />
         <!-- MessagingService -->
         <service android:name=".services.BoomBoardMessagingService">
             <intent-filter>
@@ -70,7 +72,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/color_primary_amber" />
 
-        <activity android:name=".activities.AllOnBoardActivity"></activity>
+        <activity android:name=".activities.AllOnBoardActivity" />
     </application>
 
 </manifest>

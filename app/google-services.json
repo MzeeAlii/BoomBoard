@@ -15,19 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "787287160683-02724jc4hk9clnpqitlc4tjaktkkdv02.apps.googleusercontent.com",
+          "client_id": "787287160683-9kc6k82pjgdlhk7114fp0ksvols6tlm3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "creationsofali.boomboard",
-            "certificate_hash": "4fdd726c3c06995198a8ef9c87109dd7bd8b00c7"
-          }
-        },
-        {
-          "client_id": "787287160683-10hkn9aarhg5kem7bnu43n61nu1t9e33.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "creationsofali.boomboard",
-            "certificate_hash": "92a61a0e90529d41fbed25f3e20b15d0a6dd3b33"
+            "certificate_hash": "8971a22abf1720884aa58bc56dfaacef285d8260"
           }
         },
         {

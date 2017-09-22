@@ -19,4 +19,24 @@
     <color name="color_green">#4caf50</color>
     <color name="color_white">#FFFF</color>
     <color name="color_white_alpha">#3FFF</color>
+
+    <color name="color_primary_white">#F5F5F5</color>
+    <color name="color_primary_black">#212121</color>
+    <color name="color_primary_dark_white">#E0E0E0</color>
+    <color name="color_primary_dark_black">#000000</color>
+    <color name="color_background_white">#FAFAFA</color>
+    <color name="color_background_black">#303030</color>
+
+    <color name="color_cards_white">#FFFF</color>
+    <color name="color_cards_black">#424242</color>
+
+    <color name="color_secondary_2_text">#9E9E9E</color>
+    <color name="color_grey_200">#eeeeee</color>
+    <color name="color_grey_300">#e0e0e0</color>
+    <color name="color_blue">#FF03A9F4</color>
+    <color name="color_purple">#aa00ff</color>
+    <color name="color_white_alpha_4">#4FFF</color>
+    <color name="color_white_alpha_6">#6FFF</color>
+    <color name="color_white_alpha_a">#AFFF</color>
+
 </resources>
