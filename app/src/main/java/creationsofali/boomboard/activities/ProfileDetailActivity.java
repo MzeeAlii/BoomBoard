@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -31,6 +32,7 @@ import creationsofali.boomboard.R;
 import creationsofali.boomboard.datamodels.Constant;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
+import creationsofali.boomboard.helpers.MyMenuBuilderHelper;
 
 public class ProfileDetailActivity extends AppCompatActivity {
 
@@ -125,9 +127,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
                 //     showEditProfileDialog();
                 //  else
                 // start ProfileSetupActivity
-                startActivity(new Intent(ProfileDetailActivity.this, ProfileSetupActivity.class)
-                        .putExtra("hasParentActivity", true));
-
+                gotoProfileSetup();
             }
         });
 
@@ -140,10 +140,25 @@ public class ProfileDetailActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_options_profile, menu);
+        MyMenuBuilderHelper.setOptionalIconsVisible(menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+
+            case R.id.optionSignOut:
+                showSignOutDialog();
+                return true;
+
+            case R.id.optionEditProfile:
+                gotoProfileSetup();
                 return true;
 
             default:
@@ -274,6 +289,12 @@ public class ProfileDetailActivity extends AppCompatActivity {
         startActivity(new Intent(ProfileDetailActivity.this, SignInActivity.class)
                 .putExtra("isToForceClose", true));
         finish();
+    }
+
+    private void gotoProfileSetup() {
+        startActivity(new Intent(ProfileDetailActivity.this, ProfileSetupActivity.class)
+                .putExtra("hasParentActivity", true));
+
     }
 
 

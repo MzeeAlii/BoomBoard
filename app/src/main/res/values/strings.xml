@@ -46,5 +46,6 @@
     <string name="device_offline_turn_on_internet">Device is offline! Please turn on the internet.</string>
     <string name="sign_out">Sign Out</string>
     <string name="hint">Hint</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>
