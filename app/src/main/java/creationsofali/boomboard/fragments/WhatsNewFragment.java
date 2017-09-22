@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -44,9 +42,7 @@ public class WhatsNewFragment extends Fragment {
     RecyclerView whatsNewRecycler;
     RecyclerView.LayoutManager layoutManager;
     NoticeAdapter noticeAdapter;
-    ProgressBar progressBar;
-    LinearLayout layoutDeviceOffline;
-    TextView textOnBoardThisWeek;
+    LinearLayout layoutDeviceOffline, layoutNoNotices, layoutLoadingView;
 
     List<Notice> noticeList = new ArrayList<>();
 
@@ -68,11 +64,12 @@ public class WhatsNewFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_whats_new, container, false);
 
-        progressBar = fragmentView.findViewById(R.id.progressBar);
-        textOnBoardThisWeek = fragmentView.findViewById(R.id.textOnBoardThisWeek);
-        textOnBoardThisWeek.setText("Loading...");
         layoutDeviceOffline = fragmentView.findViewById(R.id.layoutDeviceOffline);
-        //layoutDeviceOffline.setVisibility(View.GONE);
+        layoutNoNotices = fragmentView.findViewById(R.id.layoutNoNotices);
+        layoutLoadingView = fragmentView.findViewById(R.id.layoutLoadingView);
+
+        layoutNoNotices.setVisibility(View.GONE);
+        layoutDeviceOffline.setVisibility(View.GONE);
 
         layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
 
@@ -142,7 +139,10 @@ public class WhatsNewFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // onRetrieveComplete
                 // hide progressBar and shit
-                onRetrieveComplete();
+                if ((int) dataSnapshot.getChildrenCount() == 0)
+                    onNoNotices();
+                else
+                    onRetrieveComplete();
             }
 
             @Override
@@ -152,16 +152,6 @@ public class WhatsNewFragment extends Fragment {
 
         // attach listeners and retrieve from database
         startAsyncTask();
-
-//        fragmentView.findViewById(R.id.fabRefresh).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(), "Refreshing...", Toast.LENGTH_SHORT).show();
-//                startAsyncTask();
-//                // for appBarRecycler
-//                ((MainActivity) getActivity()).startAsyncTaskForAppBarRecycler();
-//            }
-//        });
 
         return fragmentView;
     }
@@ -189,14 +179,15 @@ public class WhatsNewFragment extends Fragment {
             noticeList.clear();
             //scaleInAnimationAdapter.notifyDataSetChanged();
             noticeAdapter.notifyDataSetChanged();
-            textOnBoardThisWeek.setText("Loading...");
-            textOnBoardThisWeek.setVisibility(View.VISIBLE);
 
-            if (progressBar.getVisibility() != View.VISIBLE)
-                progressBar.setVisibility(View.VISIBLE);
+            if (layoutLoadingView.getVisibility() != View.VISIBLE)
+                layoutLoadingView.setVisibility(View.VISIBLE);
 
             if (layoutDeviceOffline.getVisibility() == View.VISIBLE)
                 layoutDeviceOffline.setVisibility(View.GONE);
+
+            if (layoutNoNotices.getVisibility() == View.VISIBLE)
+                layoutNoNotices.setVisibility(View.GONE);
 
         }
 
@@ -210,7 +201,7 @@ public class WhatsNewFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            if (NetworkHelper.isOnline(getContext().getApplicationContext())) {
+            if (NetworkHelper.isOnline(getContext())) {
                 // device online
                 // attach listeners to database ref
                 noticesReference.addChildEventListener(notesChildEventListener);
@@ -228,8 +219,7 @@ public class WhatsNewFragment extends Fragment {
             if (!isOnline) {
                 // show message, device offline, can't load or something like that
                 layoutDeviceOffline.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
-                textOnBoardThisWeek.setVisibility(View.GONE);
+                layoutLoadingView.setVisibility(View.GONE);
                 ((MainActivity) getActivity()).showSnackbarAction("Failed!");
             }
         }
@@ -237,9 +227,14 @@ public class WhatsNewFragment extends Fragment {
 
 
     private void onRetrieveComplete() {
-        progressBar.setVisibility(View.GONE);
-        textOnBoardThisWeek.setText("This Week On Board");
-        textOnBoardThisWeek.setVisibility(View.GONE);
+        layoutLoadingView.setVisibility(View.GONE);
+        layoutNoNotices.setVisibility(View.GONE);
+    }
+
+    private void onNoNotices() {
+        layoutLoadingView.setVisibility(View.GONE);
+        layoutDeviceOffline.setVisibility(View.GONE);
+        layoutNoNotices.setVisibility(View.VISIBLE);
     }
 
     public void startAsyncTask() {

@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
         appBarLayout = findViewById(R.id.appBarLayout);
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
-        collapsingToolbar.setExpandedTitleColor(
-                ContextCompat.getColor(MainActivity.this, android.R.color.transparent));
+//        collapsingToolbar.setExpandedTitleColor(
+//                ContextCompat.getColor(MainActivity.this, android.R.color.transparent));
 
         animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show);
         animationFabHide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_hide);
