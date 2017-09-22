@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import creationsofali.boomboard.R;
@@ -24,6 +25,12 @@ public class AllOnBoardActivity extends AppCompatActivity {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setTitle("All On Board");
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_options_all_notices, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
