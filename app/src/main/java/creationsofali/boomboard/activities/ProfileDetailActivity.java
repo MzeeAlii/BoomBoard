@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,6 +46,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    private boolean isToolbarTitleShown;
     private static final String TAG = ProfileDetailActivity.class.getSimpleName();
 
 
@@ -73,9 +76,16 @@ public class ProfileDetailActivity extends AppCompatActivity {
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
         appBarLayout = findViewById(R.id.appBarLayout);
         textToolbarTitle = findViewById(R.id.textToolbarTitle);
-        textToolbarTitle.setVisibility(View.INVISIBLE);
+        textToolbarTitle.setText("");
 
         setInitialProfileDetails();
+
+        final Animation animFadeIn = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.anim_fade_in);
+        final Animation animFadeOut = AnimationUtils.loadAnimation(
+                getApplicationContext(), R.anim.anim_fade_out);
+
+        textToolbarTitle.startAnimation(animFadeOut);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -87,21 +97,21 @@ public class ProfileDetailActivity extends AppCompatActivity {
                 if (Math.abs(verticalOffset) == appBarLayout.getTotalScrollRange()) {
                     Log.d(TAG, "onOffsetChanged: appBarLayout fully collapsed");
                     Log.d(TAG, "onOffsetChanged: totalScrollRange = " + appBarLayout.getTotalScrollRange());
-                    //setActionBarElevation(6);
-//                    ActionBarIconsColorFilter.colorizeActionBarHome(toolbar, colorRed);
-                    textToolbarTitle.setVisibility(View.VISIBLE);
+
+                    // show title with animation
+                    isToolbarTitleShown = true;
+                    textToolbarTitle.startAnimation(animFadeIn);
 
                 } else if (verticalOffset == 0) {
                     Log.d(TAG, "onOffsetChanged: appBarLayout fully expanded");
-//                    ActionBarIconsColorFilter.colorizeActionBarHome(toolbar, colorWhite);
 
                 } else {
 
-                    if (textToolbarTitle.getVisibility() == View.VISIBLE)
-                        textToolbarTitle.setVisibility(View.INVISIBLE);
-
-                    //setActionBarElevation(0);
-
+                    // hide title with animation
+                    if (isToolbarTitleShown) {
+                        isToolbarTitleShown = false;
+                        textToolbarTitle.startAnimation(animFadeOut);
+                    }
                 }
             }
         });
