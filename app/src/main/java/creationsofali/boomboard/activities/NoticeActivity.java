@@ -49,7 +49,7 @@ public class NoticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
-        toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        toolbar = findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getString(R.string.app_name));
 
@@ -64,17 +64,17 @@ public class NoticeActivity extends AppCompatActivity {
         String gsonNote = getIntent().getStringExtra("notice");
         notice = new Gson().fromJson(gsonNote, Notice.class);
 
-        textSubject = (TextView) findViewById(R.id.textSubject);
-        textMessage = (TextView) findViewById(R.id.textMessage);
-        textAttachmentName = (TextView) findViewById(R.id.textAttachment);
-        iconAttachment = (ImageView) findViewById(R.id.iconAttachment);
-        iconDownload = (ImageView) findViewById(R.id.iconDownload);
-        imageAttachmentPreview = (ImageView) findViewById(R.id.imagePreview);
-        layoutAttachmentFile = (CardView) findViewById(R.id.layoutAttachmentFile);
-        textStaffName = (TextView) findViewById(R.id.textStaffName);
-        textStaffTitle = (TextView) findViewById(R.id.textStaffTitle);
-        textWhen = (TextView) findViewById(R.id.textWhen);
-        imageStaffDp = (ImageView) findViewById(R.id.imageStaffDp);
+        textSubject = findViewById(R.id.textSubject);
+        textMessage = findViewById(R.id.textMessage);
+        textAttachmentName = findViewById(R.id.textAttachment);
+        iconAttachment = findViewById(R.id.iconAttachment);
+        iconDownload = findViewById(R.id.iconDownload);
+        imageAttachmentPreview = findViewById(R.id.imagePreview);
+        layoutAttachmentFile = findViewById(R.id.layoutAttachmentFile);
+        textStaffName = findViewById(R.id.textStaffName);
+        textStaffTitle = findViewById(R.id.textStaffTitle);
+        textWhen = findViewById(R.id.textWhen);
+        imageStaffDp = findViewById(R.id.imageStaffDp);
 
         // setting values for notice
         onCreateNotice(notice);
@@ -250,7 +250,7 @@ public class NoticeActivity extends AppCompatActivity {
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        ImageView imagePreview = (ImageView) dialogView.findViewById(R.id.imagePreviewDialog);
+        ImageView imagePreview = dialogView.findViewById(R.id.imagePreviewDialog);
         Glide.with(NoticeActivity.this).load(imageUrl).into(imagePreview);
     }
 

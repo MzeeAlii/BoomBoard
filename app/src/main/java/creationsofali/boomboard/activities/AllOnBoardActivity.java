@@ -15,7 +15,7 @@ public class AllOnBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_on_board);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        Toolbar toolbar = findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();

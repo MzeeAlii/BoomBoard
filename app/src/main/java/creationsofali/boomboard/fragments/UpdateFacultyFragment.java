@@ -43,7 +43,7 @@ public class UpdateFacultyFragment extends Fragment {
 
         View fragmentView = inflater.inflate(R.layout.fragment_update_faculty, container, false);
 
-        spinnerFaculty = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerFaculty);
+        spinnerFaculty = fragmentView.findViewById(R.id.spinnerFaculty);
         spinnerFaculty.setAdapter(facultyAdapter);
 
         spinnerFaculty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -72,7 +72,7 @@ public class UpdateFacultyFragment extends Fragment {
         ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearAdapter.addAll(CollegeHelper.getYearList());
-        MaterialSpinner yearSpinner = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerYear);
+        MaterialSpinner yearSpinner = fragmentView.findViewById(R.id.spinnerYear);
         yearSpinner.setAdapter(yearAdapter);
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

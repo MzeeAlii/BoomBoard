@@ -68,7 +68,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-        toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        toolbar = findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
 
         isFromMain = getIntent().getBooleanExtra("isFromMain", false);
@@ -103,11 +103,11 @@ public class ProfileSetupActivity extends AppCompatActivity {
         animationFabShow = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_show_fast);
         animationFabHide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fab_hide_fast);
 
-        fabDone = (FloatingActionButton) findViewById(R.id.fab);
+        fabDone = findViewById(R.id.fab);
         fabDone.startAnimation(animationFabHide);
         fabDone.setEnabled(false);
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new ProfileSetupPagerAdapter(getSupportFragmentManager(), ProfileSetupActivity.this));
 
 
@@ -137,7 +137,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
             }
         });
 
-        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         tabs.getTabAt(0).setIcon(R.drawable.ic_temple);

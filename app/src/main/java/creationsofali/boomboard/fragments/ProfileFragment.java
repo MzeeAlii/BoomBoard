@@ -57,14 +57,14 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        textProfileEmail = (TextView) fragmentView.findViewById(R.id.textProfileEmail);
-        textProfileName = (TextView) fragmentView.findViewById(R.id.textProfileName);
-        textCollegeAbr = (TextView) fragmentView.findViewById(R.id.textCollegeAbr);
-        textCollegeFull = (TextView) fragmentView.findViewById(R.id.textCollegeFull);
-        textFacultyAbr = (TextView) fragmentView.findViewById(R.id.textFacultyAbr);
-        textFacultyFull = (TextView) fragmentView.findViewById(R.id.textFacultyFull);
-        textYearFull = (TextView) fragmentView.findViewById(R.id.textYearFull);
-        imageProfileDp = (ImageView) fragmentView.findViewById(R.id.imageProfileDp);
+        textProfileEmail = fragmentView.findViewById(R.id.textProfileEmail);
+        textProfileName = fragmentView.findViewById(R.id.textProfileName);
+        textCollegeAbr = fragmentView.findViewById(R.id.textCollegeAbr);
+        textCollegeFull = fragmentView.findViewById(R.id.textCollegeFull);
+        textFacultyAbr = fragmentView.findViewById(R.id.textFacultyAbr);
+        textFacultyFull = fragmentView.findViewById(R.id.textFacultyFull);
+        textYearFull = fragmentView.findViewById(R.id.textYearFull);
+        imageProfileDp = fragmentView.findViewById(R.id.imageProfileDp);
 
         mainActivity.setProfileFragment(textProfileName, textProfileEmail, imageProfileDp);
 
@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        buttonSignOut = (Button) fragmentView.findViewById(R.id.buttonSignOut);
+        buttonSignOut = fragmentView.findViewById(R.id.buttonSignOut);
         buttonSignOut.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/Hind-Regular.ttf"));
 
         buttonSignOut.setOnClickListener(new View.OnClickListener() {

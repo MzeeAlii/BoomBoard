@@ -78,7 +78,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        toolbar = findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
 
@@ -92,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         // buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
-        buttonSignIn = (LinearLayout) findViewById(R.id.buttonSignIn);
+        buttonSignIn = findViewById(R.id.buttonSignIn);
         // buttonSignIn.setTypeface(Typeface.createFromAsset(
         //       getResources().getAssets(), "fonts/Hind-Regular.ttf"));
 
@@ -104,10 +104,10 @@ public class SignInActivity extends AppCompatActivity {
         buildSignInDialog.setCancelable(false);
 
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        navigationDrawer = (NavigationView) findViewById(R.id.navigationDrawer);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationDrawer = findViewById(R.id.navigationDrawer);
         View headerView = navigationDrawer.getHeaderView(0);
-        textNavSignIn = (TextView) headerView.findViewById(R.id.textNavSignIn);
+        textNavSignIn = headerView.findViewById(R.id.textNavSignIn);
 
         textNavSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,10 +327,10 @@ public class SignInActivity extends AppCompatActivity {
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        TextView textVersion = (TextView) dialogView.findViewById(R.id.textVersion);
+        TextView textVersion = dialogView.findViewById(R.id.textVersion);
         textVersion.setText(PackageInfoHelper.getVersionName(SignInActivity.this));
 
-        TextView textRights = (TextView) dialogView.findViewById(R.id.textRights);
+        TextView textRights = dialogView.findViewById(R.id.textRights);
         String unicodeCopyRight = "\u00A9"; // or (char) 169 = 10101001 = 0x00A9
         String unicodeTradeMark = "\u2122"; // or (char) 8482 = 0x2122
         // (c) 2017 TINTech tm

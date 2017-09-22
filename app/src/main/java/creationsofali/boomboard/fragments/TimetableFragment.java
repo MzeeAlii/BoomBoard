@@ -40,7 +40,7 @@ public class TimetableFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_timetable, container, false);
 
-        TextView textView = (TextView) fragmentView.findViewById(R.id.someText);
+        TextView textView = fragmentView.findViewById(R.id.someText);
         textView.setText(args);
 
         return fragmentView;

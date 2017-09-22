@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.mToolbar);
+        toolbar = findViewById(R.id.mToolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -118,12 +118,12 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle("");
         }
 
-        textToolbarTitle = (TextView) findViewById(R.id.textToolbarTitle);
+        textToolbarTitle = findViewById(R.id.textToolbarTitle);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
+        appBarLayout = findViewById(R.id.appBarLayout);
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setExpandedTitleColor(
                 ContextCompat.getColor(MainActivity.this, android.R.color.transparent));
 
@@ -141,16 +141,16 @@ public class MainActivity extends AppCompatActivity {
 
         appBarLayout.setExpanded(true, true);
 
-        fabRefresh = (FloatingActionButton) findViewById(R.id.fabRefresh);
+        fabRefresh = findViewById(R.id.fabRefresh);
         fabRefresh.startAnimation(animationFabShow);
         fabRefresh.setEnabled(true);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        navigationDrawer = (NavigationView) findViewById(R.id.navigationDrawer);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationDrawer = findViewById(R.id.navigationDrawer);
         View headerView = navigationDrawer.getHeaderView(0);
-        textNavName = (TextView) headerView.findViewById(R.id.textNavName);
-        textNavEmail = (TextView) headerView.findViewById(R.id.textNavEmail);
-        imageNavDp = (ImageView) headerView.findViewById(R.id.imageNavDp);
+        textNavName = headerView.findViewById(R.id.textNavName);
+        textNavEmail = headerView.findViewById(R.id.textNavEmail);
+        imageNavDp = headerView.findViewById(R.id.imageNavDp);
         textNavEmail.setText("");
         textNavName.setText("");
 
@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
     private void onCreateAppBarRecycler() {
         layoutManagerHorizontal = new LinearLayoutManager(MainActivity.this, RecyclerView.HORIZONTAL, false);
 
-        appBarRecycler = (RecyclerView) findViewById(R.id.appBarRecycler);
+        appBarRecycler = findViewById(R.id.appBarRecycler);
         appBarRecycler.setLayoutManager(layoutManagerHorizontal);
 
         // decorations
@@ -513,10 +513,10 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();
 
-        TextView textVersion = (TextView) dialogView.findViewById(R.id.textVersion);
+        TextView textVersion = dialogView.findViewById(R.id.textVersion);
         textVersion.setText(PackageInfoHelper.getVersionName(MainActivity.this));
 
-        TextView textRights = (TextView) dialogView.findViewById(R.id.textRights);
+        TextView textRights = dialogView.findViewById(R.id.textRights);
         String unicodeCopyRight = "\u00A9"; // or (char) 169 = 10101001 = 0x00A9
         String unicodeTradeMark = "\u2122"; // or (char) 8482 = 0x2122
         // (c) 2017 TINTech Apps tm
@@ -656,8 +656,8 @@ public class MainActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
         dialogBuilder.setCancelable(true);
 
-        TextView textHeaderName = (TextView) dialogView.findViewById(R.id.textHeaderName);
-        ImageView imageDialogDp = (ImageView) dialogView.findViewById(R.id.imageDialogDp);
+        TextView textHeaderName = dialogView.findViewById(R.id.textHeaderName);
+        ImageView imageDialogDp = dialogView.findViewById(R.id.imageDialogDp);
 
         final AlertDialog dialog = dialogBuilder.create();
         dialog.show();

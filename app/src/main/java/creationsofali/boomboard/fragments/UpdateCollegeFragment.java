@@ -78,7 +78,7 @@ public class UpdateCollegeFragment extends Fragment {
 
         collegeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, collegeList);
         collegeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCollege = (MaterialSpinner) fragmentView.findViewById(R.id.spinnerCollege);
+        spinnerCollege = fragmentView.findViewById(R.id.spinnerCollege);
         spinnerCollege.setAdapter(collegeAdapter);
         Log.d(TAG, "onCreateView: adapter = collegeAdapter, position = " + position);
 

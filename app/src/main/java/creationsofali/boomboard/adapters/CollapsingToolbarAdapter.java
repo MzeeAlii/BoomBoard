@@ -40,9 +40,9 @@ public class CollapsingToolbarAdapter extends RecyclerView.Adapter<CollapsingToo
 
         ViewHolder(View itemView) {
             super(itemView);
-            textSubject = (TextView) itemView.findViewById(R.id.textSubject);
-            textDateTime = (TextView) itemView.findViewById(R.id.textDateTime);
-            cardNote = (CardView) itemView.findViewById(R.id.cardNote);
+            textSubject = itemView.findViewById(R.id.textSubject);
+            textDateTime = itemView.findViewById(R.id.textDateTime);
+            cardNote = itemView.findViewById(R.id.cardNote);
 
             cardNote.setOnClickListener(new View.OnClickListener() {
                 @Override

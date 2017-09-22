@@ -43,14 +43,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
         ViewHolder(View itemView) {
             super(itemView);
-            textSubject = (TextView) itemView.findViewById(R.id.textSubject);
-            textDateTime = (TextView) itemView.findViewById(R.id.textDateTime);
-            textMessage = (TextView) itemView.findViewById(R.id.textMessage);
-            iconClip = (ImageView) itemView.findViewById(R.id.iconClip);
+            textSubject = itemView.findViewById(R.id.textSubject);
+            textDateTime = itemView.findViewById(R.id.textDateTime);
+            textMessage = itemView.findViewById(R.id.textMessage);
+            iconClip = itemView.findViewById(R.id.iconClip);
             iconClip.setVisibility(View.GONE);
-            cardNote = (CardView) itemView.findViewById(R.id.cardNote);
-            textAuthorName = (TextView) itemView.findViewById(R.id.textAuthorName);
-            imageAuthorDp = (ImageView) itemView.findViewById(R.id.imageAuthorDp);
+            cardNote = itemView.findViewById(R.id.cardNote);
+            textAuthorName = itemView.findViewById(R.id.textAuthorName);
+            imageAuthorDp = itemView.findViewById(R.id.imageAuthorDp);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

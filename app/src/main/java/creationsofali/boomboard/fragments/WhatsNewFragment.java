@@ -68,15 +68,15 @@ public class WhatsNewFragment extends Fragment {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_whats_new, container, false);
 
-        progressBar = (ProgressBar) fragmentView.findViewById(R.id.progressBar);
-        textOnBoardThisWeek = (TextView) fragmentView.findViewById(R.id.textOnBoardThisWeek);
+        progressBar = fragmentView.findViewById(R.id.progressBar);
+        textOnBoardThisWeek = fragmentView.findViewById(R.id.textOnBoardThisWeek);
         textOnBoardThisWeek.setText("Loading...");
-        layoutDeviceOffline = (LinearLayout) fragmentView.findViewById(R.id.layoutDeviceOffline);
+        layoutDeviceOffline = fragmentView.findViewById(R.id.layoutDeviceOffline);
         //layoutDeviceOffline.setVisibility(View.GONE);
 
         layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
 
-        whatsNewRecycler = (RecyclerView) fragmentView.findViewById(R.id.whatsNewRecyclerList);
+        whatsNewRecycler = fragmentView.findViewById(R.id.whatsNewRecyclerList);
         whatsNewRecycler.setLayoutManager(layoutManager);
 
         scaleInTopAnimator = new ScaleInTopAnimator(new OvershootInterpolator(1f));
