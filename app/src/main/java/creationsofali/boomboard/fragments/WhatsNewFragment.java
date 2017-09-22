@@ -237,7 +237,7 @@ public class WhatsNewFragment extends Fragment {
         layoutNoNotices.setVisibility(View.VISIBLE);
     }
 
-    public void startAsyncTask() {
+        public void startAsyncTask() {
         new NotesRetrieveTask().execute();
     }
 

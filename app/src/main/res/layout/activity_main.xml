@@ -27,7 +27,7 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="256dp"
 
             tools:targetApi="LOLLIPOP">
 
@@ -35,6 +35,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/color_background_white"
                 android:stateListAnimator="@animator/anim_appbar_elevation"
 
                 app:collapsedTitleTextAppearance="@style/CollapsedTitleTextAppearance"

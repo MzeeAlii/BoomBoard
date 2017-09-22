@@ -261,8 +261,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // for appBarRecycler
-                startAsyncTaskForAppBarRecycler();
-
+//                startAsyncTaskForAppBarRecycler();
+                onStartLoadingNotices();
                 //for fragmentRecycler
                 whatsNewFragment.startAsyncTask();
             }
@@ -364,63 +364,85 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // attach listeners and retrieve from database
-        startAsyncTaskForAppBarRecycler();
+//        startAsyncTaskForAppBarRecycler();
+        onStartLoadingNotices();
     }
 
 
-    public void startAsyncTaskForAppBarRecycler() {
-        new NoticesRetrieveTask().execute();
-    }
+//    public void startAsyncTaskForAppBarRecycler() {
+//        new NoticesRetrieveTask().execute();
+//    }
 
 
-    private class NoticesRetrieveTask extends AsyncTask<Void, Void, Boolean> {
+//    private class NoticesRetrieveTask extends AsyncTask<Void, Void, Boolean> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            appBarNoticeList.clear();
+//            scaleInAnimationAdapter.notifyDataSetChanged();
+//
+////            if (progressBar.getVisibility() != View.VISIBLE)
+////                progressBar.setVisibility(View.VISIBLE);
+//        }
+//
+//        @Override
+//        protected Boolean doInBackground(Void... voids) {
+//
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (NetworkHelper.isOnline(MainActivity.this)) {
+//                // device online
+//                // attach listeners to database ref
+//                noticesReference.addChildEventListener(noticesChildEventListener);
+//                noticesReference.addValueEventListener(notesValueEventListener);
+//                return true;
+//
+//            } else {
+//                // device offline
+//                return false;
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Boolean isOnline) {
+//            super.onPostExecute(isOnline);
+//            if (!isOnline) {
+//                // show message, device offline, can't load or something like that
+//                //showSnackbarAction("Failed!");
+//                if (fabRefresh.isEnabled()) {
+//                    fabRefresh.setEnabled(false);
+//                    fabRefresh.startAnimation(animationFabHide);
+//                }
+//            }
+//        }
+//    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+    private void onStartLoadingNotices() {
+
+        if (NetworkHelper.isOnline(MainActivity.this)) {
+            // device online
             appBarNoticeList.clear();
             scaleInAnimationAdapter.notifyDataSetChanged();
+            // detach listeners from database ref
+            detachDatabaseListeners();
+            // attach listeners to database ref
+            attachDatabaseListeners();
 
-//            if (progressBar.getVisibility() != View.VISIBLE)
-//                progressBar.setVisibility(View.VISIBLE);
+            // disable multiple reload
+            fabRefresh.setEnabled(false);
+
+        } else {
+            // device offline
+            showSnackbar("Unable to refresh, device is offline.");
+
         }
 
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (NetworkHelper.isOnline(MainActivity.this)) {
-                // device online
-                // attach listeners to database ref
-                noticesReference.addChildEventListener(noticesChildEventListener);
-                noticesReference.addValueEventListener(notesValueEventListener);
-                return true;
-
-            } else {
-                // device offline
-                return false;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean isOnline) {
-            super.onPostExecute(isOnline);
-            if (!isOnline) {
-                // show message, device offline, can't load or something like that
-                //showSnackbarAction("Failed!");
-                if (fabRefresh.isEnabled()) {
-                    fabRefresh.setEnabled(false);
-                    fabRefresh.startAnimation(animationFabHide);
-                }
-            }
-        }
     }
-
 
     @Override
     protected void onResume() {
@@ -436,6 +458,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (noticesChildEventListener != null)
             noticesReference.removeEventListener(noticesChildEventListener);
+    }
+
+    private void attachDatabaseListeners() {
+        if (noticesChildEventListener != null)
+            noticesReference.addChildEventListener(noticesChildEventListener);
+
+        if (notesValueEventListener != null)
+            noticesReference.addValueEventListener(notesValueEventListener);
+
     }
 
 
@@ -651,7 +682,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         // start new retrieve task
                         // for app bar layout
-                        new NoticesRetrieveTask().execute();
+//                        new NoticesRetrieveTask().execute();
                         // for fragment
                         whatsNewFragment.startAsyncTask();
                     }
@@ -662,7 +693,7 @@ public class MainActivity extends AppCompatActivity {
         Snackbar.make(findViewById(R.id.mainCoordinatorLayout),
                 message,
                 Snackbar.LENGTH_INDEFINITE)
-                .setDuration(10000)
+                .setDuration(3000)
                 .show();
     }
 
