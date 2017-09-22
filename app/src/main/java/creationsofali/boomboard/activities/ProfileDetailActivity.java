@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,11 +36,15 @@ public class ProfileDetailActivity extends AppCompatActivity {
     boolean isProfileAvailable = false;
 
     TextView textProfileName, textProfileEmail, textCollegeAbr,
-            textCollegeFull, textFacultyAbr, textFacultyFull, textYearFull;
+            textCollegeFull, textFacultyAbr, textFacultyFull, textYearFull, textToolbarTitle;
     Button buttonSignOut;
     ImageView imageProfileDp;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private AppBarLayout appBarLayout;
 
     private FirebaseAuth firebaseAuth;
+
+    private static final String TAG = ProfileDetailActivity.class.getSimpleName();
 
 
     @Override
@@ -53,6 +59,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle("");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         textProfileEmail = findViewById(R.id.textEmail);
@@ -63,8 +70,41 @@ public class ProfileDetailActivity extends AppCompatActivity {
         textFacultyFull = findViewById(R.id.textFacultyFull);
         textYearFull = findViewById(R.id.textYearFull);
         imageProfileDp = findViewById(R.id.imageDisplayPhoto);
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
+        appBarLayout = findViewById(R.id.appBarLayout);
+        textToolbarTitle = findViewById(R.id.textToolbarTitle);
+        textToolbarTitle.setVisibility(View.INVISIBLE);
 
         setInitialProfileDetails();
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                Log.d(TAG, "offset = " + verticalOffset);
+                // verticalOffset == 0 : fully expanded
+                // Math.abs(verticalOffset) == appBarLayout.getTotalScrollingRange : fully collapsed
+
+                if (Math.abs(verticalOffset) == appBarLayout.getTotalScrollRange()) {
+                    Log.d(TAG, "onOffsetChanged: appBarLayout fully collapsed");
+                    Log.d(TAG, "onOffsetChanged: totalScrollRange = " + appBarLayout.getTotalScrollRange());
+                    //setActionBarElevation(6);
+//                    ActionBarIconsColorFilter.colorizeActionBarHome(toolbar, colorRed);
+                    textToolbarTitle.setVisibility(View.VISIBLE);
+
+                } else if (verticalOffset == 0) {
+                    Log.d(TAG, "onOffsetChanged: appBarLayout fully expanded");
+//                    ActionBarIconsColorFilter.colorizeActionBarHome(toolbar, colorWhite);
+
+                } else {
+
+                    if (textToolbarTitle.getVisibility() == View.VISIBLE)
+                        textToolbarTitle.setVisibility(View.INVISIBLE);
+
+                    //setActionBarElevation(0);
+
+                }
+            }
+        });
 
 
         findViewById(R.id.fabEditProfile).setOnClickListener(new View.OnClickListener() {
@@ -135,6 +175,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             textProfileName.setText(user.getDisplayName());
             textProfileEmail.setText(user.getEmail());
+            textToolbarTitle.setText(user.getDisplayName());
             Glide.with(ProfileDetailActivity.this).load(user.getPhotoUrl()).into(imageProfileDp);
         }
     }

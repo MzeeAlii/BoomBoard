@@ -97,13 +97,13 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ToolbarStyle">
 
-                <creationsofali.boomboard.appfonts.HindTextView
+                <creationsofali.boomboard.appfonts.HindBoldTextView
                     android:id="@+id/textToolbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/color_primary_text"
+                    android:textColor="@color/color_secondary_text"
                     android:textSize="18sp" />
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
