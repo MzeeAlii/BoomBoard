@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
         scaleInAnimationAdapter = new ScaleInAnimationAdapter(whatsNewAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
         scaleInAnimationAdapter.setInterpolator(new OvershootInterpolator(1f));
-        scaleInAnimationAdapter.setDuration(1000);
+        scaleInAnimationAdapter.setDuration(800);
         // set animationAdapter
         appBarRecycler.setAdapter(scaleInAnimationAdapter);
 
@@ -522,7 +522,7 @@ public class MainActivity extends AppCompatActivity {
         // (c) 2017 TINTech Apps tm
         //      All Rights Reserved.
         textRights.setText(unicodeCopyRight);
-        textRights.append(" 2017 " + "TINTech Apps" + unicodeTradeMark);
+        textRights.append(" 2017 " + "TINTech Nerds" + unicodeTradeMark);
         textRights.append("\n" + "All Rights Reserved.");
 
 
