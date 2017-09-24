@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary_amber">#FFC107</color>
+    <color name="color_amber_300">#ffca28</color>
     <color name="color_primary_amber_alpha">#30FFC107</color>
     <color name="color_primary_dark_amber">#FFA000</color>
     <color name="color_primary_light_amber">#FFECB3</color>
