@@ -1,5 +1,6 @@
 package creationsofali.boomboard.services;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -8,6 +9,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import creationsofali.boomboard.R;
 
 /**
  * Created by ali on 6/2/17.
@@ -33,7 +36,16 @@ public class BoomBoardInstanceIdService extends FirebaseInstanceIdService {
                     .child("profile");
             // refresh push token
             profileReference.child("token").setValue(refreshedToken);
-            Log.d(TAG, "token refreshed " + refreshedToken);
+            Log.d(TAG, "token saved to profile " + refreshedToken);
+        } else {
+            // user signed out
+            SharedPreferences sharedPreferences = getSharedPreferences(
+                    getString(R.string.app_name), MODE_PRIVATE);
+
+            SharedPreferences.Editor spEditor = sharedPreferences.edit();
+            spEditor.putString("pushToken", refreshedToken);
+            spEditor.apply();
+            Log.d(TAG, "token saved to shared preferences " + refreshedToken);
         }
     }
 }
