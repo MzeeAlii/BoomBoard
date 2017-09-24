@@ -35,8 +35,8 @@ public class BoomBoardInstanceIdService extends FirebaseInstanceIdService {
                     .child(user.getUid())
                     .child("profile");
             // refresh push token
-            profileReference.child("token").setValue(refreshedToken);
-            Log.d(TAG, "token saved to profile " + refreshedToken);
+            profileReference.child("pushToken").setValue(refreshedToken);
+            Log.d(TAG, "Token saved to profile " + refreshedToken);
         } else {
             // user signed out
             SharedPreferences sharedPreferences = getSharedPreferences(
@@ -45,7 +45,7 @@ public class BoomBoardInstanceIdService extends FirebaseInstanceIdService {
             SharedPreferences.Editor spEditor = sharedPreferences.edit();
             spEditor.putString("pushToken", refreshedToken);
             spEditor.apply();
-            Log.d(TAG, "token saved to shared preferences " + refreshedToken);
+            Log.d(TAG, "Token saved to SharedPreferences " + refreshedToken);
         }
     }
 }

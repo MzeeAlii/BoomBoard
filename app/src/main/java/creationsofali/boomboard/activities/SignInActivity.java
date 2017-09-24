@@ -49,6 +49,7 @@ import creationsofali.boomboard.helpers.DrawerTypefaceHelper;
 import creationsofali.boomboard.helpers.EmailHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
 import creationsofali.boomboard.helpers.PackageInfoHelper;
+import creationsofali.boomboard.helpers.PushTokenHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceEditor;
 import creationsofali.boomboard.helpers.TwitterHelper;
 import dmax.dialog.SpotsDialog;
@@ -67,6 +68,7 @@ public class SignInActivity extends AppCompatActivity {
 
     GoogleApiClient googleApiClient;
     FirebaseAuth firebaseAuth;
+    private DatabaseReference studentsReference;
 
     boolean isFirstTime;
 
@@ -91,6 +93,7 @@ public class SignInActivity extends AppCompatActivity {
         isFirstTime = getIntent().getBooleanExtra("isFirstTime", false);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        studentsReference = FirebaseDatabase.getInstance().getReference().child("students");
         // buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonSignIn = findViewById(R.id.buttonSignIn);
         // buttonSignIn.setTypeface(Typeface.createFromAsset(
@@ -263,15 +266,19 @@ public class SignInActivity extends AppCompatActivity {
 
                     SharedPreferences sharedPreferences = getSharedPreferences(
                             getString(R.string.app_name), MODE_PRIVATE);
-
                     String gsonStudent = sharedPreferences.getString("student", null);
                     Student student = new Gson().fromJson(gsonStudent, Student.class);
 
-                    if (student.getUid().equals(signedUid))
+                    if (student.getUid().equals(signedUid)) {
                         // same same account
+                        // refresh push token
+                        PushTokenHelper.refreshPushToken(
+                                studentsReference.child(signedUid).child("profile"),
+                                getApplicationContext());
                         // go to main activity
                         gotoMain();
-                    else
+
+                    }  else
                         // different account
                         // check user profile in database
                         checkUserProfileInDatabase(authResult.getUser().getUid());
@@ -358,12 +365,8 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    private void checkUserProfileInDatabase(String uid) {
+    private void checkUserProfileInDatabase(final String uid) {
         showSignInDialog("Checking Profile");
-        // database reference
-        DatabaseReference studentsReference = FirebaseDatabase.getInstance()
-                .getReference().child("students");
-
         // profile reference
         studentsReference.child(uid).child("profile").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -377,6 +380,10 @@ public class SignInActivity extends AppCompatActivity {
                     Student student = dataSnapshot.getValue(Student.class);
                     // update sharedPrefs
                     new SharedPreferenceEditor(SignInActivity.this).execute(student);
+                    // refresh push token
+                    PushTokenHelper.refreshPushToken(
+                            studentsReference.child(uid).child("profile"),
+                            getApplicationContext());
                     // go to main
                     new Handler().postDelayed(new Runnable() {
                         @Override

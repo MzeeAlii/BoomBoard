@@ -5,7 +5,7 @@ package creationsofali.boomboard.datamodels;
  */
 
 public class Student {
-    private String collegeFull, collegeAbr, facultyFull, facultyAbr, email, uid;
+    private String collegeFull, collegeAbr, facultyFull, facultyAbr, email, uid, pushToken;
     private int yearOfStudy;
 
     public Student() {
@@ -67,5 +67,13 @@ public class Student {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getPushToken() {
+        return pushToken;
+    }
+
+    public void setPushToken(String pushToken) {
+        this.pushToken = pushToken;
     }
 }

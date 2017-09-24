@@ -41,6 +41,7 @@ import creationsofali.boomboard.appfonts.MyCustomAppFont;
 import creationsofali.boomboard.datamodels.Student;
 import creationsofali.boomboard.helpers.CollegeHelper;
 import creationsofali.boomboard.helpers.NetworkHelper;
+import creationsofali.boomboard.helpers.PushTokenHelper;
 import creationsofali.boomboard.helpers.SharedPreferenceEditor;
 import creationsofali.boomboard.helpers.SharedPreferenceHelper;
 import dmax.dialog.SpotsDialog;
@@ -187,6 +188,11 @@ public class ProfileSetupActivity extends AppCompatActivity {
                         spotsDialog.setCancelable(false);
                         spotsDialog.show();
 
+                        // refresh token too
+                        String token = PushTokenHelper.getTokenFromPreferences(getApplicationContext());
+                        if (token != null)
+                            student.setPushToken(token);
+
                         // saving profile to database
                         studentProfileReference.setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -235,7 +241,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (!isProfileComplete())
             setResult(RESULT_CANCELED);
-        
+
         else if (isCollegeChanged())
             setResult(RESULT_OK);
 
@@ -409,7 +415,7 @@ public class ProfileSetupActivity extends AppCompatActivity {
             }
         }
 
-        return true;
+        return false;
     }
 
 
