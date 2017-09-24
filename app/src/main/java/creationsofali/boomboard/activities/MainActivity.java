@@ -281,6 +281,8 @@ public class MainActivity extends AppCompatActivity {
             // serious profile change
             Log.d(TAG, "Serious profile change. Different college!");
             // TODO: 9/22/17 handle a lotta shit here to deal with college change
+            appBarNoticeList.clear();
+            whatsNewFragment.clearNoticeList();
 
         } else
             super.onActivityResult(requestCode, resultCode, data);
