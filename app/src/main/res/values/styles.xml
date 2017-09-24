@@ -87,8 +87,12 @@
     <style name="AppTheme.Light.TranslucentStatus.Main" parent="AppTheme.Light">
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:colorBackground">@color/color_white</item>
-        <item name="android:windowBackground">@color/color_white</item>
+    </style>
+
+    <style name="AppTheme.Light.Splash" parent="AppTheme.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/color_background_white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="M">false</item>
     </style>
 
     <style name="AppTheme.Light.TranslucentStatus" parent="AppTheme.Light">
